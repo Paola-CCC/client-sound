@@ -1,0 +1,30 @@
+.list-courses-for-professors {
+    display: grid;
+    grid-template-columns: repeat(3, auto);
+    gap : 40px 20px;
+    width: 90%;
+    margin-left: auto;
+    margin-right: auto;
+    background-color: coral;
+    ul {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        gap: 25px;
+        margin: 0;
+        padding: 0;
+        background-color: rgb(195, 227, 188);
+        list-style: none;
+        li {
+          align-self: center;
+          justify-self: center;
+          .card {
+            border: 1px solid #ccc;
+            border-radius: 10px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+            align-self: center;
+            transition: transform 0.2s ease-in-out;
+          }
+        }
+      }
+}

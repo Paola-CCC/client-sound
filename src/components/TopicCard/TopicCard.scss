@@ -1,0 +1,151 @@
+
+@import '../../styles/_variables.scss';
+
+.topic-card-body {
+  margin-left: auto;
+  margin-right: auto;
+  background-color: #f3f4fb;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  border: 1px solid #d9c8f3;
+  border-radius: 10px;
+  padding: 25px 20px;
+  .media-body {
+    display: flex;
+    margin-bottom: 15px;
+
+    .topic-image {
+      width: 79px;
+      height: 79px;
+
+      img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        border-radius: 50%;
+      }
+    }
+
+    .topic-user-infos {
+      margin-left: 20px;
+      h5 {
+        margin-bottom: 7px;
+        font-weight: 600;
+        color: #2f3d8a;
+      }
+      span.topic-username {
+        font-weight: 400;
+        // display: inline;
+        margin-bottom: 7px;
+      }
+
+      span {
+        display: block;
+        span.category {
+          display: inline;
+          padding: 2px 10px;
+          border-radius: 10px;
+          color: #6558d3;
+          background-color: #ece9fe;
+          font-size: 12px;
+          font-weight: 600;
+        }
+      }
+    }
+  }
+
+  .topic-content {
+    margin-bottom: 15px;
+    p {
+      margin: 0;
+    }
+  }
+  .delete-btn-area {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+    align-items:center;
+    span , svg{
+      margin-left: 10px;
+      color: rgb(38, 38, 38);
+    }
+    > button {
+      background: transparent;
+      margin: 0;
+      padding: 0;
+    }
+  }
+
+  .topic-icons {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+    align-items:center;
+    color: black;
+     svg{
+      // margin-left: 10px;
+      margin-left: 6px;
+      color: #4d4d4d;
+    }
+    span {
+      color: black;
+      margin-left: 6px;
+      font-size:small;
+
+    }
+    > button:not(.primary) {
+      background: transparent;
+      // margin: 0;
+      margin-left: 20px;
+      padding: 0;
+    }
+    button.primary {
+      margin-left: 20px;
+      span , svg {
+        color: white;
+      }
+    }
+    button {
+      .btnInverse {
+        color: green;
+      }
+    }
+  
+  }
+} 
+
+.topic-text {
+  margin-left: auto;
+  margin-right: auto;
+  padding: 20px;
+  background-color: #191F5C;
+  border-bottom-left-radius: 10px;
+  border-bottom-right-radius: 10px;
+  display: none;
+  &.visible {
+    display: block;
+    .group-btn-send {
+      display: flex;
+      flex-direction: row;
+      align-items: flex-end;
+      justify-content: flex-end;
+      padding: 10px 0;
+      .cancel-btn, .send-btn {
+        span , svg{
+          margin-left: 10px;
+          color: rgb(38, 38, 38);
+          font-size:small;
+
+        }
+        > button {
+          margin-left: 20px;
+          &.primary  {
+            span , svg {
+              color: white;
+              font-size:small;
+            }
+          }
+        }
+      }
+    }
+  }
+}

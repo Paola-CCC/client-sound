@@ -1,0 +1,14 @@
+.global-layout-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  padding: 70px 0;
+
+  div.container-sidebar-content {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    padding: 0;
+    width: 70%;
+  }
+}

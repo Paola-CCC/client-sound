@@ -1,0 +1,76 @@
+
+  
+  #toggle {
+    display: none;
+  }
+  
+  /**
+    Hamburger
+  **/
+  .hamburger {
+    position: absolute;
+    top: 5em;
+    right: 5%;
+    margin-left: -2em;
+    margin-top: -45px;
+    width: 2em;
+    height: 45px;
+    z-index: 5;
+  }
+  
+  .hamburger span {
+    position: relative;
+    display: block;
+    width: 2.25em;
+    height: 5px;
+    border-radius: 2px;
+    margin-top: 8px;
+    transition: all 0.3s ease-in-out;
+  }
+  
+  .hamburger span.top-bun {
+    background-color: pink;
+  }
+  
+  .hamburger span.meat {
+    background-color: brown;
+  }
+  
+  .hamburger span.bottom-bun {
+    background-color: blue;
+  }
+  
+  /**
+  Animations
+  **/
+  #toggle:checked + .hamburger .top-bun {
+    transform: rotate(-45deg);
+    margin-top: 25px;
+  }
+  
+  /**
+  #toggle:checked + .hamburger .meat {
+    transform: rotate(45deg);
+    margin-top: -7px;
+  }
+  **/
+  
+  /**
+  #toggle:checked + .hamburger .bottom-bun {
+    opacity: 0;
+    transform: rotate(45deg);
+  }
+  **/
+  
+  #toggle:checked + .hamburger .meat {
+    transform: rotate(0);
+    margin-top: -5px;
+    opacity: 0;
+  }
+  
+  #toggle:checked + .hamburger .bottom-bun {
+    opacity: 1;
+    transform: rotate(45deg);
+    margin-top: -5px;
+  }
+  

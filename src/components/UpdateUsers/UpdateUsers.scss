@@ -1,0 +1,47 @@
+.form-update-user {
+    margin-left: auto;
+    margin-right: auto;
+    width: 80%;
+    background-color: white;
+ 
+    form.form-update-user {
+        padding: 50px 40px;
+        border-radius: 10px;
+        border: 1px solid #f0f0f0;
+        box-shadow: rgb(224, 224, 224) 0px 1px 4px;
+        width: 100%;
+
+        h4 {
+            text-align: center;
+        }
+
+        div.btn-group {
+            width: 100%;
+            display: flex;
+            flex-direction: row;
+            justify-content: flex-end;
+
+            > button {
+                margin-left: 20px;
+                svg {
+                    margin-right: 10px;
+                }
+            }
+        }
+
+        .img-profile{
+            width: 200px;
+            height: 200px;
+            img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 50%;
+            }
+        }
+
+        .btn-pic {
+            padding-left: 30px;
+        }
+    }
+}

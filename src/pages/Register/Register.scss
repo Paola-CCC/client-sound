@@ -1,0 +1,33 @@
+@import "src/styles/main.scss";
+
+.form-register {
+  padding: 70px 0px;
+  form.mx-auto {
+    padding: 50px 40px;
+    border-radius: 10px;
+    border: 1px solid #f0f0f0;
+    box-shadow: rgb(224, 224, 224) 0px 1px 4px;
+    max-width: 500px;
+    h1 {
+      text-align: center;
+      padding-bottom: 10px;
+      margin: 0;
+      color: $secondary-color;
+    }
+    button.btn.btn-primary {
+      width: 100%;
+      margin-bottom: 16px;
+      background-color: $secondary-color;
+    }
+    .link-btn {
+      margin-top: 0px;
+      margin-bottom: 0;
+      text-align: center;
+      & > a {
+        color: $secondary-color;
+        text-decoration: none;
+        font-weight: bolder;
+      }
+    }
+  }
+}

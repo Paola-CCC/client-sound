@@ -1,0 +1,120 @@
+
+.all-cours-show {
+  margin: 70px 0;
+
+    .sortCours {
+        margin: 70px 0;
+        .container-line {
+          display: flex;
+          flex-direction: column;
+          justify-content: center;
+          align-items: center;
+          h5 {
+            margin: 0;
+            padding-bottom: 10px;
+            width: 70%;
+            font-weight: 600;
+            font-size: 1.3rem;
+            line-height: 1.5;
+
+            span {
+              margin-left: 10px;
+            }
+          }
+        }
+        
+        div.global-forms-container {
+          width: 100%;
+          display: flex;
+          flex-direction: column;
+          justify-content: center;
+          align-items: center;
+      
+          .container-forms {
+            background-color: #f7f7f7;
+            width: 70%;
+            padding: 20px;
+            border-radius: 15px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            border: 1px solid #ccc;
+            
+            > div {
+              margin: 0;
+            }
+        
+            .introduction-forms {
+              display: flex;
+              flex-direction: row;
+              justify-content: space-between;
+              padding:  40px 0  0 0;
+              
+              > div {
+                align-self: flex-end;
+              }
+      
+              .input-select-container {
+                width: calc(30% - 20px); // Largeur en tenant compte de la marge de gauche de 20px
+                margin-right: 10px;
+                margin-bottom: 0;
+              }
+        
+              .input-search-container {
+                  align-self: flex-end;
+              }
+            }
+
+            
+            .list-intruments .carrousel-container .intruments {
+              background-color: #f7f7f7;
+              .instrument {
+                background-color: #ffffff;
+              }
+            }
+          }
+        }
+    }
+
+    ul {
+        width: 70%;
+        margin-left: auto;
+        margin-right: auto;
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(245px, 1fr));
+        gap: 25px;
+        margin-bottom: 75px;
+        padding: 0;
+        list-style: none;
+        li {
+            margin-left: 0;
+            margin-right: 0;
+          align-self: center;
+          justify-self: center;
+
+          .card {
+            height: 100%;
+            width: 245px;
+            border: 1px solid #ccc;
+            border-radius: 10px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+            align-self: center;
+            transition: transform 0.2s ease-in-out;
+          }
+        }
+    }
+
+    div.gestion-pages.pagination {
+        width: 100%;
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+     
+        span {
+            display: inline-block;
+            padding: 0 30px;
+            text-align:center;
+            vertical-align: sub;
+            vertical-align: -webkit-baseline-middle;
+        }
+    }
+}

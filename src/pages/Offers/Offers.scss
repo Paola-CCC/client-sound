@@ -1,0 +1,106 @@
+div.offers-list {
+
+    .subscription-card-container {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 20px;
+        // background-color: chartreuse;
+
+        .subscription-card {
+            background-color: #f3f4fb;
+            display: flex;
+            flex-direction: column;
+            justify-content:space-between;
+            height: min-content  ;
+            padding: 20px;
+            border-radius: 5px;
+            width: 300px;
+            margin: 10px;
+            // box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 30px 30px -25px rgba(65, 51, 183, 0.25);
+            border: 1px solid #d9c8f3;
+            
+
+            // &.selected {
+            //     background-color: #dbc7e8;
+            // }
+
+            > *  {
+                width: 100%;
+
+            }
+
+            div.zone-pricing {
+                // background-color: darkslateblue;
+                > * {
+                    text-align: center;
+                    color: #6558d3 ;
+                }
+
+                h2 {
+                    font-weight: 700;
+                    color: #6558d3;
+                    margin: 16px 0;
+                    span {
+                        font-size: 16px;
+                        margin-left: 10px;
+                    }
+                }
+            }
+
+            div.card-body-subscribe {
+                // background-color: fuchsia;
+                padding: 10px 0 26px 0;
+                span {
+                    margin: 0;
+                    color: #707070	;
+                }
+
+                div {
+                    display: flex;
+                    flex-direction: row;
+                    justify-content: space-between;
+                    svg {
+                        margin-right: 20px;
+                        color: #9990e6;
+                        align-self: center;
+                    }
+                    &:not(:last-of-type){
+                        margin-bottom: 15px;
+                    }
+                    span {
+                        text-align: justify;
+                    }
+                }
+            }
+
+            div.btn-selection {
+                display: flex;
+                flex-direction: row;
+                flex-wrap: wrap;
+                justify-content: center;
+                //  button.primary {
+                //     width: 100%;
+                //  }
+
+                button {
+                    color: #fff;
+                    border: none;
+                    background-color: #6558d3;
+                    padding: 10px 20px;
+                    border-radius: 5px;
+                    cursor: pointer;
+                    font-size: 1rem;
+                }
+            }
+
+   
+        }
+    }
+
+    h3 {
+        margin: 50px 0;
+        text-align: center;
+    }
+}

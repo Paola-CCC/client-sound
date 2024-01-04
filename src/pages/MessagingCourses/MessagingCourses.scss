@@ -1,0 +1,40 @@
+.global-layout-container {
+  div.container-sidebar-content {
+    aside.message {
+      margin-top: 100px;
+      width: 300px;
+      height: 200px;
+      border-radius: 10px;
+      display: inline-block;
+      border: 1px solid #f0f0f0;
+      box-shadow: rgb(224, 224, 224) 0px 1px 4px;
+
+      .infos-professor {
+        // background-color: cyan;
+        position: relative;
+        height: 100px;
+        .img-profile-msg {
+          position: absolute;
+          background-color: rgb(255, 255, 255);
+          height: 200px;
+          width: 200px;
+          // padding: 15px;
+          border-radius: 50%;
+          top: 0%;
+          left: 50%;
+          transform: translate(-50%, -50%);
+          img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 50%;
+          }
+        }
+      }
+      h5#prof-name {
+        text-align: center;
+        padding: 30px 0;
+      }
+    }
+  }
+}

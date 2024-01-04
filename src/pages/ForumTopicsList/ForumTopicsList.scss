@@ -1,0 +1,60 @@
+.global-layout-container div.container-sidebar-content .body-content .element-content {
+   
+    .topic-list {
+      width: 90%;
+      margin-left: auto;
+      margin-right: 0;
+      a.topic-list-link {
+        color: black;
+        text-decoration: none;
+        .topic-card-body {
+          margin-bottom: 19px;
+        }
+      }
+    }
+    div.pagination {
+      margin-top: 75px;
+      width: 100%;
+      display: flex;
+      flex-direction: row;
+      justify-content: center;
+    
+      span {
+          display: inline-block;
+          padding: 0 30px;
+          text-align:center;
+          vertical-align: sub;
+          vertical-align: -webkit-baseline-middle;
+      }
+    }
+
+    div.topic-container-form {
+      margin-left: auto;
+      margin-right: auto;
+      border-radius: 10px;
+      background-color: rgb(255, 255, 255);
+      form.form-topic {
+        padding: 50px 40px;
+        border-radius: 10px;
+        border: 1px solid #f0f0f0;
+        box-shadow: rgb(224, 224, 224) 0px 1px 4px;
+        width: 100%;
+        h4 {
+          text-align: center;
+          margin-top: 10px;
+        }
+
+        .topic-form-btn {
+          width: 100%;
+          display: flex;
+          flex-direction: row;
+          justify-content: flex-end;
+
+          > button {
+            margin-left: 20px;
+          }
+        }
+      }
+    }
+  
+}

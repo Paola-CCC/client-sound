@@ -1,0 +1,25 @@
+
+ul.username-only {
+    width: 100%;
+    max-height: 500px;
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow-y: auto;
+
+    li span {
+        display: block;
+        color: #000;
+        font-weight: bold;
+        padding: 8px 16px;
+        text-decoration: none;
+        text-align: center;
+        margin: 0;
+        padding: 8px 0;
+        
+        &:hover {
+            color: rgb(223, 137, 252);
+        }
+    }
+}
+

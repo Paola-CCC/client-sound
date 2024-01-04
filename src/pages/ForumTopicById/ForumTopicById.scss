@@ -1,0 +1,44 @@
+
+.forum-topic-byId {
+    padding: 70px 0;
+    .topic-card-body,.topic-text   {
+        width: 70%;
+        margin-bottom: 0;
+    }
+
+    .group-answer {
+        background-color: rgba(246, 245, 245, 0.928);
+        padding: 50px 20px 30px 20px;
+        width: 70%;
+        margin-left: auto;
+        margin-right: auto;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        border: 1px solid #e1e1e1;
+        margin-top: 50px;
+        border-radius: 10px;
+        &:not(.active) {
+            display: none;
+        }
+        &.active {
+            display: block;
+        }
+    }
+    .zone-pagination {
+        // background-color: red;
+        div.pagination {
+            margin-top: 75px;
+            width: 100%;
+            display: flex;
+            flex-direction: row;
+            justify-content: center;
+         
+            span {
+                display: inline-block;
+                padding: 0 20px;
+                text-align:center;
+                vertical-align: sub;
+                vertical-align: -webkit-baseline-middle;
+            }
+        }
+    }
+}

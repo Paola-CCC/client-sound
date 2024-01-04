@@ -1,0 +1,29 @@
+div#layout-container {
+    // position: relative;
+    header {
+        // position: sticky;
+        // top: 0;
+        // left: 0;
+        width: 100%;
+        z-index: 99999999;
+    }
+
+
+    main {
+        margin: 0 auto;
+        min-height: 100vh;
+        div.global-homepage div.container-home-hero {     
+            background-image: url("../assets/imagedefond.jpg"); 
+            background-size: cover;
+            background-repeat: no-repeat;
+            box-shadow: 0px 0px 6px 0px rgba(0, 0, 0, 0.5); 
+        }
+    }
+    footer {
+        // position: absolute;
+        // bottom: 0;
+        // width: 100%;
+        z-index: 99999999;
+
+    }
+}

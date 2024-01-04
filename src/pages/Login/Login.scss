@@ -1,0 +1,57 @@
+@import "src/styles/main.scss";
+
+.form-login {
+  padding: 70px 0;
+  form.mx-auto {
+    padding: 40px 40px;
+    border-radius: 10px;
+    border: 1px solid #f0f0f0;
+    box-shadow: rgb(224, 224, 224) 0px 1px 4px;
+    border: 1px solid #f0f0f0;
+    box-shadow: rgb(224, 224, 224) 0px 1px 4px;
+    max-width: 500px;
+    h1 {
+      text-align: center;
+      padding-bottom: 10px;
+      margin: 0;
+      color: $secondary-color;
+    }
+    button.btn.btn-primary {
+      width: 100%;
+      margin-bottom: 16px;
+      background-color: $secondary-color;
+    }
+    .link-btn {
+      margin-top: 0px;
+      margin-bottom: 0;
+      text-align: center;
+      & > a {
+        color: $secondary-color;
+        text-decoration: none;
+        font-weight: bolder;
+      }
+    }
+  }
+  .form-arror-msg {
+    max-width: 500px;
+    margin: 20px;
+    border-radius: 10px;
+    padding: 10px;
+    background-color:#f4b4b4;
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;
+    p{
+      margin: 0;
+      font-weight: 600;
+    }
+    &.hidden {
+      display: none;
+    }
+
+    &.show {
+      display: block;
+    }
+  
+  }
+}

@@ -1,0 +1,78 @@
+// Couleurs
+$color-primary: #007bff;
+$color-secondary: #ccc;
+$color-placeholder: #bbb;
+$border-color : rgb(184, 183, 183);
+
+// Tailles
+$input-height: 40px;
+$input-padding: 8px;
+$border-radius: 4px;
+
+.input-search-container {
+  margin-right: 0px;
+  .input-search-input {
+    padding: 8px 0 8px 8px ;
+    font-size: 17px;
+    border-top-left-radius: 4px;
+    border-bottom-left-radius: 4px;
+    border-top: 1px solid $border-color;
+    border-bottom: 1px solid $border-color;
+    border-left: 1px solid $border-color;
+    border-right: 0px solid $border-color;
+    background: #ffffff;
+    width: 75%;
+
+    &::placeholder {
+      color: $color-placeholder;
+    }
+
+    &:disabled {
+      cursor: not-allowed;
+      background-color: $color-secondary;
+      color: $color-placeholder;
+    }
+
+    &.error {
+      border-color: red;
+
+      &:focus {
+        box-shadow: 0 0 0 2px red;
+      }
+    }
+
+    .success {
+      border-color: green;
+
+      &:focus {
+        box-shadow: 0 0 0 2px green;
+      }
+    }
+  }
+
+  button.icon-search {
+    // float: left;
+    // width: 20%;
+    padding: 8px 8px 8px 0;
+    background: #ffffff;
+    height: $input-height;
+    color: $border-color;
+    font-size: 17px;
+    border: 1px solid $border-color;
+    border-left: none;
+    border-top-right-radius: 4px;
+    border-bottom-right-radius: 4px;
+    cursor: pointer;
+  }
+
+  &::after {
+    content: "";
+    clear: both;
+    display: table;
+  }
+
+  &:focus {
+    outline: none;
+    box-shadow: 0 0 0 2px $color-primary;
+  }
+}

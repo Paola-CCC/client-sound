@@ -1,0 +1,108 @@
+.container-personalspace {
+    margin-left: auto;
+    margin-right: auto;
+    width: 80%;
+    background-color: white;
+ 
+    h4 {
+      font-size: 1.5rem;
+      padding: 6px 0;
+      font-weight: 300;
+      margin-left: auto;
+      margin-right: auto;
+    }
+  
+    .personal-card-users {
+    //   background-color: rgb(32, 130, 228);
+      display: flex;
+      padding: 20px;
+      border-radius: 10px;
+      border: 1px solid #f0f0f0;
+      box-shadow: rgb(224, 224, 224) 0px 1px 4px;
+      .img-profile {
+        width: 200px ;
+        height: 200px ;
+        img {
+          width: 100%;
+          height: 100%;
+          object-fit: cover;
+          border-radius: 50%;
+        }
+      }
+
+      .users-perso-datas {
+        display: flex;
+        flex-direction: column;
+        width: calc(100% - 200px);
+        padding-left: 30px;
+  
+        .name h3 {
+            margin: 0;
+        }
+  
+        .informations-grp {
+          padding: 24px 0;
+          display: flex;
+          width: 100%;
+  
+          .infos-values {
+            margin-left: 60px;
+          }
+          .perso-infos p {
+            margin: 0;
+          }
+        }
+        .btn-zone button {
+           
+            float: right;
+          
+        }
+      }
+  
+  
+    }
+  
+  
+
+    .recap-courses {
+      padding: 50px 0;
+      background-color: cyan;
+      table {
+        width: 100%;
+        margin-left: auto;
+        margin-right: auto;
+        border-radius: 10px;
+        border-collapse: collapse;
+        border: 1px solid #f0f0f0;
+        box-shadow: rgb(224, 224, 224) 0px 1px 4px;
+  
+        thead {
+          border-top-left-radius: 10px;
+          border-top-right-radius: 10px;
+          padding: 30px;
+  
+          th:first-child {
+            border-top-left-radius: 10px;
+          }
+  
+          th:last-child {
+            border-top-right-radius: 10px;
+          }
+  
+          tr th {
+            padding: 15px;
+            margin-left: 10px;
+            background-color: rgb(237, 237, 237);
+          }
+        }
+  
+        tbody {
+          th,
+          td {
+            padding: 8px 15px;
+          }
+        }
+      }
+    }
+  }
+  

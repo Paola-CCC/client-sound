@@ -1,0 +1,119 @@
+div.beforeVidéo {
+  height: 100%;
+  width: 100%;
+  position: relative;
+
+  .userIsKnow {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    display: inline-flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    opacity: 0.33;
+    filter: blur(4px);
+    ._elementIcons {
+      background-color: rgb(237, 237, 237);
+      padding: 10px;
+      border-radius: 20px;
+      display: inline-flex;
+      box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
+
+      ._zoneIcons {
+        // background-color: darksalmon;
+        padding: 2rem;
+        svg.fa-2xl {
+          display: block;
+          font-size: 7em;
+          line-height: 0.03125em;
+          margin-left: auto;
+          margin-right: auto;
+          color: #405cf5;
+        }
+
+        button {
+          appearance: button;
+          backface-visibility: hidden;
+          height: 100%;
+          margin: 0;
+          border-radius: 6px;
+          border-width: 0;
+
+          box-sizing: border-box;
+          color: #fff;
+          cursor: pointer;
+          font-size: 100%;
+          line-height: 1.15;
+          outline: none;
+          // overflow: hidden;
+
+          span {
+            padding-top: 20px;
+            font-size: large;
+            color: #405cf5;
+            font-weight: 500;
+          }
+
+          &:disabled {
+            cursor: default;
+          }
+        }
+      }
+    }
+  }
+
+  ._elementIcons {
+    position: absolute;
+    z-index: 9999;
+    background-color: rgb(237, 237, 237);
+    padding: 10px;
+    border-radius: 20px;
+    display: inline-flex;
+    box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
+    top: 50%; 
+    left: 50%; 
+    transform: translate(-50%, -50%);
+
+    ._zoneIcons {
+      // background-color: darksalmon;
+      padding: 2rem;
+      svg.fa-2xl {
+        display: block;
+        font-size: 7em;
+        line-height: 0.03125em;
+        margin-left: auto;
+        margin-right: auto;
+        color: #405cf5;
+      }
+
+      button {
+        appearance: button;
+        backface-visibility: hidden;
+        height: 100%;
+        margin: 0;
+        border-radius: 6px;
+        border-width: 0;
+
+        box-sizing: border-box;
+        color: #fff;
+        cursor: pointer;
+        font-size: 100%;
+        line-height: 1.15;
+        outline: none;
+        // overflow: hidden;
+
+        span {
+          padding-top: 20px;
+          font-size: large;
+          color: #405cf5;
+          font-weight: 500;
+        }
+
+        &:disabled {
+          cursor: default;
+        }
+      }
+    }
+  }
+}

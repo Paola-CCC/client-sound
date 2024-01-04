@@ -1,0 +1,110 @@
+// InputText.scss
+
+// Couleurs
+$color-secondary: #ccc;
+$color-placeholder: #999;
+
+.input-text-container {
+  margin-bottom: 16px;
+
+  label {
+    display: block;
+    margin-bottom: 8px;
+    color: rgb(7, 7, 7);
+    font-weight: 400;
+  }
+
+  .input-text-grp {
+    // background-color: chartreuse;
+
+
+    input[type="text"] {
+      width: 100%;
+      height: 40px;
+      padding: 8px;
+      font-size: 16px;
+      border: 1px solid #ced4da;
+      border-radius: 4px;
+      background-color: #fff;
+      // color: rgb(168, 168, 168);
+
+      &:focus {
+        color: #212529;
+        background-color: #fff;
+        border-color: #86b7fe;
+        outline: 0;
+        box-shadow: 0 0 0 0.25rem rgba(13, 110, 253, 0.25);
+      }
+
+      &::placeholder {
+        color: $color-placeholder;
+      }
+
+      &:disabled {
+        cursor: not-allowed;
+        background-color: $color-secondary;
+        color: $color-placeholder;
+      }
+
+      &.error {
+        border-color: rgb(247, 109, 109);
+
+        &:focus {
+          box-shadow: 0 0 0 2px red;
+        }
+      }
+
+      .success {
+        border-color: green;
+
+        &:focus {
+          box-shadow: 0 0 0 2px green;
+        }
+      }
+    }
+
+    span {
+      margin-left: 10px;
+    }
+
+    &.error {
+      padding-bottom: 5px;
+      border-radius: 3px;
+
+      // border-bottom-left-radius: 6px;
+      // border-bottom-right-radius: 6px;
+      background-color: rgb(255, 149, 149);
+      input[type="text"] {
+        border-color: rgb(247, 109, 109);
+      }
+      input[type="password"] {
+        border-color: rgb(247, 109, 109);
+      }
+    }
+  }
+
+  // Styles pour l'état désactivé
+  // input[type="text"]:disabled {
+  //   cursor: not-allowed;
+  //   background-color: $color-secondary;
+  //   color: $color-placeholder;
+  // }
+
+  // Styles pour l'état erreur
+  // input[type="text"].error {
+  //   border-color: rgb(247, 109, 109);
+
+  //   &:focus {
+  //     box-shadow: 0 0 0 2px red;
+  //   }
+  // }
+
+  // Styles pour l'état succès
+  // input[type="text"].success {
+  //   border-color: green;
+
+  //   &:focus {
+  //     box-shadow: 0 0 0 2px green;
+  //   }
+  // }
+}

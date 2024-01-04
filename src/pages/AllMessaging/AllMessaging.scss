@@ -1,0 +1,61 @@
+.global-layout-container {
+    div.container-sidebar-content {
+      aside.list-recipient {
+        width: max-content;
+        border-radius: 10px;
+        display: inline-block;
+        border: 1px solid #f0f0f0;
+        box-shadow: rgb(224, 224, 224) 0px 1px 4px;
+
+        div  {
+          background-color: #6772DC;
+          text-align: center;
+          padding: 15px;
+          border-bottom: 2px solid #e4e4e4;
+          border-top-left-radius: 10px;
+          border-top-right-radius: 10px ;
+          span {
+            font-weight: 500;
+            color: white;
+            small {
+              font-size: .870em;
+            }
+          }
+        }
+
+        ul {
+          list-style-type: none;
+          margin: 0;
+          padding: 25px 0;
+          max-height: 550px;
+          overflow-y: auto;
+          width: 230px;
+
+          li {
+            padding: 5px 20px ; 
+            margin: 0;  
+
+            &:hover {
+              border: 2px solid #f79191;
+            }
+          }
+        }
+      }
+    }
+  }
+  
+
+.container-messenger {
+  margin: 70px 0;
+  .recipient-empty {
+    background-color: rgb(235, 235, 235);
+    width: 70%;
+    margin-left: auto;
+    margin-right: auto;
+    border-radius: 10px;
+     p {
+      padding: 5px;
+      text-align: center;
+     }
+  }
+}
