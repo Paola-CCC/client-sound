@@ -1,10 +1,13 @@
-import React, {  useCallback, useEffect, useMemo } from 'react';
+import React, {  useCallback, useContext, useEffect, useMemo } from 'react';
 import { createContext,useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import jwt_decode from "jwt-decode";
 import services from '../services';
 
 const AuthContext = createContext();
+
+const useAuthContext = () => useContext(AuthContext);
+
 
 /** 
  * Context Provider va être utiliser pour délimiter les composants enfants qui pourront accéder à ses informations càd aux variables ci-dessous.
@@ -18,7 +21,6 @@ const AuthContextProvider = ({children}) => {
 
     const navigate = useNavigate();
     const token = localStorage.getItem('jwt')  ?  localStorage.getItem('jwt') : '';
-    const usernameStored = localStorage.getItem('username') ?  localStorage.getItem('username') : '';
 
 
     /** Retire JWT du localstorage et change la variable du context */
@@ -51,10 +53,10 @@ const AuthContextProvider = ({children}) => {
         let jwtDecoded  = jwt_decode(JSON.parse(token));
         setUserId(parseInt(jwtDecoded.userId));
         setUserRole(jwtDecoded.roles);
-        setUsername(usernameStored);
+        setUsername(jwtDecoded.username);
       }
 
-    }, [isJWTinlocalStorage ,token,userId,isAuthenticated,usernameStored ]);
+    }, [isJWTinlocalStorage ,token,userId,isAuthenticated ]);
 
   
     /** Permet de stocker les variables du context getter et leur mutateur - fonction qui changent la/les valeurs  */
@@ -81,4 +83,4 @@ const AuthContextProvider = ({children}) => {
     );
 }
 
-export { AuthContext, AuthContextProvider} ;
+export { useAuthContext, AuthContext, AuthContextProvider} ;

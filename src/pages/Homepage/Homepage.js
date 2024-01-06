@@ -236,8 +236,12 @@ const Homepage = () => {
                 ) :       
                 <>
                   <ul className='all-courses'>
+
                     {dataToShow?.map((value, index) => (
+                      
                       <li key={index} >
+{                                                console.log( 'rating Score  ' ,value.ratingScore)
+}
                         <Card
                           id={value.id}
                           imgSrc={value.photo !== '' ? value.photo :"https://i1.sndcdn.com/artworks-000236202373-bjmc48-t500x500.jpg"}

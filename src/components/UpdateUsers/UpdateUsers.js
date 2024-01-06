@@ -19,6 +19,7 @@ const UpdateUsers = ({firstName,lastName,email,userId, instrument,handleCancel,r
   const [successUpdateUserPic, setSuccessUpdateUserPic] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
   const { userAPI } = useContext(AuthContext);
+  const [selectedOptions, setSelectedOptions] = useState([]);
 
 
     const handleSubmit = async(e) => {
@@ -86,19 +87,30 @@ const UpdateUsers = ({firstName,lastName,email,userId, instrument,handleCancel,r
       }
     };
 
+    const handleCheckboxChange = (value) => {
+      if (selectedOptions.includes(value)) {
+        setSelectedOptions(selectedOptions.filter((option) => option !== value));
+      } else {
+        setSelectedOptions([...selectedOptions, value]);
+      }
+    };
+
+    
+
     useEffect(() => {
       const displayInstruments = async () => {
         setIsLoading(true); 
         try {
             const response = await axios.get(process.env.REACT_APP_API_URL + `/instruments`);
             const dataInstruments = await response.data;
-            let instrumentUserList = [];
-            for (let i = 0; i < dataInstruments.length; i++) {
-              const instrument = dataInstruments[i];
-              const instrumentName = instrument.name;
-              instrumentUserList.push(instrumentName);
-            };
-            setInstrumentList(instrumentUserList);
+            const instruments = dataInstruments?.map((e) => {
+              let objtValue = {
+                value: e.id,
+                label: e.name,
+              };
+              return objtValue;
+            });
+            setInstrumentList([...instruments]);
             setIsLoading(false); 
         } catch (error) {
           console.error(error);
@@ -159,11 +171,11 @@ const UpdateUsers = ({firstName,lastName,email,userId, instrument,handleCancel,r
           />
         </div>
         <div className="mb-3">
-          <InputGroupCheckbox
-            options={instrumentList}
-            selectedOptions={selectedInstruments}
+        <InputGroupCheckbox
             labelCheckboxGroup="Instruments"
-            onChange={(selected) => setSelectedInstruments(selected)}
+            options={instrumentList}
+            selectedOptions={selectedOptions}
+            handleChange={(e) => handleCheckboxChange(e.target.value)}
           />
         </div>
 

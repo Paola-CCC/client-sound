@@ -20,7 +20,7 @@ const FeedbackCard = ({userName , city , scoreFeedback , srcPictureUser , altPic
           </div>
         </div>
         <div className="stars-feedback">
-          <RatingStars ratingScore={scoreFeedback} />
+          <RatingStars ratingScore={scoreFeedback} type={'show'}  />
         </div>
       </div>
       <div className="feedback-body">

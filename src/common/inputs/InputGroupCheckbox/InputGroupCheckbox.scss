@@ -4,8 +4,6 @@
 $color-primary: #007bff;
 $color-secondary: #ccc;
 
-.input-group-checkbox-container {
-  margin-bottom: 16px;
 
   label {
     display: block;
@@ -16,9 +14,9 @@ $color-secondary: #ccc;
 
   .checkbox-wrapper {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(110px, 1fr));
+    grid-template-columns: repeat(2, 1fr);
     gap: 0px;
-    padding: 20px 0;
+    // padding: 20px 0;
     margin-bottom: 4px;
 
     label.form-control {
@@ -26,13 +24,12 @@ $color-secondary: #ccc;
       font-size: 1.15rem;
       font-weight:inherit;
       line-height: 1.1;
-      display: inline-grid;
-      grid-template-columns: 1em auto;
+      display: flex;
       gap: 0.5em;
-      border: 0;
-      width: fit-content;
-      padding: 10px 0;
-      margin: 0;
+      border: none;
+      // width: fit-content;
+      // padding: 10px 0;
+      // margin: 0;
     
 
       input[type="checkbox"] {
@@ -78,7 +75,7 @@ $color-secondary: #ccc;
   //   cursor: not-allowed;
   //   background-color: $color-secondary;
   // }
-}
+
 
 
 

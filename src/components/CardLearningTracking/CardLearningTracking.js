@@ -35,7 +35,7 @@ const CardLearningTracking = ({ valueProgress, imgSrc, imgAlt, professorName,rat
         <div className="cours-infos-little">
           <small>de {professorName}</small>
           <span className="stars-area">
-            <RatingStars ratingScore={rating} />
+            <RatingStars ratingScore={rating} type={'show'} />
           </span>
         </div>
       </div>

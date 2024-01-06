@@ -44,7 +44,7 @@ const CardStudentsTracking = ({
         <div className="cours-infos-little">
           <span className="nmbr-students">{nmbrStudents} Élèves</span>
           <span className="stars-area">
-            <RatingStars ratingScore={rating} />
+            <RatingStars ratingScore={rating}  type={'show'} />
           </span>
         </div>
       </div>

@@ -12,7 +12,7 @@ const Button = ({ children, kind , type,  onClick, disabled , id, isSelected}) =
     'tertiary': kind && kind === "tertiary",
     'good-answers': kind && kind === "good-answers",
 		'false-answers': kind && kind === "false-answers",
-    'seletedAnswers': isSelected && isSelected == true
+    'seletedAnswers': isSelected && isSelected === true
 	});
 
   return (

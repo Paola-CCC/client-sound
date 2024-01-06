@@ -6,7 +6,7 @@ const InputRadio = ({ labelRadioGroup, options, selectedOption, onChange }) => {
     <div className="container-inputradio">
 
       {labelRadioGroup && labelRadioGroup !== undefined  && (
-      <label>{labelRadioGroup}</label>
+        <label>{labelRadioGroup}</label>
       )}
       <div className="radio-zone">
         {options.map((option) => (
