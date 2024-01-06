@@ -74,13 +74,15 @@ const ForumTopicById = () => {
 
     try {
       const data = await forumAPI.show(forumId);
-
       setTopicData(data);
       if (data.author.firstName && data.author.lastName) {
         setUsername(`${data.author.firstName} ${data.author.lastName}`);
         setAuthorInfos(data.author);
         setPhoto(data.author.photo);
       }
+
+      setAllResponses(data.responses);
+      setAnswersCount(data.responses && data.responses.length > 0 ? data.responses.length : 0);
       setIsLoading(false);
     } catch (error) {
       console.error(error);
@@ -179,7 +181,6 @@ const ForumTopicById = () => {
     if ( allResponses.length === 0 && !dataFetchedRef.current  ) {
       dataFetchedRef.current = true;
       displayForumSubject();
-      getAllComments();
     } else {
       if ( Object.values(courseTopicData).length > 0 ) {
         setLikesCount(courseTopicData.likesCount);

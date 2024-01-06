@@ -5,7 +5,7 @@ import { faPlay } from "@fortawesome/free-solid-svg-icons";
 import { Link } from "react-router-dom";
 import RatingStars from "../../components/RatingStars/RatingStars";
 
-const Card = ({ id, imgSrc, imgAlt, professorName, title, rating, shortDescription ,linkTo }) => {
+const Card = ({ imgSrc, imgAlt, professorName, title, rating, shortDescription ,linkTo }) => {
 
 
   return (

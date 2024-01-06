@@ -5,7 +5,7 @@ const InputSelect = ({ label, options, value, onChange  }) => {
   return (
     <div className="input-select-container">
 
-      {label && (
+      { label && (
         <label>{label}</label>
       )}
       <select value={value} onChange={onChange}>

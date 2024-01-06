@@ -78,13 +78,13 @@ const TopicCard = ({
         <div className="topic-icons">
 
 
-        {(zone === "forum" || zone === "topicById")? (
+        {(zone === "forum" || zone === "topicById") ? (
           <>
             <Button onClick={() => handleClickLike(1)}>
               <FontAwesomeIcon icon={faThumbsUp}  size="lg" className={`${liked && liked.like === true ? 'btnInverse' : ''}`}/>    
               <span>{likes && likes}</span>
-                
             </Button>
+            
             <Button onClick={() => handleClickLike(-1)} >
               <FontAwesomeIcon icon={faThumbsUp} rotation={180} size="lg" className={`${liked && liked.dislike === true ? 'btnInverse' : ''}`}/>    
               <span>{dislikes && dislikes}</span>
