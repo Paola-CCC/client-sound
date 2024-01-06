@@ -50,7 +50,7 @@ class CourseService {
   // ESPACE D'APPRENTISSAGE
   async showCourseByUser(userId) {
     try {
-      const response = await this.httpClient.get(`${this.URL}/api/progression-student/${userId}`);
+      const response = await this.httpClient.get(`${this.URL}/progression-student/${userId}`);
       if (response.status >= 200 && response.status <= 299) {
         return response.data;
       } else {
