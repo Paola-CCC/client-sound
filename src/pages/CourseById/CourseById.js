@@ -168,8 +168,7 @@ const CourseById = () => {
         quizzStatus: e.quizzStatus
       }));
       setStatus(elementsStatus);
-      // setVideoLinkID(data[0].linkVideo);
-      setVideoLinkID("8UImUUUUBVA");
+      setVideoLinkID(data[0].linkVideo);
     } catch (error) {
       setIsLoading(false);
     }
