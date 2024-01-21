@@ -4,6 +4,7 @@ div.global-homepage {
     display: grid;
     grid-template-columns: repeat(8, 1fr);
     background-color: white;
+    margin-top: 100px;
 
     section {
 
@@ -12,7 +13,6 @@ div.global-homepage {
         height: auto;
         width: 100%;
         padding: 0;
-        margin-top: 140px;
 
         div.zone-images {
           display: grid;
@@ -190,9 +190,17 @@ div.global-homepage {
         position: relative;
         height: 1px;
         width: 100%;
-        margin: 100px 0 100px 0;
+        margin: 80px 0 80px 0;
         padding: 0;
         background-color: #d5d4d4;
+        // background-color: white;
+
+
+        &.new-zone {
+          // background-color: white;
+          margin-top: 0;
+          // margin-bottom: 100px;
+        }
 
         .overlay {
           position: absolute;
@@ -272,7 +280,7 @@ div.global-homepage {
 
     .homepage-grid-area {
       display: block;
-      margin-top: 120px;
+      // margin-top: 120px;
 
       section {
     
@@ -282,7 +290,6 @@ div.global-homepage {
           margin-left: auto;
           margin-right: auto;  
           padding: 0;
-          margin-top: 266px;          
           div.zone-images {
             gap: 20px;
             figure.img-news {

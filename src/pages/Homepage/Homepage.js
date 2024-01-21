@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useRef, useState } from "react";
+import React, {  useEffect, useRef, useState } from "react";
 import "./Homepage.scss";
 import DisplayFeedbackCard from "../../components/DisplayFeedbackCard/DisplayFeedbackCard";
 import HomeHero from "../../components/HomeHero/HomeHero";
@@ -10,143 +10,23 @@ import { faArrowRightLong } from "@fortawesome/free-solid-svg-icons";
 import { useNavigate } from "react-router-dom";
 import LoadingElements from "../../components/LoadingElements/LoadingElements";
 import { useAxiosFetchCourse } from "../../hooks/axiosFetch";
-import { useInstrumentContext } from "../../contexts/InstrumentProvider";
 
 
 
 const Homepage = () => {
 
   const navigate = useNavigate();
-  const { instrumentSelected } = useInstrumentContext();
   const { fetchData } = useAxiosFetchCourse();
   const { courseAPI } = useAPIContext();
   const [isLoading , setIsLoading ] = useState(false);
   const [data, setData] = useState([]);
   const dataToShow = data ? data.slice(0, 12) : [];
-  const [selectedProfessor, setSelectedProfessor] = useState("");
-  const [selectedCategory, setSelectedCategory] = useState("");
-  const [selectedCompositor, setSelectedCompositor] = useState("");
-  const [searchValue , setSearchValue] = useState('');
-  const [optionsProfessors, setOptionsProfessors] = useState([{ value: "", label: "professeurs" }]);
-  const [optionsCategory, setOptionsCategory] = useState([{ value: "", label: "catégories" }]);
-  const [optionsCompositors, setOptionsCompositor] = useState([{ value: "", label: "compositeurs" }]);
+
   const dataFetchedRef = useRef(false);
-
-
-  const getProfessorForOption = useCallback((response) => {
-    let index = 0;
-    let tabProfessor = [];
-    const professor = response.map((e) => {
-      let username = e.professor.firstName + ' ' + e.professor.lastName;
-      let objtValue = {};
-      tabProfessor.push(username);
-      let coco = tabProfessor.filter(x => x === username).length;
-      if( coco === 1 ){
-        objtValue = {
-          value: index+=1,
-          label: username
-        }
-      }
-      return objtValue ;
-    }) ;
-    const asArray = Object.values(professor);
-    const filterProfessor = Object.values(asArray).filter((value) => Object.keys(value).length !== 0);
-    const finalDataProfessor = [
-      ...optionsProfessors,
-      ...filterProfessor
-    ];
-    setOptionsProfessors(finalDataProfessor);
-  },[optionsProfessors])
-
-
-  const getCategory = useCallback( (response) => {
-    let tabCategory = [];
-
-    const category = response.map((e) => {
-      tabCategory.push(e.categories[0].name);
-      let objtValue = {};
-      let coco = tabCategory.filter(x => x === e.categories[0].name).length;
-
-      if( coco === 1 ){
-        objtValue = {
-          value: e.categories[0].id,
-          label: e.categories[0].name
-        }
-      }
-      return objtValue;
-    });
-    const asArray = Object.values(category);
-    const filterCategory = Object.values(asArray).filter((value) => Object.keys(value).length !== 0);
-    const finalDatacategory = [
-      ...optionsCategory,
-      ...filterCategory
-    ];
-    setOptionsCategory(finalDatacategory);
-  },[optionsCategory]);
-
-  const getComposers = useCallback( (response) => {
-    let stockComposerName = [];
-    const composers = response.map((e) => {
-      stockComposerName.push(e.composers[0].fullName);
-      let objtValue = {};
-      let coco = stockComposerName.filter(x => x === e.composers[0].fullName).length;
-      if( coco === 1 ){
-        objtValue = {
-          value: e.composers[0].id,
-          label: e.composers[0].fullName
-        }
-      }
-      return objtValue;
-    });
-    const asArray = Object.values(composers);
-    const filteredComposers = Object.values(asArray).filter((value) => Object.keys(value).length !== 0);
-    const finalDataComposers = [
-      ...optionsCompositors,
-      ...filteredComposers
-    ];
-    setOptionsCompositor(finalDataComposers);
-  },[optionsCompositors]);
 
   const getFormFocus = () => {
     navigate(`/courses-all`) ;
   }
-
-  const checkEmptyValue = (obj) => {
-    for (const key in obj) {
-      if (Object.prototype.hasOwnProperty.call(obj, key) && obj[key] !== '') {
-        return true;
-      }
-    }
-    return false;
-  }
-
-  const searchCoursesDatas = (event) => {
-    event.preventDefault();
-
-    let index = {
-      instrumentName : instrumentSelected,
-      professorId :selectedProfessor,
-      categoryId : selectedCategory,
-      composerId :selectedCompositor,
-      title : searchValue
-    };
-
-    if (checkEmptyValue(index)) {
-      fetchData(index).then((e) => {
-        setData([]);
-        setData(e);
-        return;
-      });
-      return ;
-
-    } else {
-      fetchData(index).then((e) => {
-        setData([]);
-        setData(e);
-        return;
-      });
-    }
-  };
 
   useEffect(() => {
     const getData = async () => {
@@ -166,48 +46,20 @@ const Homepage = () => {
       getData();
     }
 
-    if( data && data.length > 1 ) {
-      if(optionsProfessors.length === 1){
-        getProfessorForOption(data);
-      }
-      if(optionsCategory.length === 1){
-        getCategory(data);
-      }
-      if(optionsCompositors.length === 1){
-        getComposers(data);
-      } 
-    }
 
-  },[data,isLoading,courseAPI,selectedProfessor,getProfessorForOption,optionsCategory,optionsCompositors ,optionsProfessors,getCategory,getComposers,selectedCategory,selectedCompositor,searchValue,fetchData]);
+
+  },[data,isLoading,fetchData , courseAPI]);
 
 
   return (
     <div className="global-homepage">
-      <HomeHero 
-      professorsList={optionsProfessors}
-      selectedProfessor={selectedProfessor}
-      handleSelectedProfessor={(e) => setSelectedProfessor(e.target.value)}
-
-      categoryList={optionsCategory}
-      selectedCategory={selectedCategory}
-      handleSelectedCategory={(e) => setSelectedCategory(e.target.value)}
-
-      compositorList={optionsCompositors}
-      selectedCompositor={selectedCompositor}
-      handleSelectedCompositor={(e) => setSelectedCompositor(e.target.value)}
-
-      searchValue={searchValue}
-      handleSearchValue={(e)=> setSearchValue(e.target.value)}
-
-      handleFilter={searchCoursesDatas}
-
-      />
+      <HomeHero />
       <div className="homepage-grid-area">
 
         {/* NOUVEAUTE */}
 
         <section className="new-courses">
-          <div className="container-line">
+          <div className="container-line new-zone">
             <span className="overlay">Nouveautés </span>
           </div>
 

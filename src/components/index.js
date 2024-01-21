@@ -15,7 +15,6 @@ export { default as CardNewCourses } from "./CardNewCourses/CardNewCourses";
 export { default as PlayerYoutube } from "./PlayerYoutube/PlayerYoutube";
 
 export { default as RatingStars } from "./RatingStars/RatingStars";
-export { default as ShowListCourses } from "./ShowListCourses/ShowListCourses";
 
 export { default as PersonalCard } from "./PersonalCard/PersonalCard";
 

@@ -1,25 +1,10 @@
 import React from "react";
 // import PropTypes from "prop-types";
 import "./HomeHero.scss";
-import { Button, InputSearch, InputSelect } from "../../common/Index";
 import Navigation from "../Navigation/Navigation";
-import ListInstrumentsScroll from "../ListInstrumentsScroll/ListInstrumentsScroll";
 
 
-const HomeHero = ({
-  professorsList,
-  selectedProfessor,
-  handleSelectedProfessor,
-  categoryList,
-  selectedCategory,
-  handleSelectedCategory,
-  compositorList,
-  selectedCompositor,
-  handleSelectedCompositor,
-  searchValue,
-  handleSearchValue,
-  handleFilter
-}) => {
+const HomeHero = () => {
 
   return (
     <div id="form-search" className="container-home-hero" tabIndex={0}>
@@ -34,7 +19,7 @@ const HomeHero = ({
         </p>
       </div>
 
-      <div className="global-forms-container">
+      {/* <div className="global-forms-container">
           <div className="container-forms">
 
             <div className="container-line">
@@ -73,7 +58,7 @@ const HomeHero = ({
               </div>
             </div>
           </div>
-      </div>
+      </div> */}
     </div>
   );
 };
