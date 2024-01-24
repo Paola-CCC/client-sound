@@ -99,13 +99,13 @@ const ListAllCourses = () => {
     const getComposers = useCallback((response) => {
       let stockComposerName = [];
       const composers = response.map((e) => {
-        stockComposerName.push(e.composers[0].fullName);
+        stockComposerName.push(e?.composers[0]?.fullName);
         let objtValue = {};
-        let coco = stockComposerName.filter(x => x === e.composers[0].fullName).length;
+        let coco = stockComposerName.filter(x => x === e.composers[0]?.fullName).length;
         if( coco === 1 ){
           objtValue = {
-            value: e.composers[0].id,
-            label: e.composers[0].fullName
+            value: e.composers[0]?.id,
+            label: e.composers[0]?.fullName
           }
         }
         return objtValue;
