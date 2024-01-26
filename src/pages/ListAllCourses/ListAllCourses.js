@@ -5,7 +5,7 @@ import { useAPIContext } from '../../contexts/APIContextProvider';
 import { Button, Card, InputSearch, InputSelect } from '../../common/Index';
 import ListInstrumentsScroll from '../../components/ListInstrumentsScroll/ListInstrumentsScroll';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faSliders } from "@fortawesome/free-solid-svg-icons";
+import { faCircleXmark } from "@fortawesome/free-solid-svg-icons";
 import LoadingElements from '../../components/LoadingElements/LoadingElements';
 import { useAxiosFetchCourse } from '../../hooks/axiosFetch';
 import { useInstrumentContext } from '../../contexts/InstrumentProvider';
@@ -46,6 +46,7 @@ const ListAllCourses = () => {
       }
     },[endIndex,startIndex]);
 
+    /** Crée la liste de prof à sélectionner */
     const getProfessorForOption = useCallback((response) => {
       let index = 0;
       let tabProfessor = [];
@@ -64,13 +65,11 @@ const ListAllCourses = () => {
       }) ;
       const asArray = Object.values(professor);
       const filterProfessor = Object.values(asArray).filter((value) => Object.keys(value).length !== 0);
-      const finalDataProfessor = [
-        ...optionsProfessors,
-        ...filterProfessor
-      ];
-      setOptionsProfessors(finalDataProfessor);
+      setOptionsProfessors([...optionsProfessors,...filterProfessor ]);
     },[optionsProfessors])
   
+
+    /** Crée la liste des catégories à sélectionner */
     const getCategory = useCallback((response) => {
       let tabCategory = [];
   
@@ -89,13 +88,13 @@ const ListAllCourses = () => {
       });
       const asArray = Object.values(category);
       const filterCategory = Object.values(asArray).filter((value) => Object.keys(value).length !== 0);
-      const finalDatacategory = [
+      setOptionsCategory([
         ...optionsCategory,
         ...filterCategory
-      ];
-      setOptionsCategory(finalDatacategory);
+      ]);
     },[optionsCategory]);
   
+    /** Crée la liste des compositeurs à sélectionner */
     const getComposers = useCallback((response) => {
       let stockComposerName = [];
       const composers = response.map((e) => {
@@ -185,16 +184,9 @@ const ListAllCourses = () => {
   return (
   <div className='all-cours-show'>
     
-        <div className='sortCours'>
-          <div className="container-line">
-            <h5 className="overlay">
-              <FontAwesomeIcon icon={faSliders} />  
-              <span> Filtres </span>            
-            </h5>
-          </div>
+
           <div className="global-forms-container">
             <div className="container-forms">
-
               < ListInstrumentsScroll />
               <div className="introduction-forms">
                 <InputSelect
@@ -218,11 +210,12 @@ const ListAllCourses = () => {
                   onChange={(e) => setSelectedCompositor(e.target.value)}
                 />
 
-                <InputSearch
-                  value={searchValue}
-                  placeholder="Rechercher"
-                  onChange={(e)=> setSearchValue(e.target.value)}
-                /> 
+                <div className='clear-all-sort'>
+                  <button> 
+                      <FontAwesomeIcon icon={faCircleXmark} />
+                      <small> Nettoyer</small>
+                  </button>
+                </div>
 
                 <div>
                   <Button kind={"primary"} onClick={searchCoursesDatas}> Rechercher</Button>
@@ -230,26 +223,37 @@ const ListAllCourses = () => {
               </div>
             </div>
           </div>
-        </div>
+
+
+
+
+
 
         <ul className='all-courses'>
         {currentData.map((value, index) => (
           <li key={index} >
             <Card
-              id={value.id}
-              imgSrc={value.photo !== '' ? value.photo :"https://i1.sndcdn.com/artworks-000236202373-bjmc48-t500x500.jpg"}
+              id={value?.id}
+              imgSrc={value?.photo}
               imgAlt="Cours de Violon"
-              title={value.title}
-              rating={value.ratingScore}
-              shortDescription={value.preview}
-              longDescription={value.description}
-              professorName={`${value.professor.firstName} ${value.professor.lastName}`}
-              linkTo={`/courses/${value.id}`}
+              title={value?.title}
+              rating={value?.ratingScore}
+              shortDescription={value?.preview}
+              longDescription={value?.description}
+              professorName={`${value?.professor?.firstName} ${value?.professor?.lastName}`}
+              linkTo={`/courses/${value?.id}`}
               />
           </li>
         ))}
         </ul>
-      { Object.values(currentData).length > 0 ?
+
+
+
+
+
+
+
+      {/* { Object.values(currentData).length > 0 ?
         <div className='gestion-pages pagination'>
           <Pagination totalPages={totalPages} currentPage={currentPage} onPageChange={handlePageChange} />
         </div> : 
@@ -258,16 +262,9 @@ const ListAllCourses = () => {
                 <LoadingElements />
             </>
           )
-        }
+        } */}
 
   </div>
 )};
-
-
-
-
-ListAllCourses.propTypes = {};
-
-ListAllCourses.defaultProps = {};
 
 export default ListAllCourses;

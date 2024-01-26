@@ -1,10 +1,20 @@
 import React from 'react';
-import Layout from './layout/Layout';
 import './App.scss';
+import { useLocation } from 'react-router-dom';
+import { Footer, Header, Main } from './layout';
 
 const App = () => {
+
+  const location = useLocation();
+
   return (
-      <Layout />
+    <div id="layout-container">
+       { location.pathname !== "/" && location.pathname !== "courses" && (
+        <Header />
+       )}
+      <Main />
+      <Footer />
+    </div>
   );
 }
 

@@ -4,8 +4,6 @@ export { default as Offers } from './Offers/Offers';
 export { default as PersonalSpace } from './PersonalSpace/PersonalSpace';
 export { default as ForumTopicsList } from './ForumTopicsList/ForumTopicsList';
 export { default as ForumTopicById } from './ForumTopicById/ForumTopicById';
-export { default as About } from './About/About';
-export { default as Contact } from './Contact/Contact';
 export { default as CourseById } from './CourseById/CourseById';
 export { default as ListLearningTracking } from './ListLearningTracking/ListLearningTracking';
 export { default as ListStudentsTracking } from './ListStudentsTracking/ListStudentsTracking';

@@ -13,7 +13,6 @@ import {
   ListAllCourses,
   Login,
   Register,
-  About,
   AllMessaging,
   ForumTopicById
 } from "../pages/index.js";
@@ -27,7 +26,6 @@ const RouterNav = () => {
         <Route path="courses" element={<Homepage />} />
         <Route path="connexion" element={<Login />} />
         <Route path="inscription" element={<Register />} />
-        <Route path="about" element={<About />} />
         <Route path="offers" element={<Offers />} />
         <Route path="*" element={<NotFound />} />
         <Route path="forum" element={<ForumTopicsList />} />
