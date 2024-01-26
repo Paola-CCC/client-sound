@@ -1,6 +1,5 @@
 import React, { useState, useEffect, useContext } from "react";
 import "./UpdateUsers.scss";
-import { useNavigate } from "react-router-dom";
 import Button from "../../common/Button/Button";
 import { InputFile, InputGroupCheckbox } from "../../common/Index";
 import axios from "axios";

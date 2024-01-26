@@ -1,8 +1,7 @@
-import React from 'react';
 import './FeedbackCard.scss';
-import RatingStars from '../RatingStars/RatingStars';
+// import RatingStars from '../RatingStars/RatingStars';
 
-const FeedbackCard = ({userName , city , scoreFeedback , srcPictureUser , altPicture , textContent}) => {
+const FeedbackCard = ({userName ,date, srcPictureUser , altPicture , textContent}) => {
 
   return (
     <div className="feedback-card">
@@ -16,12 +15,12 @@ const FeedbackCard = ({userName , city , scoreFeedback , srcPictureUser , altPic
         <div>
           <div>
             <span>{userName}</span>
-            <span>{city}</span>
+            <span>{date}</span>
           </div>
         </div>
-        <div className="stars-feedback">
+        {/* <div className="stars-feedback">
           <RatingStars ratingScore={scoreFeedback} type={'show'}  />
-        </div>
+        </div> */}
       </div>
       <div className="feedback-body">
         <p>
