@@ -5,7 +5,7 @@ import { useAPIContext } from '../../contexts/APIContextProvider';
 import { Button, Card, InputSearch, InputSelect } from '../../common/Index';
 import ListInstrumentsScroll from '../../components/ListInstrumentsScroll/ListInstrumentsScroll';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faCircleXmark } from "@fortawesome/free-solid-svg-icons";
+import { faCircleXmark , faMagnifyingGlass} from "@fortawesome/free-solid-svg-icons";
 import LoadingElements from '../../components/LoadingElements/LoadingElements';
 import { useAxiosFetchCourse } from '../../hooks/axiosFetch';
 import { useInstrumentContext } from '../../contexts/InstrumentProvider';
@@ -216,9 +216,11 @@ const ListAllCourses = () => {
                       <small> Nettoyer</small>
                   </button>
                 </div>
-
-                <div>
-                  <Button kind={"primary"} onClick={searchCoursesDatas}> Rechercher</Button>
+                <div className='clear-all-sort'>
+                  <Button kind={"primary"} onClick={searchCoursesDatas}> 
+                  <FontAwesomeIcon icon={faMagnifyingGlass} />
+                    Filtrer
+                  </Button>
                 </div>
               </div>
             </div>
@@ -253,7 +255,7 @@ const ListAllCourses = () => {
 
 
 
-      {/* { Object.values(currentData).length > 0 ?
+    { Object.values(currentData).length > 0 ?
         <div className='gestion-pages pagination'>
           <Pagination totalPages={totalPages} currentPage={currentPage} onPageChange={handlePageChange} />
         </div> : 
@@ -262,7 +264,7 @@ const ListAllCourses = () => {
                 <LoadingElements />
             </>
           )
-        } */}
+        } 
 
   </div>
 )};

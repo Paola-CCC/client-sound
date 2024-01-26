@@ -10,7 +10,7 @@ $input-padding: 8px;
 $border-radius: 4px;
 
 .input-search-container {
-  margin-right: 0px;
+
   .input-search-input {
     padding: 8px 0 8px 8px ;
     font-size: 17px;
@@ -21,7 +21,7 @@ $border-radius: 4px;
     border-left: 1px solid $border-color;
     border-right: 0px solid $border-color;
     background: #ffffff;
-    width: 75%;
+ 
 
     &::placeholder {
       color: $color-placeholder;

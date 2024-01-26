@@ -313,7 +313,7 @@ const ForumTopicsList = () => {
     <ContainerSidebarAndContent>
 
       { canWeShowForm === false  && (
-          <Sidebar>
+          <div className='form-sort'>
               <InputSelect
                 label={optionsCategory[0].label.toUpperCase()}
                 options={optionsCategory}
@@ -333,10 +333,10 @@ const ForumTopicsList = () => {
                     </Button>
                 </div>
               )}
-          </Sidebar>
-      )}
+          </div>
+      )} 
 
-      <ContainerContent>
+      <div className='content-area'>
         { isLoading ? (
             <>
                 <LoadingElements />
@@ -346,13 +346,9 @@ const ForumTopicsList = () => {
             {canWeShowForm === true ? creatForumQuestion() : showListForumQuestion()}
           </> 
         )}
-      </ContainerContent>
+      </div>
     </ContainerSidebarAndContent>
   );
 };
-
-ForumTopicsList.propTypes = {};
-
-ForumTopicsList.defaultProps = {};
 
 export default ForumTopicsList;

@@ -227,7 +227,7 @@ const ListLearningTracking = () =>  {
 
   return (
     <ContainerSidebarAndContent>
-        <Sidebar>
+        <div className='form-sort'>
           <InputSelect
             label={("Professeurs").toUpperCase()}
             options={optionsProfessors}
@@ -244,8 +244,10 @@ const ListLearningTracking = () =>  {
           <div>
             <Button kind={"primary"} onClick={handleFilter}> Rechercher</Button>
           </div>
-        </Sidebar>
-      <ContainerContent>
+        </div>
+
+
+      <div className="content-area">
         { isLoading ?
           (
             <>
@@ -276,7 +278,7 @@ const ListLearningTracking = () =>  {
 
           )       
         }
-      </ContainerContent>
+      </div>
     </ContainerSidebarAndContent>
   );
 };
