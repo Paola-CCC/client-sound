@@ -156,36 +156,38 @@ const AllMessaging = () => {
                 <p> Il n'existe aucun message à afficher  </p>
               </div> 
             )}
+
+          { recipientList.length > 0  && (
+              <div className="grid-box-msg">
+                <aside className="list-recipient">
+                  <div>
+                    <span> Mes contacts
+                      { recipientList.length > 0 && ( 
+                        <small>  ({recipientList.length}) </small>
+                      )}
+                    </span>
+                  </div>
+                  <ul>
+                    {Object.values(recipientList).map((recipient,index) => (
+                      <li key={index} onClick={() => checkMessages(recipient.id, recipient.username)} tabIndex={0}>
+                        <span className='recipient-name'>{recipient.username}</span>
+                      </li>
+                    ))}
+                  </ul>
+                </aside>
+
+                <ConversationBox 
+                  getTabListsOfConversation={tabListsOfConversation}
+                  handleDisplayConversation={() => upDateMessagesConversation()}
+                  currentConversation={conversationID}
+                  destinataireName={destinataireName}
+                />
+              </div>
+          )}
           </div>
           
 
-          { recipientList.length > 0  && (
-                <div className="grid-box-msg">
-                  <aside className="list-recipient">
-                    <div>
-                      <span> Mes contacts
-                        { recipientList.length > 0 && ( 
-                          <small>  ({recipientList.length}) </small>
-                        )}
-                      </span>
-                    </div>
-                    <ul>
-                      {Object.values(recipientList).map((recipient,index) => (
-                        <li key={index} onClick={() => checkMessages(recipient.id, recipient.username)} tabIndex={0}>
-                          <span className='recipient-name'>{recipient.username}</span>
-                        </li>
-                      ))}
-                    </ul>
-                  </aside>
 
-                  <ConversationBox 
-                    getTabListsOfConversation={tabListsOfConversation}
-                    handleDisplayConversation={() => upDateMessagesConversation()}
-                    currentConversation={conversationID}
-                    destinataireName={destinataireName}
-                  />
-                </div>
-          )}
       </>
 
 

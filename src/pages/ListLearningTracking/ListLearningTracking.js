@@ -9,7 +9,7 @@ import Pagination from "../../components/Pagination/Pagination";
 import LoadingElements from "../../components/LoadingElements/LoadingElements";
 import { checkEmptyValue, useAxiosFetchApprentissage} from '../../hooks/axiosFetch';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faCircleXmark , faMagnifyingGlass} from "@fortawesome/free-solid-svg-icons";
+import { faCircleXmark } from "@fortawesome/free-solid-svg-icons";
 
 
 const ListLearningTracking = () =>  { 
@@ -20,8 +20,6 @@ const ListLearningTracking = () =>  {
   const [selectedStatus, setSelectedStatus ] = useState("");
   const [searchValue, setSearchValue] = useState("");
   const [isLoading , setIsLoading ] = useState(true);
-  const [data, setData] = useState([]);
-  const [countRender, setCountRender] = useState(0);
   const [optionsProfessors, setOptionsProfessors] = useState([{ value: "", label: "professeurs" }]);
   const [optionsInstruments, setOptionsInstruments] = useState([{ value: "", label: "instruments" }]);
   const [optionsCompositors, setOptionsCompositor] = useState([{ value: "", label: "compositeurs" }]);
@@ -32,7 +30,7 @@ const ListLearningTracking = () =>  {
       {value: "FINISHED", label: "Terminé" }
     ]);
 
-  const itemsPerPage = 6;
+  const itemsPerPage = 8;
   const [currentPage, setCurrentPage] = useState(1);
   //calcule l'index de départ dans le tableau data pour la page actuelle.
   const startIndex = (currentPage - 1) * itemsPerPage;
@@ -43,23 +41,34 @@ const ListLearningTracking = () =>  {
   const { fetchDataApprentissage } = useAxiosFetchApprentissage();
 
 
+  const getDataLearningPagesNext = async () => {
+    try {
+      const response = await courseAPI.showCourseByUser(userId);
+      const datasCourses = response.map((e) => e.course);
+      truncatedDatas(datasCourses);
+    } catch (error) {
+      console.error(error);
+    }
+  }
+
   const handlePageChange = (newPage) => {
+    setCurrentData([]);
     if (newPage >= 1 && newPage <= totalPages) {
       setCurrentPage(newPage);
+      getDataLearningPagesNext();
     }
   };
 
 
-  const truncatedDatas = useCallback((dataElement) =>  {
+  const truncatedDatas = (dataElement) =>  {
     setCurrentData([]);
-    setTotalPages([])
     if( dataElement && dataElement.length > 0){
       const currentElemnt = dataElement && dataElement.slice(startIndex, endIndex);
       setCurrentData(currentElemnt);
       const totalElement = Math.ceil(dataElement && dataElement.length / itemsPerPage);
       setTotalPages(totalElement)
     }
-  },[endIndex,startIndex]);
+  };
 
   /** Permet de supprimer un object qui serait un doublon grace à son ID  */
   const  filterDuplicateName = (arrayObject) => {
@@ -93,114 +102,107 @@ const ListLearningTracking = () =>  {
   const getProfessorForOption = useCallback((response) => {
     const professor = response.map((e) => {
       let objtValue = {
-        value: e.professor.id,
-        label:  strLcFirst(e.professor.firstName) + ' ' + e.professor.lastName.toUpperCase()
+        value: e?.professor?.id,
+        label: strLcFirst(e?.professor?.firstName) + ' ' + e?.professor?.lastName.toUpperCase()
       }
       return objtValue ;
     });
 
     const datas = getFlattenArray(professor);
-    const filteredArray = filterDuplicateName(datas);
-    const finalDataProfessor = [
+    const filteredArray = filterDuplicateName(datas);    
+    setOptionsProfessors([
       ...optionsProfessors,
       ...filteredArray
-    ];
-    
-    setOptionsProfessors(finalDataProfessor);
+    ]);
   },[optionsProfessors])
 
   const getInstruments = useCallback((response) => {
     const instrument = response.map((e) => {
       let objtValue = {
-        value: e.instrument.id,
-        label: e.instrument.name
+        value: e.instrument?.id,
+        label: e.instrument?.name
       }
       return objtValue;
     });
     const datas = getFlattenArray(instrument);
     const filteredArray = filterDuplicateName(datas);
-    const finalDataInstrument = [
+    setOptionsInstruments([
       ...optionsInstruments,
       ...filteredArray
-    ];
-    setOptionsInstruments(finalDataInstrument);
+    ]);
   },[optionsInstruments])
 
   const getComposers = useCallback((response) => {
     const composers = response.map((e) => {
       let objtValue = {
-        value: e.composers[0].id,
-        label: e.composers[0].fullName
+        value: e.composers[0]?.id,
+        label: e.composers[0]?.fullName
       }
       return objtValue;
     });
     const datas = getFlattenArray(composers);
     const filteredArray = filterDuplicateName(datas);
-    const finalDataComposers = [
+    setOptionsCompositor([
       ...optionsCompositors,
       ...filteredArray
-    ];
-    setOptionsCompositor(finalDataComposers);
+    ]);
   },[optionsCompositors])
  
+  const changeData = () => {
+
+    const datasCourses = currentData.map((value,index) => {
+        return (
+          <li key={index}>
+              <CardLearningTracking
+                imgSrc={value?.photo}
+                imgAlt="Cours de Violon"
+                title={value.title}
+                valueProgress={value?.percentageWatched ? value?.percentageWatched  : '0'}
+                rating={value?.ratingScore}
+                shortDescription={value?.preview}
+                longDescription={value?.description}
+                professorName={`${value?.professor?.firstName} ${value?.professor?.lastName}`}
+                linkTo={`/courses/${value?.id}`}
+              />
+          </li>
+        );
+    });
+    return datasCourses;
+  };
 
   useEffect(() => {
     const getData = async () => {
+      setIsLoading(true);
       try {
-        setIsLoading(true);
+        
         const response = await courseAPI.showCourseByUser(userId);
-        if( response && response !== undefined && response !== null) {
-          if( Object.keys(response[0]).includes('course')){
-            // setData(response);
-            truncatedDatas(response);
-            let datasCourses = response.map((e) => e.course);
+          if( Object.keys(response).length > 0) {
+            const datasCourses = response.map((e) => e.course);
+            const currentElemnt = datasCourses && datasCourses.slice(startIndex, endIndex);
+            setCurrentData(currentElemnt);
+            const totalElement = Math.ceil(datasCourses && datasCourses.length / itemsPerPage);
+            setTotalPages(totalElement);
+            getProfessorForOption(currentElemnt);
+            getInstruments(currentElemnt);
+            getComposers(currentElemnt);
             setIsLoading(false);
-            getProfessorForOption(datasCourses);
-            getInstruments(datasCourses);
-            getComposers(datasCourses);
+
           } else {
             setIsLoading(false);
           }
   
-        }
       } catch (error) {
         console.error(error);
         setIsLoading(false);
       }
     }
 
-    if( data.length < 1 && countRender <= 2 && userId !== null ){
-      setCountRender((prevCount) => prevCount + 1);
+    if(currentData && Object.values(currentData).length === 0){
       getData(); 
     }
-  },[data,isLoading,courseAPI,userId,countRender ,getComposers,getInstruments,getProfessorForOption,truncatedDatas]);
 
+  },[isLoading,courseAPI,userId, optionsCompositors , optionsProfessors ,getComposers,getInstruments,getProfessorForOption ,startIndex ,endIndex , currentData]);
 
-  const changeData = () => {
-
-    let index = Object.values(currentData).map((elements,index) => {
-        let value = elements.course;
-        let professor = `${value.professor.firstName} ${value.professor.lastName}`;
-        return (
-          <>
-              <CardLearningTracking
-                key={index}
-                imgSrc={value.photo !== '' ? value.photo :"https://i1.sndcdn.com/artworks-000236202373-bjmc48-t500x500.jpg"}
-                imgAlt="Cours de Violon"
-                title={value.title}
-                valueProgress={elements.percentageWatched ? elements.percentageWatched  : '0'}
-                rating={value.ratingScore}
-                shortDescription={value.preview}
-                longDescription={value.description}
-                professorName={professor}
-                linkTo={`/courses/${value.id}`}
-              />
-          </>
-
-          );
-    });
-    return index;
-  };
 
 
   const handleFilter= () => {
@@ -222,7 +224,6 @@ const ListLearningTracking = () =>  {
     } else {
       fetchDataApprentissage(index).then((e) => {
         console.log(' Index MM' , index)
-
         truncatedDatas(e);
         return;
       });
@@ -245,33 +246,34 @@ const ListLearningTracking = () =>  {
               value={selectedStatus}
               onChange={(e) => setSelectedStatus(e.target.value)}
             />
-            <InputSearch value={searchValue} placeholder="Rechercher"  onChange={(e) => setSearchValue(e.target.value)} />
-              <div className="clear-all-sort">
-                    <button> 
-                        <FontAwesomeIcon icon={faCircleXmark} />
-                        <small> Nettoyer</small>
-                    </button>
-              </div>
+            <InputSearch 
+              value={searchValue} 
+              placeholder="Rechercher"  
+              onChange={(e) => setSearchValue(e.target.value)} 
+            />
+            <div className="clear-all-sort">
+              <button> 
+                <FontAwesomeIcon icon={faCircleXmark} />
+                <small> Nettoyer</small>
+              </button>
+            </div>
             <div className="clear-all-sort">
               <Button kind={"primary"} onClick={handleFilter}> Rechercher</Button>
             </div>
         </div>
 
 
-      <div className="content-area">
-        { isLoading ?
-          (
-            <>
-              <LoadingElements />
-            </>
-          ) : (
-            <>
+        <div className="content-area">
+          { isLoading ?
+            (
+              <>
+                <LoadingElements />
+              </>
+            ) : (
+              <>
                 <ul className="list-courses-learning-tracking">
                   {( currentData && Object.values(currentData).length > 0 ) ? (
-                    <>
-                      {  changeData()}
-                    </>
-
+                    changeData()
                   ) : (
                     <p>
                       Nous n'avons aucun élément à afficher
@@ -280,16 +282,13 @@ const ListLearningTracking = () =>  {
                 </ul>
                 
                 <div className="zone-pagination" >
-                    <Pagination totalPages={totalPages} currentPage={currentPage} onPageChange={handlePageChange} />
-                    {/* { currentData && Object.values(currentData).length > itemsPerPage  && (
-                        <Pagination totalPages={totalPages} currentPage={currentPage} onPageChange={handlePageChange} />
-                    )} */}
+                  <Pagination totalPages={totalPages} currentPage={currentPage} onPageChange={handlePageChange} />
                 </div>
-            </>
+              </>
+            )       
+          }
+        </div>
 
-          )       
-        }
-      </div>
     </ContainerSidebarAndContent>
   );
 };

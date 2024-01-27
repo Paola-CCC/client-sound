@@ -2,7 +2,7 @@ import React, { useCallback, useEffect, useState } from 'react';
 import './ListAllCourses.scss';
 import Pagination from '../../components/Pagination/Pagination';
 import { useAPIContext } from '../../contexts/APIContextProvider';
-import { Button, Card, InputSearch, InputSelect } from '../../common/Index';
+import { Button, Card, InputSelect } from '../../common/Index';
 import ListInstrumentsScroll from '../../components/ListInstrumentsScroll/ListInstrumentsScroll';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCircleXmark , faMagnifyingGlass} from "@fortawesome/free-solid-svg-icons";
@@ -50,6 +50,7 @@ const ListAllCourses = () => {
     };
 
     const truncatedDatas = (dataElement) =>  {
+      setCurrentData([]);
       if( dataElement && dataElement.length > 0){
         const currentElemnt = dataElement && dataElement.slice(startIndex, endIndex);
         setCurrentData(currentElemnt);
@@ -184,7 +185,6 @@ const ListAllCourses = () => {
       
        if(currentData && Object.values(currentData).length === 0){
         getData(); 
-
        }
 
       if( currentData && currentData.length > 1 ) {
@@ -268,12 +268,12 @@ const ListAllCourses = () => {
         <div className='gestion-pages pagination'>
           <Pagination totalPages={totalPages} currentPage={currentPage} onPageChange={handlePageChange} />
         </div> : 
-          (
-            <>
-                <LoadingElements />
-            </>
-          )
-        } 
+        (
+          <>
+            <LoadingElements />
+          </>
+        )
+    } 
 
   </div>
 )};
