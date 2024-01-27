@@ -7,19 +7,17 @@ import { AuthContext } from "../../contexts/AuthContextProvider";
 import { faPaperPlane } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
-const UpdateUsers = ({firstName,lastName,email,userId, instrument,handleCancel,roles, srcImg,altImg}) => {
+const UpdateUsers = ({firstName,lastName,email,userId, instrumentPlayed,handleCancel,roles, srcImg,altImg}) => {
   const [firstNameAPI, setFirstname] = useState(firstName);
   const [lastNameAPI, setLastname] = useState(lastName);
   const [emailAPI, setEmail] = useState(email);
   const [instrumentList, setInstrumentList] = useState([]);
-  const [selectedInstruments, setSelectedInstruments] = useState(instrument);
+  const [selectedInstruments, setSelectedInstruments] = useState([...instrumentPlayed]);
   const [selectedFile, setSelectedFile] = useState('');
   const [successUpdateUser, setSuccessUpdateUser] = useState(null);
   const [successUpdateUserPic, setSuccessUpdateUserPic] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
   const { userAPI } = useContext(AuthContext);
-  const [selectedOptions, setSelectedOptions] = useState([]);
-
 
     const handleSubmit = async(e) => {
       e.preventDefault();
@@ -86,11 +84,14 @@ const UpdateUsers = ({firstName,lastName,email,userId, instrument,handleCancel,r
       }
     };
 
-    const handleCheckboxChange = (value) => {
-      if (selectedOptions.includes(value)) {
-        setSelectedOptions(selectedOptions.filter((option) => option !== value));
+    /** Recherche s'il y a des doublons et les supprime */
+    const handleCheckboxChange = (option) => {
+      if(selectedInstruments.includes(option) ){
+        const newArray = selectedInstruments.filter((valueChecked) => valueChecked !== option );
+        setSelectedInstruments([]);
+        setSelectedInstruments( newArray);
       } else {
-        setSelectedOptions([...selectedOptions, value]);
+        setSelectedInstruments([...selectedInstruments, option]);
       }
     };
 
@@ -117,7 +118,8 @@ const UpdateUsers = ({firstName,lastName,email,userId, instrument,handleCancel,r
         } 
       }
       displayInstruments();
-    }, [selectedInstruments])
+
+    }, [selectedInstruments, instrumentPlayed])
 
     if (isLoading ) {
     <p> La page est en train de charger</p>
@@ -129,7 +131,7 @@ const UpdateUsers = ({firstName,lastName,email,userId, instrument,handleCancel,r
         <h4 className="form-h4"> Modifier mes informations </h4>
         <div className="mb-3">
           <label htmlFor="firstName" className="form-label">
-            Prénom :{" "}
+            Prénom :
           </label>
           <input
             type="text"
@@ -143,7 +145,7 @@ const UpdateUsers = ({firstName,lastName,email,userId, instrument,handleCancel,r
         </div>
         <div className="mb-3">
           <label htmlFor="lastName" className="form-label">
-            Nom :{" "}
+            Nom :
           </label>
           <input
             type="text"
@@ -157,7 +159,7 @@ const UpdateUsers = ({firstName,lastName,email,userId, instrument,handleCancel,r
         </div>
         <div className="mb-3">
           <label htmlFor="email" className="form-label">
-            Adresse Email :{" "}
+            Adresse Email :
           </label>
           <input
             type="text"
@@ -173,8 +175,8 @@ const UpdateUsers = ({firstName,lastName,email,userId, instrument,handleCancel,r
         <InputGroupCheckbox
             labelCheckboxGroup="Instruments"
             options={instrumentList}
-            selectedOptions={selectedOptions}
-            handleChange={(e) => handleCheckboxChange(e.target.value)}
+            listInstrumentsPlayed={selectedInstruments}
+            handleChange={(e) => handleCheckboxChange(Number(e.target.value))}
           />
         </div>
 
@@ -223,8 +225,5 @@ const UpdateUsers = ({firstName,lastName,email,userId, instrument,handleCancel,r
   );
 };
 
-UpdateUsers.propTypes = {};
-
-UpdateUsers.defaultProps = {};
 
 export default UpdateUsers;

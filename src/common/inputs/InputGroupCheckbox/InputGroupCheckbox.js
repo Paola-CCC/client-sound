@@ -1,7 +1,7 @@
 import React from "react";
 import "./InputGroupCheckbox.scss";
 
-const InputGroupCheckbox = ({ labelCheckboxGroup, options, handleChange }) => {
+const InputGroupCheckbox = ({ labelCheckboxGroup,listInstrumentsPlayed, options, handleChange }) => {
   return (
     <>
       {labelCheckboxGroup && labelCheckboxGroup !== undefined && (
@@ -14,6 +14,7 @@ const InputGroupCheckbox = ({ labelCheckboxGroup, options, handleChange }) => {
               type="checkbox"
               value={option.value}
               name="checkbox-checked"
+              checked={listInstrumentsPlayed?.includes(option.value)}
               onChange={handleChange}
             />
             <span> {option.label} </span>

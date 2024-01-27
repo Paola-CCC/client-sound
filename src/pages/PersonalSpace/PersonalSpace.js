@@ -12,7 +12,7 @@ const PersonalSpace = () => {
   const [ count, setCount] = useState(0);
   const [ courses, setCourses] = useState([]);
   const [ instrument, setInstrument] = useState([]);
-  const [ instrumentList, setInstrumentList] = useState("");
+  const [ instrumentList, setInstrumentList] = useState({});
   const [ isLoading, setIsLoading] = useState(false);
   const { userId , userAPI , setUsername} = useContext(AuthContext);
   const [allUsersInfos, setAllUsersInfos] = useState({
@@ -52,10 +52,11 @@ const PersonalSpace = () => {
 
         localStorage.setItem('username', strLcFirst(dataUser.user.firstName) + ' ' + dataUser.user.lastName.toUpperCase());
         setUsername(strLcFirst(dataUser.user.firstName) + ' ' + dataUser.user.lastName.toUpperCase());
-        const userInstrument = dataUser.user.instruments.map((e) => e.name);
-        const formattedInstrumentList = userInstrument.join(', ');
+        const userInstrumentID = dataUser.user.instruments.map((e) => e.id);
+        const userInstrumentName = dataUser.user.instruments.map((e) => e.name);
+        const formattedInstrumentList = userInstrumentName.join(', ');
         setInstrument(formattedInstrumentList);
-        setInstrumentList(userInstrument);
+        setInstrumentList(userInstrumentID);
 
         if( Object.keys(response[0]).includes('course')){
           const allDatas = response.map(e => {
@@ -94,7 +95,7 @@ const PersonalSpace = () => {
             email={allUsersInfos.email}  
             userId={userId}
             roles={allUsersInfos.role[0]}
-            instrument={instrumentList} 
+            instrumentPlayed={instrumentList} 
             srcImg={allUsersInfos.photo ? '/images/upload/' + allUsersInfos.photo : '/images/upload/profile.png'}
             handleCancel={() => setCanUpdateUser(false)}
           />
