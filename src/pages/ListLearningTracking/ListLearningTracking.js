@@ -266,7 +266,7 @@ const ListLearningTracking = () =>  {
             </>
           ) : (
             <>
-                <section className="list-courses-learning-tracking">
+                <ul className="list-courses-learning-tracking">
                   {( currentData && Object.values(currentData).length > 0 ) ? (
                     <>
                       {  changeData()}
@@ -277,7 +277,7 @@ const ListLearningTracking = () =>  {
                       Nous n'avons aucun élément à afficher
                     </p>
                   )}   
-                </section>
+                </ul>
                 
                 <div className="zone-pagination" >
                     <Pagination totalPages={totalPages} currentPage={currentPage} onPageChange={handlePageChange} />

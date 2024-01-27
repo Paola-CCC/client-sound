@@ -7,7 +7,7 @@ import RatingStars from '../RatingStars/RatingStars';
 
 const CardLearningTracking = ({ valueProgress, imgSrc, imgAlt, professorName,rating, title, shortDescription,linkTo }) => {
   return (
-  <div className="cardLearningTracking">
+  <li className="cardLearningTracking">
       <div className="card-img">
         {imgSrc && imgAlt && (
           <img src={imgSrc} alt={imgAlt} className="card-img" />
@@ -39,7 +39,7 @@ const CardLearningTracking = ({ valueProgress, imgSrc, imgAlt, professorName,rat
           </span>
         </div>
       </div>
-  </div>
+  </li>
 )};
 
 CardLearningTracking.propTypes = {};
