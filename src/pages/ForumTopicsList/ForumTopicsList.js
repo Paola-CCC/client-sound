@@ -1,10 +1,6 @@
 import React, { useCallback, useContext, useEffect, useRef, useState } from "react";
 import "./ForumTopicsList.scss";
-import {
-  ContainerContent,
-  ContainerSidebarAndContent,
-  Sidebar,
-} from "../../components";
+import { ContainerSidebarAndContent } from "../../components";
 import {
   Button,
   InputSearch,
@@ -18,6 +14,8 @@ import { useAPIContext } from "../../contexts/APIContextProvider";
 import { getformatDate } from "../../utils/Date";
 import Pagination from "../../components/Pagination/Pagination";
 import LoadingElements from "../../components/LoadingElements/LoadingElements";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faCircleXmark , faMagnifyingGlass} from "@fortawesome/free-solid-svg-icons";
 
 const ForumTopicsList = () => {
 
@@ -313,7 +311,7 @@ const ForumTopicsList = () => {
     <ContainerSidebarAndContent>
 
       { canWeShowForm === false  && (
-          <div className='form-sort'>
+          <div className='form-sort form-topic-list'>
               <InputSelect
                 label={optionsCategory[0].label.toUpperCase()}
                 options={optionsCategory}
@@ -326,13 +324,18 @@ const ForumTopicsList = () => {
                 onChange={(e) => handleSearchInSubject(e.target.value)}
                 onClick={handleSearchInSubject}
               />
-              {userId && userId !== null && userId !== undefined && (
-                <div>
-                    <Button kind="primary" onClick={() => setCanWeShowForm(true)}>
-                      Ajouter un commentaire
-                    </Button>
+                <div className="clear-all-sort">
+                  <button> 
+                      <FontAwesomeIcon icon={faCircleXmark} />
+                      <small> Nettoyer</small>
+                  </button>
                 </div>
-              )}
+                <div className='clear-all-sort'>
+                  <Button kind={"primary"} onClick={() => setCanWeShowForm(true)}> 
+                      <FontAwesomeIcon icon={faMagnifyingGlass} />
+                      Commenter
+                  </Button>
+                </div>
           </div>
       )} 
 

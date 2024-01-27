@@ -1,6 +1,6 @@
 import React, { useCallback, useContext,useEffect,useState } from "react";
 import "./ListLearningTracking.scss";
-import { ContainerContent, ContainerSidebarAndContent,  Sidebar } from "../../components";
+import {  ContainerSidebarAndContent } from "../../components";
 import { Button, InputSearch, InputSelect } from "../../common/Index";
 import { useAPIContext } from "../../contexts/APIContextProvider";
 import { AuthContext } from "../../contexts/AuthContextProvider";
@@ -8,6 +8,8 @@ import CardLearningTracking from "../../components/CardLearningTracking/CardLear
 import Pagination from "../../components/Pagination/Pagination";
 import LoadingElements from "../../components/LoadingElements/LoadingElements";
 import { checkEmptyValue, useAxiosFetchApprentissage} from '../../hooks/axiosFetch';
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faCircleXmark , faMagnifyingGlass} from "@fortawesome/free-solid-svg-icons";
 
 
 const ListLearningTracking = () =>  { 
@@ -180,18 +182,21 @@ const ListLearningTracking = () =>  {
         let value = elements.course;
         let professor = `${value.professor.firstName} ${value.professor.lastName}`;
         return (
-            <CardLearningTracking
-            key={index}
-            imgSrc={value.photo !== '' ? value.photo :"https://i1.sndcdn.com/artworks-000236202373-bjmc48-t500x500.jpg"}
-            imgAlt="Cours de Violon"
-            title={value.title}
-            valueProgress={elements.percentageWatched ? elements.percentageWatched  : '0'}
-            rating={value.ratingScore}
-            shortDescription={value.preview}
-            longDescription={value.description}
-            professorName={professor}
-            linkTo={`/courses/${value.id}`}
-            />
+          <>
+              <CardLearningTracking
+                key={index}
+                imgSrc={value.photo !== '' ? value.photo :"https://i1.sndcdn.com/artworks-000236202373-bjmc48-t500x500.jpg"}
+                imgAlt="Cours de Violon"
+                title={value.title}
+                valueProgress={elements.percentageWatched ? elements.percentageWatched  : '0'}
+                rating={value.ratingScore}
+                shortDescription={value.preview}
+                longDescription={value.description}
+                professorName={professor}
+                linkTo={`/courses/${value.id}`}
+              />
+          </>
+
           );
     });
     return index;
@@ -227,23 +232,29 @@ const ListLearningTracking = () =>  {
 
   return (
     <ContainerSidebarAndContent>
-        <div className='form-sort'>
-          <InputSelect
-            label={("Professeurs").toUpperCase()}
-            options={optionsProfessors}
-            value={selectedProfessor}
-            onChange={(e) => setSelectedProfessor(e.target.value)}
-          />
-          <InputSelect
-            label={("Status").toUpperCase()}
-            options={optionsStatus}
-            value={selectedStatus}
-            onChange={(e) => setSelectedStatus(e.target.value)}
-          />
-          <InputSearch value={searchValue} placeholder="Rechercher"  onChange={(e) => setSearchValue(e.target.value)} />
-          <div>
-            <Button kind={"primary"} onClick={handleFilter}> Rechercher</Button>
-          </div>
+        <div className='form-sort form-learning-list'>
+            <InputSelect
+              label={("Professeurs").toUpperCase()}
+              options={optionsProfessors}
+              value={selectedProfessor}
+              onChange={(e) => setSelectedProfessor(e.target.value)}
+            />
+            <InputSelect
+              label={("Status").toUpperCase()}
+              options={optionsStatus}
+              value={selectedStatus}
+              onChange={(e) => setSelectedStatus(e.target.value)}
+            />
+            <InputSearch value={searchValue} placeholder="Rechercher"  onChange={(e) => setSearchValue(e.target.value)} />
+              <div className="clear-all-sort">
+                    <button> 
+                        <FontAwesomeIcon icon={faCircleXmark} />
+                        <small> Nettoyer</small>
+                    </button>
+              </div>
+            <div className="clear-all-sort">
+              <Button kind={"primary"} onClick={handleFilter}> Rechercher</Button>
+            </div>
         </div>
 
 
@@ -255,25 +266,25 @@ const ListLearningTracking = () =>  {
             </>
           ) : (
             <>
+                <section className="list-courses-learning-tracking">
+                  {( currentData && Object.values(currentData).length > 0 ) ? (
+                    <>
+                      {  changeData()}
+                    </>
 
-            <section className="list-courses-learning-tracking">
-            {( currentData && Object.values(currentData).length > 0 ) ? (
-              <>
-                {  changeData()}
-              </>
-
-            ) : (
-              <p>
-                Nous n'avons aucun élément à afficher
-              </p>
-            )}   
-            </section>
-            <div className="zone-pagination" >
-            { currentData && Object.values(currentData).length > itemsPerPage  && (
-                <Pagination totalPages={totalPages} currentPage={currentPage} onPageChange={handlePageChange} />
-            )}
-            </div>
-            
+                  ) : (
+                    <p>
+                      Nous n'avons aucun élément à afficher
+                    </p>
+                  )}   
+                </section>
+                
+                <div className="zone-pagination" >
+                    <Pagination totalPages={totalPages} currentPage={currentPage} onPageChange={handlePageChange} />
+                    {/* { currentData && Object.values(currentData).length > itemsPerPage  && (
+                        <Pagination totalPages={totalPages} currentPage={currentPage} onPageChange={handlePageChange} />
+                    )} */}
+                </div>
             </>
 
           )       

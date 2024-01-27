@@ -66,23 +66,23 @@ useEffect(() => {
 },[displayConversation, userId ,callAPIAppend ,destinataireDatas ,count])
 
   return (
-  <ContainerSidebarAndContent>
-      <aside className='message'>
-          <div className='infos-professor'>
-            <div className="img-profile-msg">
-              <img src={destinataireDatas.photoUser} alt={"zeus"} />
+    <div className=''>
+        <aside className='message'>
+            <div className='infos-professor'>
+              <div className="img-profile-msg">
+                <img src={destinataireDatas.photoUser} alt={""} />
+              </div>
             </div>
-          </div>
-          <h5 id='prof-name'>{destinataireDatas.username}</h5>
-      </aside>
+            <h5 id='prof-name'>{destinataireDatas.username}</h5>
+        </aside>
 
-      <ConversationBox 
-        getTabListsOfConversation={tabListsOfConversation}
-        handleDisplayConversation={() => displayConversation()}
-        currentConversation={currentConversation}
-        destinataireName={destinataireDatas.username}
-      />
-  </ContainerSidebarAndContent>
+        <ConversationBox 
+          getTabListsOfConversation={tabListsOfConversation}
+          handleDisplayConversation={() => displayConversation()}
+          currentConversation={currentConversation}
+          destinataireName={destinataireDatas.username}
+        />
+    </div>
 )};
 
 

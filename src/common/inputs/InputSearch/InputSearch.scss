@@ -10,8 +10,10 @@ $input-padding: 8px;
 $border-radius: 4px;
 
 .input-search-container {
-
+  width: 100%;
+  display: inline-flex;
   .input-search-input {
+    width: 90%;
     padding: 8px 0 8px 8px ;
     font-size: 17px;
     border-top-left-radius: 4px;

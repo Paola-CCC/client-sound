@@ -7,8 +7,4 @@ const ContainerSidebarAndContent = ({children}) => (
   </div>
 );
 
-ContainerSidebarAndContent.propTypes = {};
-
-ContainerSidebarAndContent.defaultProps = {};
-
 export default ContainerSidebarAndContent;

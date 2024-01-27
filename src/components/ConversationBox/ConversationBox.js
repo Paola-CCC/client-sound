@@ -57,7 +57,7 @@ export const ConversationBox = ({getTabListsOfConversation,handleDisplayConversa
                   </span>
               </div>
               <div className="messages-zone">
-                    <p> {value.contentText} </p>
+                <p> {value.contentText} </p>
               </div>
             </div>
           </div>
