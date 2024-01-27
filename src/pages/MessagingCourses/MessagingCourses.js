@@ -1,6 +1,5 @@
 import React, {  useCallback, useContext, useEffect, useState } from 'react'
 import './MessagingCourses.scss';
-import { ContainerSidebarAndContent} from '../../components';
 import { ConversationBox } from '../../components/ConversationBox/ConversationBox';
 import { AuthContext } from "../../contexts/AuthContextProvider";
 import { useAPIContext } from '../../contexts/APIContextProvider';
@@ -66,7 +65,7 @@ useEffect(() => {
 },[displayConversation, userId ,callAPIAppend ,destinataireDatas ,count])
 
   return (
-    <div className=''>
+    <div className='grid-box-msg'>
         <aside className='message'>
             <div className='infos-professor'>
               <div className="img-profile-msg">

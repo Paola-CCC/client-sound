@@ -1,5 +1,11 @@
-.global-layout-container {
-  div.container-sidebar-content {
+
+  div.grid-box-msg  {
+    padding: 70px 0;
+    display: flex;
+    flex-direction: row;
+    width: 70%;
+    margin-left: auto;
+    margin-right: auto;
     aside.message {
       margin-top: 100px;
       width: 300px;
@@ -10,7 +16,6 @@
       box-shadow: rgb(224, 224, 224) 0px 1px 4px;
 
       .infos-professor {
-        // background-color: cyan;
         position: relative;
         height: 100px;
         .img-profile-msg {
@@ -37,4 +42,4 @@
       }
     }
   }
-}
+

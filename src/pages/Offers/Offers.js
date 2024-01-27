@@ -70,8 +70,5 @@ const Offers = () => {
   )
 };
 
-Offers.propTypes = {};
-
-Offers.defaultProps = {};
 
 export default Offers;

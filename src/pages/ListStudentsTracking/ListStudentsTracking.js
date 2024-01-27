@@ -263,9 +263,6 @@ const ListStudentsTracking = () => {
   );
 };
 
-ListStudentsTracking.propTypes = {};
-
-ListStudentsTracking.defaultProps = {};
 
 export default ListStudentsTracking;
 

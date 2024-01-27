@@ -160,7 +160,7 @@ const AllMessaging = () => {
           
 
           { recipientList.length > 0  && (
-                <ContainerSidebarAndContent>
+                <div className="grid-box-msg">
                   <aside className="list-recipient">
                     <div>
                       <span> Mes contacts
@@ -184,7 +184,7 @@ const AllMessaging = () => {
                     currentConversation={conversationID}
                     destinataireName={destinataireName}
                   />
-                </ContainerSidebarAndContent>
+                </div>
           )}
       </>
 
