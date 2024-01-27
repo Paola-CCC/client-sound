@@ -25,26 +25,38 @@ const ListAllCourses = () => {
     const [selectedProfessor, setSelectedProfessor] = useState("");
     const [selectedCategory, setSelectedCategory] = useState("");
     const [selectedCompositor, setSelectedCompositor] = useState("");
-    const [searchValue , setSearchValue] = useState('');
+    const [searchValue , setSearchValue] = useState("");
     const [optionsProfessors, setOptionsProfessors] = useState([{ value: "", label: "professeurs" }]);
     const [optionsCategory, setOptionsCategory] = useState([{ value: "", label: "catégories" }]);
     const [optionsCompositors, setOptionsCompositor] = useState([{ value: "", label: "compositeurs" }]);
     const { fetchData } = useAxiosFetchCourse();
 
+
+    const getDataPagesNext = async () => {
+      try {
+        setCurrentData([]);
+        const response = await courseAPI.showAll();
+        truncatedDatas(response);
+      } catch (error) {
+        console.error(error);
+      }
+    }
+
     const handlePageChange = (newPage) => {
       if (newPage >= 1 && newPage <= totalPages) {
         setCurrentPage(newPage);
+        getDataPagesNext(); 
       }
     };
 
-    const truncatedDatas = useCallback((dataElement) =>  {
+    const truncatedDatas = (dataElement) =>  {
       if( dataElement && dataElement.length > 0){
         const currentElemnt = dataElement && dataElement.slice(startIndex, endIndex);
         setCurrentData(currentElemnt);
         const totalElement = Math.ceil(dataElement && dataElement.length / itemsPerPage);
         setTotalPages(totalElement)
       }
-    },[endIndex,startIndex]);
+    };
 
     /** Crée la liste de prof à sélectionner */
     const getProfessorForOption = useCallback((response) => {
@@ -98,10 +110,13 @@ const ListAllCourses = () => {
     const getComposers = useCallback((response) => {
       let stockComposerName = [];
       const composers = response.map((e) => {
-        stockComposerName.push(e?.composers[0]?.fullName);
         let objtValue = {};
-        let coco = stockComposerName.filter(x => x === e.composers[0]?.fullName).length;
-        if( coco === 1 ){
+        if( e?.composers[0]?.fullName){
+          stockComposerName.push(e?.composers[0]?.fullName);
+        }
+
+        let sortedArrayName = stockComposerName.filter(nameComposer => nameComposer === e.composers[0]?.fullName).length;
+        if( sortedArrayName === 1 ){
           objtValue = {
             value: e.composers[0]?.id,
             label: e.composers[0]?.fullName
@@ -111,11 +126,10 @@ const ListAllCourses = () => {
       });
       const asArray = Object.values(composers);
       const filteredComposers = Object.values(asArray).filter((value) => Object.keys(value).length !== 0);
-      const finalDataComposers = [
+      setOptionsCompositor([
         ...optionsCompositors,
         ...filteredComposers
-      ];
-      setOptionsCompositor(finalDataComposers);
+      ]);
     },[optionsCompositors]);
 
     const checkEmptyValue = (obj) => {
@@ -139,6 +153,7 @@ const ListAllCourses = () => {
   
       if (checkEmptyValue(index)) {
         fetchData(index).then((e) => {
+          // truncatedDatas(e);
           setData([]);
           setData(e);
         });
@@ -157,29 +172,33 @@ const ListAllCourses = () => {
       const getData = async () => {
         try {
           const response = await courseAPI.showAll();
-          setData(response);
-          truncatedDatas(response);
+          const currentElemnt = response && response.slice(startIndex, endIndex);
+          setCurrentData(currentElemnt);
+          const totalElement = Math.ceil(response && response.length / itemsPerPage);
+          setTotalPages(totalElement);
+
         } catch (error) {
           console.error(error);
         }
       }
       
-       if(data && Object.values(data).length === 0){
+       if(currentData && Object.values(currentData).length === 0){
         getData(); 
+
        }
 
-       if( data && data.length > 1 ) {
+      if( currentData && currentData.length > 1 ) {
         if(optionsProfessors.length === 1){
-          getProfessorForOption(data);
+          getProfessorForOption(currentData);
         }
         if(optionsCategory.length === 1){
-          getCategory(data);
+        getCategory(currentData);
         }
         if(optionsCompositors.length === 1){
-          getComposers(data);
+          getComposers(currentData);
         }
       }
-    },[data,courseAPI,optionsProfessors,getProfessorForOption ,optionsCategory ,optionsCompositors.length, getComposers , getCategory ,truncatedDatas]);
+    },[data,courseAPI,optionsProfessors,getProfessorForOption ,optionsCategory ,optionsCompositors.length, getComposers , getCategory ,startIndex, endIndex ,currentData]);
 
   return (
   <div className='all-cours-show'>
@@ -227,10 +246,6 @@ const ListAllCourses = () => {
           </div>
 
 
-
-
-
-
         <ul className='all-courses'>
         {currentData.map((value, index) => (
           <li key={index} >
@@ -248,12 +263,6 @@ const ListAllCourses = () => {
           </li>
         ))}
         </ul>
-
-
-
-
-
-
 
     { Object.values(currentData).length > 0 ?
         <div className='gestion-pages pagination'>
