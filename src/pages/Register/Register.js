@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useState } from "react";
+import React, {  useEffect, useState } from "react";
 import "./Register.scss";
 import { Link, useNavigate } from "react-router-dom";
 import jwt_decode from "jwt-decode";
@@ -15,7 +15,6 @@ const Register = () => {
   // const [selectedFile, setSelectedFile] = useState('');
   const [password, setPassword] = useState("");
   const [passwordVerification, setPasswordVerification] = useState("");
-  const [passwordIsOK, setPasswordIsOK] = useState(null);
   const [instrumentList, setInstrumentList] = useState([]);
   const [successRegister, setSuccessRegister] = useState(null);
   const [selectedOptions, setSelectedOptions] = useState([]);
@@ -54,6 +53,7 @@ const Register = () => {
       setUserRole(jwtDecoded.roles);
       navigate("/courses-all");
     } else {
+      setSuccessRegister(false);
       console.log("Le Token Register est vide");
     }
   };
@@ -86,7 +86,7 @@ const Register = () => {
       }
     };
     displayInstruments();
-  }, [password, passwordVerification, passwordIsOK, selectedOptions]);
+  }, [password, passwordVerification,selectedOptions]);
 
   return (
     <div className="form-register">
@@ -138,13 +138,7 @@ const Register = () => {
             onChange={(e) => setPassword(e.target.value)}
             placeholder={"Mot de passe"}
             isRequired={true}
-            errorText={
-              passwordIsOK === false &&
-              passwordVerification !== "" &&
-              password !== ""
-                ? "Le mot de passe de vérification ne correspond pas"
-                : ""
-            }
+            errorText={""}
           />
         </div>
         <div className="mb-3">
@@ -155,13 +149,7 @@ const Register = () => {
             onChange={(e) => setPasswordVerification(e.target.value)}
             placeholder={"Vérifier le mot de passe"}
             isRequired={true}
-            errorText={
-              passwordIsOK === false &&
-              passwordVerification !== "" &&
-              password !== ""
-                ? "Le mot de passe de vérification ne correspond pas"
-                : ""
-            }
+            errorText={""}
           />
         </div>
 
@@ -172,7 +160,7 @@ const Register = () => {
         </div>
 
         <p className="link-btn">
-          Vous avez déjà un compte ? <Link to="/login"> Se connecter </Link>{" "}
+          Vous avez déjà un compte ? <Link to="/connexion"> Se connecter </Link>{" "}
         </p>
       </form>
       {successRegister !== null && successRegister === false && (

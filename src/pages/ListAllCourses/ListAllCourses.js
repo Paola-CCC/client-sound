@@ -12,9 +12,8 @@ import { useInstrumentContext } from '../../contexts/InstrumentProvider';
 
 const ListAllCourses = () => {
 
-    const [data, setData] = useState([]);
     const { courseAPI } = useAPIContext();
-    const { instrumentSelected } = useInstrumentContext();
+    const { instrumentSelected ,handleInstrument } = useInstrumentContext();
     const itemsPerPage = 8;
     const [currentPage, setCurrentPage] = useState(1);
     const startIndex = (currentPage - 1) * itemsPerPage;
@@ -31,6 +30,14 @@ const ListAllCourses = () => {
     const [optionsCompositors, setOptionsCompositor] = useState([{ value: "", label: "compositeurs" }]);
     const { fetchData } = useAxiosFetchCourse();
 
+
+    const cleanSelectedInputs = () => {
+      setSelectedProfessor('');
+      setSelectedCategory('');
+      setSelectedCompositor('');
+      setSearchValue('');
+      handleInstrument('');
+    };
 
     const getDataPagesNext = async () => {
       try {
@@ -133,9 +140,10 @@ const ListAllCourses = () => {
       ]);
     },[optionsCompositors]);
 
-    const checkEmptyValue = (obj) => {
+    // Vérifie que les valeurs des objects sont vides
+    const checkObjValueIsEmpty = (obj) => {
       for (const key in obj) {
-        if (Object.prototype.hasOwnProperty.call(obj, key) && obj[key] !== '') {
+        if ( obj[key] !== '') {
           return true;
         }
       }
@@ -144,7 +152,7 @@ const ListAllCourses = () => {
   
     const searchCoursesDatas = () => {
   
-      let index = {
+      const objSearch = {
         professorId :selectedProfessor,
         instrumentName :instrumentSelected,
         categoryId : selectedCategory,
@@ -152,18 +160,15 @@ const ListAllCourses = () => {
         title : searchValue
       };
   
-      if (checkEmptyValue(index)) {
-        fetchData(index).then((e) => {
-          // truncatedDatas(e);
-          setData([]);
-          setData(e);
+      if (checkObjValueIsEmpty(objSearch)) {
+        fetchData(objSearch).then((e) => {
+          truncatedDatas(e);
         });
         return ;
   
       } else {
-        fetchData(index).then((e) => {
-          setData([]);
-          setData(e);
+        fetchData(objSearch).then((e) => {
+          truncatedDatas(e);
         });
       }
     };
@@ -198,7 +203,7 @@ const ListAllCourses = () => {
           getComposers(currentData);
         }
       }
-    },[data,courseAPI,optionsProfessors,getProfessorForOption ,optionsCategory ,optionsCompositors.length, getComposers , getCategory ,startIndex, endIndex ,currentData]);
+    },[courseAPI,optionsProfessors,getProfessorForOption ,optionsCategory ,optionsCompositors.length, getComposers , getCategory ,startIndex, endIndex ,currentData]);
 
   return (
   <div className='all-cours-show'>
@@ -230,7 +235,7 @@ const ListAllCourses = () => {
                 />
 
                 <div className='clear-all-sort'>
-                  <button> 
+                  <button onClick={cleanSelectedInputs}> 
                       <FontAwesomeIcon icon={faCircleXmark} />
                       <small> Nettoyer</small>
                   </button>

@@ -6,7 +6,7 @@ const InstrumentListIcons = ({ instrument, nameInstrument }) => {
 
   const handleGetInstrument = () => {
     if( nameInstrument && nameInstrument !== '') {
-      handleInstrument(nameInstrument);
+      handleInstrument('');
     }
   }
 
