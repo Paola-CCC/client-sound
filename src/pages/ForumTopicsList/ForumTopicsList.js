@@ -15,7 +15,7 @@ import { getformatDate } from "../../utils/Date";
 import Pagination from "../../components/Pagination/Pagination";
 import LoadingElements from "../../components/LoadingElements/LoadingElements";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faCircleXmark , faMagnifyingGlass} from "@fortawesome/free-solid-svg-icons";
+import { faCircleXmark , faMagnifyingGlass ,faPen} from "@fortawesome/free-solid-svg-icons";
 
 const ForumTopicsList = () => {
 
@@ -29,8 +29,8 @@ const ForumTopicsList = () => {
   const { userId } = useContext(AuthContext);
   const { forumAPI } = useAPIContext();
   const [isLoading, setIsLoading] = useState(true);
-  const [optionsCategory, setOptionsCategory] = useState([{ value: "", label: "catégories" }]);
-  const [optionsCategoryAsk, setOptionsCategoryAsk] = useState([{ value: "", label: "catégories" }]);
+  const [optionsCategory, setOptionsCategory] = useState([{ value: "", label: "catégorie" }]);
+  const [optionsCategoryAsk, setOptionsCategoryAsk] = useState([{ value: "", label: "catégorie" }]);
   const itemsPerPage = 5;
   const [currentPage, setCurrentPage] = useState(1);
   //calcule l'index de départ dans le tableau data pour la page actuelle.
@@ -326,7 +326,8 @@ const ForumTopicsList = () => {
                   </Button>
                 </div>
                 <div className='clear-all-sort'>
-                  <Button kind={"primary"} onClick={() => setCanWeShowForm(true)}> 
+                  <Button kind={"secondary"} onClick={() => setCanWeShowForm(true)}> 
+                    <FontAwesomeIcon icon={faPen} />
                     Commenter
                   </Button>
                 </div>

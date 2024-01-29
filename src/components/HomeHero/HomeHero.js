@@ -28,21 +28,21 @@ const HomeHero = () => {
             < ListInstrumentsScroll />
             <div className="introduction-forms">
               <InputSelect
-                label={("Professeurs").toUpperCase()}
+                label={("professeur").toUpperCase()}
                 options={professorsList}
                 value={selectedProfessor}
                 onChange={handleSelectedProfessor}
               />
 
               <InputSelect
-                label={("Catégories").toUpperCase()}
+                label={("catégorie").toUpperCase()}
                 options={categoryList}
                 value={selectedCategory}
                 onChange={handleSelectedCategory}
               />
 
               <InputSelect
-                label={("Compositeurs").toUpperCase()}
+                label={("compositeur").toUpperCase()}
                 options={compositorList}
                 value={selectedCompositor}
                 onChange={handleSelectedCompositor}

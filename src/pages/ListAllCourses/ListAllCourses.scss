@@ -23,10 +23,9 @@
       }
 
       .introduction-forms {
-        display: flex;
-        flex-direction: row;
-        justify-content: space-between;
-        padding: 20px 0 0 0;
+        display: grid;
+        grid-template-columns: 2fr 2fr 2fr 0.25fr 1fr;
+        padding-top: 25px;
 
         .clear-all-sort button {
           padding: 0px 20px;
@@ -49,9 +48,9 @@
         }
 
         .input-select-container {
-          width: calc(
-            30% - 20px
-          ); // Largeur en tenant compte de la marge de gauche de 20px
+          // width: calc(
+          //   30% - 20px
+          // ); // Largeur en tenant compte de la marge de gauche de 20px
           margin-right: 10px;
           margin-bottom: 0;
         }

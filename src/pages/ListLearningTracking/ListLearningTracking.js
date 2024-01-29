@@ -9,7 +9,7 @@ import Pagination from "../../components/Pagination/Pagination";
 import LoadingElements from "../../components/LoadingElements/LoadingElements";
 import { checkEmptyValue, useAxiosFetchApprentissage} from '../../hooks/axiosFetch';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faCircleXmark } from "@fortawesome/free-solid-svg-icons";
+import { faCircleXmark ,faMagnifyingGlass } from "@fortawesome/free-solid-svg-icons";
 import { useInstrumentContext } from "../../contexts/InstrumentProvider";
 
 
@@ -22,9 +22,9 @@ const ListLearningTracking = () =>  {
   const [selectedStatus, setSelectedStatus ] = useState("");
   const [searchValue, setSearchValue] = useState("");
   const [isLoading , setIsLoading ] = useState(true);
-  const [optionsProfessors, setOptionsProfessors] = useState([{ value: "", label: "professeurs" }]);
+  const [optionsProfessors, setOptionsProfessors] = useState([{ value: "", label: "professeur" }]);
   const [optionsInstruments, setOptionsInstruments] = useState([{ value: "", label: "instruments" }]);
-  const [optionsCompositors, setOptionsCompositor] = useState([{ value: "", label: "compositeurs" }]);
+  const [optionsCompositors, setOptionsCompositor] = useState([{ value: "", label: "compositeur" }]);
   const optionsStatus = [
       {value: "", label: "status" },
       {value: "NOT_STARTED", label: "Non commencé" },
@@ -264,7 +264,7 @@ const ListLearningTracking = () =>  {
     <ContainerSidebarAndContent>
         <div className='form-sort form-learning-list'>
             <InputSelect
-              label={("Professeurs").toUpperCase()}
+              label={("professeur").toUpperCase()}
               options={optionsProfessors}
               value={selectedProfessor}
               onChange={(e) => setSelectedProfessor(e.target.value)}
@@ -287,7 +287,10 @@ const ListLearningTracking = () =>  {
               </button>
             </div>
             <div className="clear-all-sort">
-              <Button kind={"primary"} onClick={handleFilter}> Rechercher</Button>
+              <Button kind={"primary"} onClick={handleFilter}> 
+                <FontAwesomeIcon icon={faMagnifyingGlass} />
+                Filtrer
+              </Button>
             </div>
         </div>
 

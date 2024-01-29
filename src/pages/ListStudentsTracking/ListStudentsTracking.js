@@ -21,7 +21,7 @@ const ListStudentsTracking = () => {
   const [ countRender,setCountRender ] = useState(0);
   const [ optionsStudents,setOptionsStudents] = useState([{ value: "", label: "élèves" }]);
   const [ optionsInstruments,setOptionsInstruments ] = useState([{ value: "", label: "instruments" }]);
-  const [ optionsCompositors,setOptionsCompositor ] = useState([{ value: "", label: "compositeurs" }]);
+  const [ optionsCompositors,setOptionsCompositor ] = useState([{ value: "", label: "compositeur" }]);
 
 
   const itemsPerPage = 6;
@@ -196,7 +196,7 @@ const ListStudentsTracking = () => {
         />
 
         <InputSelect
-          label={("Compositeurs").toUpperCase()}
+          label={("compositeur").toUpperCase()}
           options={optionsCompositors}
           value={selectedCompositor}
           onChange={(e) => setSelectedCompositor(e.target.value)}

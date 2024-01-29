@@ -2,7 +2,7 @@ import React, { useCallback, useEffect, useState } from 'react';
 import './ListAllCourses.scss';
 import Pagination from '../../components/Pagination/Pagination';
 import { useAPIContext } from '../../contexts/APIContextProvider';
-import { Button, Card, InputSelect } from '../../common/Index';
+import { Button, Card, InputSearch, InputSelect } from '../../common/Index';
 import ListInstrumentsScroll from '../../components/ListInstrumentsScroll/ListInstrumentsScroll';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCircleXmark , faMagnifyingGlass} from "@fortawesome/free-solid-svg-icons";
@@ -24,9 +24,9 @@ const ListAllCourses = () => {
     const [ selectedCategory, setSelectedCategory] = useState("");
     const [ selectedCompositor, setSelectedCompositor] = useState("");
     const [ searchValue , setSearchValue] = useState("");
-    const [ optionsProfessors, setOptionsProfessors] = useState([{ value: "", label: "professeurs" }]);
-    const [ optionsCategory, setOptionsCategory] = useState([{ value: "", label: "catégories" }]);
-    const [ optionsCompositors, setOptionsCompositor] = useState([{ value: "", label: "compositeurs" }]);
+    const [ optionsProfessors, setOptionsProfessors] = useState([{ value: "", label: "professeur" }]);
+    const [ optionsCategory, setOptionsCategory] = useState([{ value: "", label: "catégorie" }]);
+    const [ optionsCompositors, setOptionsCompositor] = useState([{ value: "", label: "compositeur" }]);
     const { fetchData } = useAxiosFetchCourse();
 
 
@@ -215,17 +215,23 @@ const ListAllCourses = () => {
               < ListInstrumentsScroll />
               <div className="introduction-forms">
                 <InputSelect
-                  label={("Professeurs").toUpperCase()}
+                  label={("professeur").toUpperCase()}
                   options={optionsProfessors}
                   value={selectedProfessor}
                   onChange={(e) => setSelectedProfessor(e.target.value)}
                 />
 
                 <InputSelect
-                  label={("Compositeurs").toUpperCase()}
+                  label={("compositeur").toUpperCase()}
                   options={optionsCompositors}
                   value={selectedCompositor}
                   onChange={(e) => setSelectedCompositor(e.target.value)}
+                />
+
+                <InputSearch
+                  value={searchValue}
+                  placeholder="Rechercher"
+                  onChange={(e) => setSearchValue(e.target.value)}
                 />
 
                 <div className='clear-all-sort'>
