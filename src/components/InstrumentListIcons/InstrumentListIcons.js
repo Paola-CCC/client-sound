@@ -5,7 +5,9 @@ const InstrumentListIcons = ({ instrument, nameInstrument }) => {
   const { handleInstrument } = useInstrumentContext();
 
   const handleGetInstrument = () => {
-    if( nameInstrument && nameInstrument !== '') {
+    if( nameInstrument && nameInstrument !== 'Tous') {
+      handleInstrument(nameInstrument);
+    } else {
       handleInstrument('');
     }
   }

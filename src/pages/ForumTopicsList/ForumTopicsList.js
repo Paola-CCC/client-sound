@@ -26,13 +26,11 @@ const ForumTopicsList = () => {
   const [topicTitle, setTopicTitle] = useState("");
   const [topicDescription, setTopicDescription] = useState("");
   const [successCreatTopic, setSuccessCreatTopic] = useState(null);
-  const [allTopics, setAllTopics] = useState([]);
   const { userId } = useContext(AuthContext);
   const { forumAPI } = useAPIContext();
   const [isLoading, setIsLoading] = useState(true);
   const [optionsCategory, setOptionsCategory] = useState([{ value: "", label: "catégories" }]);
   const [optionsCategoryAsk, setOptionsCategoryAsk] = useState([{ value: "", label: "catégories" }]);
-
   const itemsPerPage = 5;
   const [currentPage, setCurrentPage] = useState(1);
   //calcule l'index de départ dans le tableau data pour la page actuelle.
@@ -40,15 +38,17 @@ const ForumTopicsList = () => {
   //Cette ligne calcule l'index de fin dans le tableau data pour la page actuelle
   const endIndex = startIndex + itemsPerPage;
   // tronque le tableau sur la partie désirée
-  const currentData = allTopics ? allTopics.slice(startIndex, endIndex) : '';
-  const totalPages = allTopics ? Math.ceil(Object.values(allTopics).length / itemsPerPage) : '';
+  const [ currentData, setCurrentData] = useState([]);
+  const [ totalPages, setTotalPages] = useState(1);
   const dataFetchedRef = useRef(false);
+  const categoryListFetchedForumRef = useRef(false);
 
   const handleCancel = () => {
     setSuccessCreatTopic(null);
-    setCanWeShowForm(!canWeShowForm);
+    setCanWeShowForm(false);
     setTopicDescription("");
     setSuccessCreatTopic("");
+    window.location.reload(true);
   };
 
 
@@ -72,7 +72,7 @@ const ForumTopicsList = () => {
     };
 
     try {
-      setAllTopics([]);
+      setCurrentData([]);
       await forumAPI.addForum(topicsData);
       setSuccessCreatTopic(true);
       setCanWeShowForm(false);
@@ -113,80 +113,70 @@ const ForumTopicsList = () => {
     setOptionsCategory(finalDatacategory);
   },[optionsCategory]);
 
-  /** Récupère toutes les catégories pour le formulaire */
-  const getAllCategory = useCallback(async () => {
-    try {
-      const responseCategory = await forumAPI.showCategory();
-      const transformedData = responseCategory.map((category) => ({
-        value: category.id,
-        label: category.name
-      }));
-      const finalData = [
-        ...optionsCategory,
-        ...transformedData
-      ];
-      setOptionsCategoryAsk(finalData);
 
-    } catch (error) {
-      console.error("Error fetching category data:", error);
+ /** Récupère toutes les catégories pour le formulaire */
+ const getAllCategory = useCallback( async () => {
+  try {
+    const responseCategory = await forumAPI.showCategory();
+
+    const transformedData = responseCategory.map((category) => ({
+      value: category.id,
+      label: category.name
+    }));
+
+    const finalData = [
+      ...optionsCategoryAsk,
+      ...transformedData
+    ];
+    setOptionsCategoryAsk(finalData);
+
+  } catch (error) {
+    console.error("Error fetching category data:", error);
+  }
+},[forumAPI, optionsCategoryAsk]);
+
+  const getForumAfterSearch = async () => {
+    const objValue = {
+        categoryId: selectedCategory !== "" ? parseInt(selectedCategory) : "" ,
+        subjectName: topicTitle
     }
-  },[forumAPI ,optionsCategory]);
 
-
-  const getDatasByCategoryID = useCallback(async (value) => {
     try {
-      setAllTopics([]);
-      const responseCategory = await forumAPI.showAllByCategoryID( value );
-      if( responseCategory.length > 0 ) {
-        setAllTopics(responseCategory);
+      const sortedData = await forumAPI.showForumSorted(objValue);
+      if( sortedData.length > 0 ) {
+        setCurrentData(sortedData);
       }
       setIsLoading(false);
     } catch (error) {
       console.error("Error fetching category data:", error);
     }
-  },[forumAPI]);
-
-
-  const getDatasBySubject = useCallback(async (value) => {
-    try {
-      setAllTopics([]);
-      const responseCategory = await forumAPI.showAllBySubject( value );
-      if( responseCategory.length > 0 ) {
-        setAllTopics(responseCategory);
-      }
-      setIsLoading(false);
-    } catch (error) {
-      console.error("Error fetching category data:", error);
-    }
-  },[forumAPI]);
+  };
 
 
   const handleSelectCategory = (value) => {
     setSelectedCategory(value);
-    if( value && value !== '') {
-      getDatasByCategoryID(value);
-    }
   }
 
   const handleSearchInSubject = (value) => {
     setSearchValue(value);
-    if( value && value !== '') {
-      getDatasBySubject(value);
-    }
   }
 
 
   const displayData = useCallback(async () => {
     setIsLoading(true);
     try {
-      setAllTopics([]);
+      setCurrentData([]);
       const response = await forumAPI.showAll();
+
       if( response.length > 0 ) {
         let allCategories = Object.values(response).map((e) => e['category'][0]) ;
-        setAllTopics(response);
-        if( optionsCategory.length === 1 ){
+        if( allCategories.length > 0 ){
           getCategory(allCategories);
         }
+        const currentElemnt = response && response.slice(startIndex, endIndex);
+        setCurrentData(currentElemnt);
+        const totalElement = Math.ceil(response && response.length / itemsPerPage);
+        setTotalPages(totalElement);
       }
 
       setIsLoading(false);
@@ -194,22 +184,21 @@ const ForumTopicsList = () => {
       console.error(error);
       setIsLoading(false);
     }
-  }, [forumAPI,getCategory,optionsCategory]);
+  }, [forumAPI,getCategory, startIndex , endIndex]);
 
   useEffect(() => {
 
-    if ( allTopics.length === 0 && !dataFetchedRef.current){
-      dataFetchedRef.current = true;
+    if (  Object.values(currentData).length === 0 && !dataFetchedRef.current){
       displayData();
+      dataFetchedRef.current = true;
+    }
+
+    if (!categoryListFetchedForumRef.current) {
       getAllCategory();
+      categoryListFetchedForumRef.current = true ;
     }
 
-    if( selectedCategory === '' && selectedCategory === '' && dataFetchedRef.current === true){
-      setAllTopics([]);
-      dataFetchedRef.current = false;
-    }
-
-  }, [displayData,getAllCategory, optionsCategory, allTopics.length ,selectedCategory ]);
+  }, [displayData, optionsCategory, selectedCategory,currentData , getAllCategory ]);
 
 
   const creatForumQuestion = () => {
@@ -275,25 +264,25 @@ const ForumTopicsList = () => {
         <div className="topic-list">
           {currentData ? currentData.map((e, index) => (
 
-              <Link to={`${e.id}`} className="topic-list-link" key={index}>
+              <Link to={`${e?.id}`} className="topic-list-link" key={index}>
                 <TopicCard
                   zone="forum"
                   username={
-                    e.author !== null &&
-                      e.author !== undefined &&
+                    e?.author !== null &&
+                      e?.author !== undefined &&
                       Object.values(e.author)
-                      ? e.author.firstName + " " + e.author.lastName
+                      ? e?.author?.firstName + " " + e?.author?.lastName
                       : ""
                   }
                   date={getformatDate(e.createdAt)}
-                  title={e.subject}
-                  photo={e.author.photo}
-                  content={e.description}
-                  category={e.category[0].name}
+                  title={e?.subject}
+                  photo={e?.author?.photo}
+                  content={e?.description}
+                  category={e?.category[0]?.name}
                   canShowDelete={false}
-                  nmbComments={e.answersCount}
-                  likes={e.likesCount ? e.likesCount : 0}
-                  dislikes={e.dislikesCount ? e.dislikesCount : 0}
+                  nmbComments={e?.answersCount}
+                  likes={e?.likesCount ? e.likesCount : 0}
+                  dislikes={e?.dislikesCount ? e?.dislikesCount : 0}
                 />
               </Link>
           )) :
@@ -325,15 +314,20 @@ const ForumTopicsList = () => {
                 onClick={handleSearchInSubject}
               />
                 <div className="clear-all-sort">
-                  <button> 
+                  <button onClick={handleCancel}> 
                       <FontAwesomeIcon icon={faCircleXmark} />
                       <small> Nettoyer</small>
                   </button>
                 </div>
                 <div className='clear-all-sort'>
-                  <Button kind={"primary"} onClick={() => setCanWeShowForm(true)}> 
+                  <Button kind={"primary"} onClick={getForumAfterSearch}> 
                       <FontAwesomeIcon icon={faMagnifyingGlass} />
-                      Commenter
+                      Filter
+                  </Button>
+                </div>
+                <div className='clear-all-sort'>
+                  <Button kind={"primary"} onClick={() => setCanWeShowForm(true)}> 
+                    Commenter
                   </Button>
                 </div>
           </div>

@@ -51,6 +51,19 @@ class ForumService {
         }
     }
 
+    async showForumSorted(datas)
+    {
+        try {
+            const response = await this.httpClient.post(`${this.URL}/forums-subject/search`, datas);
+            if (response.status >= 200 && response.status <= 299) {
+                return response.data ;
+            } else {
+                console.log('error message ', response)
+            }
+        } catch (error) {
+            console.error(error)
+        }
+    }
 
     async showAllBySubject(subjectName)
     {

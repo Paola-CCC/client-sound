@@ -15,19 +15,18 @@ const ListAllCourses = () => {
     const { courseAPI } = useAPIContext();
     const { instrumentSelected ,handleInstrument } = useInstrumentContext();
     const itemsPerPage = 8;
-    const [currentPage, setCurrentPage] = useState(1);
+    const [ currentPage, setCurrentPage] = useState(1);
     const startIndex = (currentPage - 1) * itemsPerPage;
     const endIndex = startIndex + itemsPerPage;
-    const [currentData, setCurrentData] = useState([]);
-    const [totalPages, setTotalPages] = useState(1);
-
-    const [selectedProfessor, setSelectedProfessor] = useState("");
-    const [selectedCategory, setSelectedCategory] = useState("");
-    const [selectedCompositor, setSelectedCompositor] = useState("");
-    const [searchValue , setSearchValue] = useState("");
-    const [optionsProfessors, setOptionsProfessors] = useState([{ value: "", label: "professeurs" }]);
-    const [optionsCategory, setOptionsCategory] = useState([{ value: "", label: "catégories" }]);
-    const [optionsCompositors, setOptionsCompositor] = useState([{ value: "", label: "compositeurs" }]);
+    const [ currentData, setCurrentData] = useState([]);
+    const [ totalPages, setTotalPages] = useState(1);
+    const [ selectedProfessor, setSelectedProfessor] = useState("");
+    const [ selectedCategory, setSelectedCategory] = useState("");
+    const [ selectedCompositor, setSelectedCompositor] = useState("");
+    const [ searchValue , setSearchValue] = useState("");
+    const [ optionsProfessors, setOptionsProfessors] = useState([{ value: "", label: "professeurs" }]);
+    const [ optionsCategory, setOptionsCategory] = useState([{ value: "", label: "catégories" }]);
+    const [ optionsCompositors, setOptionsCompositor] = useState([{ value: "", label: "compositeurs" }]);
     const { fetchData } = useAxiosFetchCourse();
 
 
@@ -37,6 +36,7 @@ const ListAllCourses = () => {
       setSelectedCompositor('');
       setSearchValue('');
       handleInstrument('');
+      window.location.reload(true);
     };
 
     const getDataPagesNext = async () => {
@@ -68,8 +68,7 @@ const ListAllCourses = () => {
 
     /** Crée la liste de prof à sélectionner */
     const getProfessorForOption = useCallback((response) => {
-      let index = 0;
-      let tabProfessor = [];
+      const tabProfessor = [];
       const professor = response.map((e) => {
         let username = e.professor.firstName + ' ' + e.professor.lastName;
         let objtValue = {};
@@ -77,7 +76,7 @@ const ListAllCourses = () => {
         let coco = tabProfessor.filter(x => x === username).length;
         if( coco === 1 ){
           objtValue = {
-            value: index+=1,
+            value: e.professor.id,
             label: username
           }
         }
@@ -153,21 +152,23 @@ const ListAllCourses = () => {
     const searchCoursesDatas = () => {
   
       const objSearch = {
-        professorId :selectedProfessor,
+        professorId : selectedProfessor !== "" ?  Number(selectedProfessor) : '',
         instrumentName :instrumentSelected,
-        categoryId : selectedCategory,
-        composerId :selectedCompositor,
+        categoryId : selectedCategory !== "" ?  Number(selectedCategory) : "",
+        composerId : selectedCompositor !== "" ?  Number(selectedCompositor) : "",
         title : searchValue
       };
   
       if (checkObjValueIsEmpty(objSearch)) {
         fetchData(objSearch).then((e) => {
+          setCurrentData([]);
           truncatedDatas(e);
         });
         return ;
   
       } else {
         fetchData(objSearch).then((e) => {
+          setCurrentData([]);
           truncatedDatas(e);
         });
       }
@@ -218,13 +219,6 @@ const ListAllCourses = () => {
                   options={optionsProfessors}
                   value={selectedProfessor}
                   onChange={(e) => setSelectedProfessor(e.target.value)}
-                />
-
-                <InputSelect
-                  label={("Catégories").toUpperCase()}
-                  options={optionsCategory}
-                  value={selectedCategory}
-                  onChange={(e) => setSelectedCategory(e.target.value)}
                 />
 
                 <InputSelect

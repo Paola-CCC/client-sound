@@ -1,4 +1,4 @@
-import React, { useCallback, useContext,useEffect,useState } from "react";
+import React, { useCallback, useContext,useEffect,useRef,useState } from "react";
 import "./ListLearningTracking.scss";
 import {  ContainerSidebarAndContent } from "../../components";
 import { Button, InputSearch, InputSelect } from "../../common/Index";
@@ -10,12 +10,14 @@ import LoadingElements from "../../components/LoadingElements/LoadingElements";
 import { checkEmptyValue, useAxiosFetchApprentissage} from '../../hooks/axiosFetch';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCircleXmark } from "@fortawesome/free-solid-svg-icons";
+import { useInstrumentContext } from "../../contexts/InstrumentProvider";
 
 
 const ListLearningTracking = () =>  { 
 
   const { courseAPI } = useAPIContext();
   const { userId } = useContext(AuthContext);
+  const {handleInstrument } = useInstrumentContext();
   const [selectedProfessor, setSelectedProfessor ] = useState("");
   const [selectedStatus, setSelectedStatus ] = useState("");
   const [searchValue, setSearchValue] = useState("");
@@ -23,12 +25,12 @@ const ListLearningTracking = () =>  {
   const [optionsProfessors, setOptionsProfessors] = useState([{ value: "", label: "professeurs" }]);
   const [optionsInstruments, setOptionsInstruments] = useState([{ value: "", label: "instruments" }]);
   const [optionsCompositors, setOptionsCompositor] = useState([{ value: "", label: "compositeurs" }]);
-  const [optionsStatus, setOptionsStatus] = useState([
+  const optionsStatus = [
       {value: "", label: "status" },
       {value: "NOT_STARTED", label: "Non commencé" },
       {value: "IN_PROGRESS", label: "En cours" },
       {value: "FINISHED", label: "Terminé" }
-    ]);
+  ];
 
   const itemsPerPage = 8;
   const [currentPage, setCurrentPage] = useState(1);
@@ -39,10 +41,18 @@ const ListLearningTracking = () =>  {
   const [currentData, setCurrentData] = useState([]);
   const [totalPages, setTotalPages] = useState(1);
   const { fetchDataApprentissage } = useAxiosFetchApprentissage();
+  const dataFetchedRef = useRef(false);
 
+  const cleanSelectedInputs = () => {
+    setSelectedProfessor('');
+    setSearchValue('');
+    handleInstrument('');
+    window.location.reload(true);
+  };
 
   const getDataLearningPagesNext = async () => {
     try {
+      setCurrentData([]);
       const response = await courseAPI.showCourseByUser(userId);
       const datasCourses = response.map((e) => e.course);
       truncatedDatas(datasCourses);
@@ -156,7 +166,7 @@ const ListLearningTracking = () =>  {
               <CardLearningTracking
                 imgSrc={value?.photo}
                 imgAlt="Cours de Violon"
-                title={value.title}
+                title={value?.title}
                 valueProgress={value?.percentageWatched ? value?.percentageWatched  : '0'}
                 rating={value?.ratingScore}
                 shortDescription={value?.preview}
@@ -197,8 +207,9 @@ const ListLearningTracking = () =>  {
       }
     }
 
-    if(currentData && Object.values(currentData).length === 0){
+    if(currentData && Object.values(currentData).length === 0 && userId && !dataFetchedRef.current){
       getData(); 
+      dataFetchedRef.current = true;
     }
 
   },[isLoading,courseAPI,userId, optionsCompositors , optionsProfessors ,getComposers,getInstruments,getProfessorForOption ,startIndex ,endIndex , currentData]);
@@ -207,24 +218,29 @@ const ListLearningTracking = () =>  {
 
   const handleFilter= () => {
 
-    let index = {
-      professorId : parseInt(selectedProfessor),
+    const index = {
+      professorId : selectedProfessor !== '' ? parseInt(selectedProfessor) : '',
       status: selectedStatus,
       title: searchValue
     };
 
     if (checkEmptyValue(index)) {
-      fetchDataApprentissage(index).then((e) => {
-        console.log(' Index ' , index)
-        truncatedDatas(e);
-        return;
+      fetchDataApprentissage(index).then((values) => {
+        if( values ) {
+          const datasCourses = values.map((e) => e.course);
+          setCurrentData([]);
+          truncatedDatas(datasCourses);
+          return;
+        }
       });
       return ;
 
     } else {
-      fetchDataApprentissage(index).then((e) => {
-        console.log(' Index MM' , index)
-        truncatedDatas(e);
+      fetchDataApprentissage(index).then((values) => {
+        const datasCourses = values.map((e) => e.course);
+        truncatedDatas(datasCourses);
+        setCurrentData([]);
+        truncatedDatas(datasCourses);
         return;
       });
     }
@@ -252,7 +268,7 @@ const ListLearningTracking = () =>  {
               onChange={(e) => setSearchValue(e.target.value)} 
             />
             <div className="clear-all-sort">
-              <button> 
+              <button onClick={cleanSelectedInputs}> 
                 <FontAwesomeIcon icon={faCircleXmark} />
                 <small> Nettoyer</small>
               </button>

@@ -40,7 +40,7 @@ const ListInstrumentsScroll = () => {
             <FontAwesomeIcon icon={faChevronLeft} />
           </button>
           <div className="carrousel intruments" id='listTrack'>
-              <InstrumentListIcons instrument={<MaestroAll />} nameInstrument="Tous" />
+              <InstrumentListIcons instrument={<MaestroAll />} nameInstrument="Tous"/>
               <InstrumentListIcons instrument={<Clarinette />} nameInstrument="Clarinette" />
               <InstrumentListIcons instrument={<Flute />} nameInstrument="Flute" />
               <InstrumentListIcons instrument={<Piano />} nameInstrument="Piano" />

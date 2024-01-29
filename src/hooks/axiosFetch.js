@@ -32,9 +32,7 @@ const useAxiosFetchApprentissage = () => {
     async (value) => {
       try {
         if (value !== undefined) {
-          const response = await userProgressionAPI.searchProgressionStudent(
-            value
-          );
+          const response = await userProgressionAPI.searchProgressionStudent(value );
           return response;
         }
       } catch (error) {
