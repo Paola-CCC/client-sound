@@ -180,6 +180,20 @@ const ListLearningTracking = () =>  {
     return datasCourses;
   };
 
+  /** création d'un nouvel object en applatissant les paires clé-valeur de la réponse API  */
+  const currentDataFlatten = (response) => {
+
+    const flattenobjCourse = response.map((e) => {
+            if (e.course) {
+              const { course, ...rest } = e;
+              return { ...rest, ...course };
+            }
+            return e;
+    });
+
+    return flattenobjCourse;
+  }
+
   useEffect(() => {
     const getData = async () => {
       setIsLoading(true);
@@ -187,7 +201,7 @@ const ListLearningTracking = () =>  {
         
         const response = await courseAPI.showCourseByUser(userId);
           if( Object.keys(response).length > 0) {
-            const datasCourses = response.map((e) => e.course);
+            const datasCourses = currentDataFlatten(response);
             const currentElemnt = datasCourses && datasCourses.slice(startIndex, endIndex);
             setCurrentData(currentElemnt);
             const totalElement = Math.ceil(datasCourses && datasCourses.length / itemsPerPage);
@@ -227,7 +241,7 @@ const ListLearningTracking = () =>  {
     if (checkEmptyValue(index)) {
       fetchDataApprentissage(index).then((values) => {
         if( values ) {
-          const datasCourses = values.map((e) => e.course);
+          const datasCourses = currentDataFlatten(values);
           setCurrentData([]);
           truncatedDatas(datasCourses);
           return;
@@ -237,8 +251,7 @@ const ListLearningTracking = () =>  {
 
     } else {
       fetchDataApprentissage(index).then((values) => {
-        const datasCourses = values.map((e) => e.course);
-        truncatedDatas(datasCourses);
+        const datasCourses = currentDataFlatten(values);
         setCurrentData([]);
         truncatedDatas(datasCourses);
         return;

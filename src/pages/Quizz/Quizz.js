@@ -44,7 +44,7 @@ const Quizz = () => {
       }
     };
     getQuizz();
-  }, [courseId]);
+  }, [courseId , quizzAPI]);
 
   const submitAnswers = async () => {
     if(submitIsAllow ){
@@ -118,8 +118,5 @@ const Quizz = () => {
   );
 };
 
-Quizz.propTypes = {};
-
-Quizz.defaultProps = {};
 
 export default Quizz;

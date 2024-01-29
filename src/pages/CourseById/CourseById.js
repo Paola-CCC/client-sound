@@ -70,7 +70,6 @@ const CourseById = () => {
     }
   };
 
-  //   
 
   const handleDownload = (id, originalFilename) => {
     const downloadLink = document.createElement('a');
@@ -128,7 +127,7 @@ const CourseById = () => {
     await userProgressionAPI.updateOneProgression(userDatas);
   };
 
-  const showCourseDocuments = useCallback(async () => {
+  const showCourseDocuments = async () => {
     const parsedCourseId = parseInt(courseId);
 
     try {
@@ -139,7 +138,7 @@ const CourseById = () => {
       console.log(error)
       setIsLoading(false);
     }
-  })
+  };
 
   const displayDataForStudent = useCallback(async () => {
 
@@ -281,24 +280,24 @@ const CourseById = () => {
     );
   }
 
-  const dislayDocuments = () => {
-    return (
-      <div className="show-documents">
-        <ul>
-          {allFiles ? (
-            Object.values(allFiles).map((file, index) => (
-              <li key={index}>
-                <span className='file-title'>{file.originalFilename}</span>
-                <button className="button-secondary" onClick={() => { handleDownload(file.id, file.originalFilename) }}>Télécharger</button>
-              </li>
-            ))
-          ) : (
-            <p>Aucun document à afficher.</p>
-          )}
-        </ul>
-      </div>
-    );
-  }
+  // const dislayDocuments = () => {
+  //   return (
+  //     <div className="show-documents">
+  //       <ul>
+  //         {allFiles ? (
+  //           Object.values(allFiles).map((file, index) => (
+  //             <li key={index}>
+  //               <span className='file-title'>{file.originalFilename}</span>
+  //               <button className="button-secondary" onClick={() => { handleDownload(file.id, file.originalFilename) }}>Télécharger</button>
+  //             </li>
+  //           ))
+  //         ) : (
+  //           <p>Aucun document à afficher.</p>
+  //         )}
+  //       </ul>
+  //     </div>
+  //   );
+  // }
 
   const displayDescription = () => {
     return (
@@ -320,7 +319,7 @@ const CourseById = () => {
       if (dataFetchedRef.current) return;
       dataFetchedRef.current = true;
       displayDataForStudent()
-      showCourseDocuments()
+      // showCourseDocuments()
     }
   }, [courseId, timeVideoLastVisit, courseDatas, displayDataForStudent, courseVideoIsFinished, globalDurationTime, userId, videoInformations, userRole, callAPIAppend, count, userProgressionAPI]);
 
@@ -353,9 +352,9 @@ const CourseById = () => {
               <span> Description</span>
             </div>
 
-            <div className={classNames("button-element", { active: displayedBlock === "showDocuments" })} onClick={() => setDisplayedBlock("showDocuments")} >
+            {/* <div className={classNames("button-element", { active: displayedBlock === "showDocuments" })} onClick={() => setDisplayedBlock("showDocuments")} >
               <span> Documents </span>
-            </div>
+            </div> */}
 
             <div className={classNames("button-element", { active: displayedBlock === "showComments" })} onClick={() => setDisplayedBlock("showComments")} >
               {allComments.length > 1 ? (
@@ -374,7 +373,9 @@ const CourseById = () => {
             <div className="block-child">
 
               {displayedBlock === "showComments" && (displayComments())}
-              {displayedBlock === "showDocuments" && (dislayDocuments())}
+
+              {/* {displayedBlock === "showDocuments" && (dislayDocuments())} */}
+              
               {displayedBlock === "showDescription" && (displayDescription())}
 
             </div>
