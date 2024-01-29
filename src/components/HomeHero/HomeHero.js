@@ -8,9 +8,7 @@ const HomeHero = () => {
 
   return (
     <div id="form-search" className="container-home-hero" tabIndex={0}>
-
       <Navigation />
-
       <div className="title">
         <h1> Saline royale academy </h1>
         <h4>Apprenez au côté des meilleurs musiciens au monde</h4>
@@ -18,47 +16,6 @@ const HomeHero = () => {
           Découvrez le plus grand catalogue de cours de musique classique en ligne
         </p>
       </div>
-
-      {/* <div className="global-forms-container">
-          <div className="container-forms">
-
-            <div className="container-line">
-              <span className="overlay">INSTRUMENTS </span>
-            </div>
-            < ListInstrumentsScroll />
-            <div className="introduction-forms">
-              <InputSelect
-                label={("professeur").toUpperCase()}
-                options={professorsList}
-                value={selectedProfessor}
-                onChange={handleSelectedProfessor}
-              />
-
-              <InputSelect
-                label={("catégorie").toUpperCase()}
-                options={categoryList}
-                value={selectedCategory}
-                onChange={handleSelectedCategory}
-              />
-
-              <InputSelect
-                label={("compositeur").toUpperCase()}
-                options={compositorList}
-                value={selectedCompositor}
-                onChange={handleSelectedCompositor}
-              />
-
-              <InputSearch
-                value={searchValue}
-                placeholder="Rechercher"
-                onChange={handleSearchValue}
-              /> 
-              <div>
-                <Button kind={"primary"} onClick={handleFilter}> Rechercher</Button>
-              </div>
-            </div>
-          </div>
-      </div> */}
     </div>
   );
 };
