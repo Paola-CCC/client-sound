@@ -203,7 +203,7 @@ const ListStudentsTracking = () => {
         />
 
 
-        <InputSearch value={searchValue} placeholder="Rechercher"  onChange={(e) => setSearchValue(e.target.value)} />
+        <InputSearch value={searchValue} placeholder="Rechercher..."  onChange={(e) => setSearchValue(e.target.value)} />
 
           {data.length > 0 && (
               <div className="display-short-infos-courses">

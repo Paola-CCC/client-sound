@@ -309,7 +309,7 @@ const ForumTopicsList = () => {
               />
               <InputSearch
                 value={searchValue}
-                placeholder="Rechercher"
+                placeholder="Rechercher..."
                 onChange={(e) => handleSearchInSubject(e.target.value)}
                 onClick={handleSearchInSubject}
               />

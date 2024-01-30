@@ -230,7 +230,7 @@ const ListAllCourses = () => {
 
                 <InputSearch
                   value={searchValue}
-                  placeholder="Rechercher"
+                  placeholder="Rechercher..."
                   onChange={(e) => setSearchValue(e.target.value)}
                 />
 

@@ -277,7 +277,7 @@ const ListLearningTracking = () =>  {
             />
             <InputSearch 
               value={searchValue} 
-              placeholder="Rechercher"  
+              placeholder="Rechercher..."  
               onChange={(e) => setSearchValue(e.target.value)} 
             />
             <div className="clear-all-sort">

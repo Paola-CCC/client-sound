@@ -2,9 +2,9 @@ import React, { useContext, useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import IconHome from '../../assets/svg/IconHome';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faUser } from "@fortawesome/free-solid-svg-icons";
 import { AuthContext } from '../../contexts/AuthContextProvider';
 import './Navigation.scss';
+import { faRightFromBracket ,faMessage ,faUser } from "@fortawesome/free-solid-svg-icons";
 
 const Navigation = () => {
 const {isAuthenticated,handleLogout,userRole ,username} = useContext(AuthContext);
@@ -88,19 +88,26 @@ return (
 
           <ul className={`sub-menu ${ subnavbarIsOpen ? 'open' : ''}`}  tabIndex={0} >
               { isAuthenticated && (    
-                <li >
-                  <Link to="/espace-personnel"> Espace personnel  </Link> 
-                </li>
+              <li >
+                <Link to="/espace-personnel"> 
+                  <FontAwesomeIcon icon={faUser} />
+                  Espace personnel  
+                </Link> 
+              </li>
               )}
               {(isAuthenticated && isAuthenticated !== false && isAuthenticated !== null) && (
               <li>
-                <Link to="/messagerie">Messagerie</Link>
+                <Link to="/messagerie">
+                <FontAwesomeIcon icon={faMessage} />
+                  Messagerie
+                </Link>
               </li>
               )}
               {(isAuthenticated && isAuthenticated !== false && isAuthenticated !== null) && (
               <li>
                 <Link to="/" onClick={handleLogout} >
-                Se déconnecter
+                  <FontAwesomeIcon icon={faRightFromBracket} />
+                  Se déconnecter
                 </Link>
               </li> )}
           </ul>
