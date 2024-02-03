@@ -18,6 +18,7 @@ const AuthContextProvider = ({children}) => {
     const [userId, setUserId] = useState(null);
     const [userRole, setUserRole] = useState([]);
     const [username, setUsername] = useState('');
+    const [navbarMobileIsOpen, setNavbarMobileIsOpen] = useState(false);
 
     const navigate = useNavigate();
     const token = localStorage.getItem('jwt')  ?  localStorage.getItem('jwt') : '';
@@ -71,9 +72,11 @@ const AuthContextProvider = ({children}) => {
         username,
         setUsername,
         handleLogout,
+        navbarMobileIsOpen,
+        setNavbarMobileIsOpen,
         userAPI: new services.UserService()
       }),
-      [isAuthenticated, userId, userRole , username ,handleLogout]
+      [isAuthenticated, userId, userRole , username ,handleLogout ,navbarMobileIsOpen]
     );
 
     return (

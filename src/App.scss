@@ -1,12 +1,15 @@
 div#layout-container {
-  // position: relative;
   header {
-      // position: sticky;
-      // top: 0;
-      // left: 0;
-      width: 100%;
-      z-index: 99999999;
-  }
+    background-image: url("./assets/imagedefond.jpg");
+    background-size: cover;
+    background-repeat: no-repeat;
+    box-shadow: 0 -6px 15px 8px rgba(62, 62, 62, 0.5); 
+
+    div.navbar-mobile-isOpen {
+      display: none;
+    }
+
+  } 
 
 
   main {
@@ -29,223 +32,308 @@ div#layout-container {
 }
 
 
-@media only screen and (max-width: 900px) {
-  .global-layout-container {
-    div.container-sidebar-content {
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
-      padding: 0;
-      width: 90%;
 
-      aside.sidebar {
-        padding: 0px 0px;
-        width: 100%;
-        max-width: 100%;
-        margin-bottom: 40px;
-        div.content {
-          width: 100%;
-          border-radius: 10px;
-          display: inline-block;
+@media only screen and (max-width: 1024px){
 
-          div.filters-title {
-            display: block;
-            padding: 10px 0px 10px 0px;
-            text-align: left;
-            border-top-left-radius: 10px;
-            border-top-right-radius: 10px;
-            width: 92%;
-            margin-right: auto;
-            margin-left: auto;
+  div#layout-container {
 
-            span {
-              margin-left: 10px;
-              top: -32px;
-              left: 70px;
-              font-size: 14px;
-              font-weight: 500;
-              color: #656565;
-              font-weight: 700;
-            }
-
-            svg {
-              color: #656565 !important;
-              margin-left: 40px;
-              top: -30px;
-              left: 0px;
-              margin: 0;
-            }
+    header {
+      div.navbar-mobile-isOpen {
+        padding: 0 30px;
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        .burger-menu {
+          display: flex;
+          align-items: center;
+          svg {
+            color: white;
           }
-
-          div.inputs-list-area {
-            padding: 20px 0 20px 0;
+        }
+  
+        .logo-zone {
+        // width: 100%;
+        // display: flex;
+        // flex-direction: row;
+        // justify-content: center;
+        img {
+          height: 60px;
+          width: 60px;
+        }
+    }
+  
+        div.zone {
+          background-color: darkkhaki;
+          height: 50px;
+          width: 50px;
+  
+          a {
             width: 100%;
-            display: inline-flex;
-            flex-direction: row;
-            flex-wrap: wrap;
-            justify-content: space-evenly;
-            align-items: flex-end;
-            > * {
-              margin: 0;
-            }
-
-            button.button.primary {
-              margin-top: 0px;
-              width: 100%;
-              display: inline-block;
-            }
-
-            > button.icon-search.icon-search {
-              height: 40px;
-              width: 40px;
-              padding: 0;
-              display: inline-block;
-
-              svg {
-                padding: 3px;
-              }
-            }
-            .input-select-container,
-            .input-search-container {
-              display: inline-block;
-            }
-
-            div.display-short-infos-courses {
-              .short-courses-infos {
-                padding: 10px 20px;
-                display: inline-flex;
-                div {
-                  &.infos-courses {
-                    margin-left: 45px;
-                  }
-                  p {
-                    margin: 3px;
-                  }
-                }
-              }
-            }
+            height: 100%;
+            object-fit: cover;
           }
         }
       }
+    } 
+  }
 
-      .body-content {
-        .element-content {
-          // FORUM COMPONENT
-          .topic-list {
-            //   background-color: crimson;
-            width: 100%;
-            margin: 0;
-            a.topic-list-link {
-              color: black;
-              text-decoration: none;
-              .topic-card-body {
-                margin-bottom: 19px;
-              }
-            }
-          }
-          // FORUM COMPONENT
+  div#layout-container.open {
+    position: relative;
+    header {
+        background-color: rgb(14, 18, 120);
+        background-image: none;
+        width: fit-content;
+        box-shadow: 4px 1px 15px 2px rgba(57, 56, 56, 0.45);
 
-          div.topic-container-form {
-            margin-left: auto;
-            margin-right: auto;
-            border-radius: 10px;
-            background-color: rgb(255, 255, 255);
-            form.form-topic {
-              padding: 50px 40px;
-              border-radius: 10px;
-              border: 1px solid #f0f0f0;
-              box-shadow: rgb(224, 224, 224) 0px 1px 4px;
-              width: 100%;
-              h4 {
-                text-align: center;
-                margin-top: 10px;
-              }
+        // background: none;
+        position: absolute;
+        z-index: 999999;
+        top: 0;
+        left: 0;
+        bottom: 0;
+        opacity: 1;
+    }
 
-              .topic-form-btn {
-                width: 100%;
-                display: flex;
-                flex-direction: row;
-                justify-content: flex-end;
-
-                > button {
-                  margin-left: 20px;
-                }
-              }
-            }
-          }
-
-          // ESPACE D APPRENTISSAGE-ELEVE
-          section.list-courses-learning-tracking {
-            display: grid;
-            grid-template-columns: repeat(2, auto);
-            gap: 50px 0px;
-            // width: 100%;
-            // margin-left: 0;
-            // margin-right: 0;
-
-            ul {
-              display: grid;
-              grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-              gap: 25px;
-              margin: 0;
-              padding: 0;
-              list-style: none;
-              li {
-                align-self: center;
-                justify-self: center;
-
-                .card {
-                  height: 100%;
-                  width: 245px;
-                  border: 1px solid #ccc;
-                  border-radius: 10px;
-                  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-                  overflow: hidden;
-                  align-self: center;
-                  transition: transform 0.2s ease-in-out;
-                }
-              }
-            }
-          }
-
-          // ESPACE DE SUIVIE ELÈVES
-          section.list-courses-for-professors {
-            display: grid;
-            grid-template-columns: repeat(2, auto);
-            gap: 50px 0px;
-            width: 100%;
-            margin-left: 0;
-            margin-right: 0;
-            margin-top: 160px;
+    
+    .cache-mobile{
+      position: absolute;
+      z-index: 999;
+      background-color: rgb(0, 0, 0);
+      top: 0;
+      right: 0;
+      bottom: 0;
+      left: 0;
+      opacity: 0.5;
+    }
 
 
-
-            ul {
-              display: grid;
-              grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-              gap: 25px;
-              margin: 0;
-              padding: 0;
-              background-color: rgb(195, 145, 242);
-              list-style: none;
-              li {
-                align-self: center;
-                justify-self: center;
-                .card {
-                  height: 100%;
-                  width: 245px;
-                  border: 1px solid #ccc;
-                  border-radius: 10px;
-                  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-                  overflow: hidden;
-                  align-self: center;
-                  transition: transform 0.2s ease-in-out;
-                }
-              }
-            }
-          }
-        }
+    main {
+      .container-messenger {
+        margin: 0;
       }
     }
   }
 }
+
+
+
+// @media only screen and (max-width: 900px) {
+//   .global-layout-container {
+//     div.container-sidebar-content {
+//       display: flex;
+//       flex-direction: column;
+//       justify-content: space-between;
+//       padding: 0;
+//       width: 90%;
+
+//       aside.sidebar {
+//         padding: 0px 0px;
+//         width: 100%;
+//         max-width: 100%;
+//         margin-bottom: 40px;
+//         div.content {
+//           width: 100%;
+//           border-radius: 10px;
+//           display: inline-block;
+
+//           div.filters-title {
+//             display: block;
+//             padding: 10px 0px 10px 0px;
+//             text-align: left;
+//             border-top-left-radius: 10px;
+//             border-top-right-radius: 10px;
+//             width: 92%;
+//             margin-right: auto;
+//             margin-left: auto;
+
+//             span {
+//               margin-left: 10px;
+//               top: -32px;
+//               left: 70px;
+//               font-size: 14px;
+//               font-weight: 500;
+//               color: #656565;
+//               font-weight: 700;
+//             }
+
+//             svg {
+//               color: #656565 !important;
+//               margin-left: 40px;
+//               top: -30px;
+//               left: 0px;
+//               margin: 0;
+//             }
+//           }
+
+//           div.inputs-list-area {
+//             padding: 20px 0 20px 0;
+//             width: 100%;
+//             display: inline-flex;
+//             flex-direction: row;
+//             flex-wrap: wrap;
+//             justify-content: space-evenly;
+//             align-items: flex-end;
+//             > * {
+//               margin: 0;
+//             }
+
+//             button.button.primary {
+//               margin-top: 0px;
+//               width: 100%;
+//               display: inline-block;
+//             }
+
+//             > button.icon-search.icon-search {
+//               height: 40px;
+//               width: 40px;
+//               padding: 0;
+//               display: inline-block;
+
+//               svg {
+//                 padding: 3px;
+//               }
+//             }
+//             .input-select-container,
+//             .input-search-container {
+//               display: inline-block;
+//             }
+
+//             div.display-short-infos-courses {
+//               .short-courses-infos {
+//                 padding: 10px 20px;
+//                 display: inline-flex;
+//                 div {
+//                   &.infos-courses {
+//                     margin-left: 45px;
+//                   }
+//                   p {
+//                     margin: 3px;
+//                   }
+//                 }
+//               }
+//             }
+//           }
+//         }
+//       }
+
+//       .body-content {
+//         .element-content {
+//           // FORUM COMPONENT
+//           .topic-list {
+//             //   background-color: crimson;
+//             width: 100%;
+//             margin: 0;
+//             a.topic-list-link {
+//               color: black;
+//               text-decoration: none;
+//               .topic-card-body {
+//                 margin-bottom: 19px;
+//               }
+//             }
+//           }
+//           // FORUM COMPONENT
+
+//           div.topic-container-form {
+//             margin-left: auto;
+//             margin-right: auto;
+//             border-radius: 10px;
+//             background-color: rgb(255, 255, 255);
+//             form.form-topic {
+//               padding: 50px 40px;
+//               border-radius: 10px;
+//               border: 1px solid #f0f0f0;
+//               box-shadow: rgb(224, 224, 224) 0px 1px 4px;
+//               width: 100%;
+//               h4 {
+//                 text-align: center;
+//                 margin-top: 10px;
+//               }
+
+//               .topic-form-btn {
+//                 width: 100%;
+//                 display: flex;
+//                 flex-direction: row;
+//                 justify-content: flex-end;
+
+//                 > button {
+//                   margin-left: 20px;
+//                 }
+//               }
+//             }
+//           }
+
+//           // ESPACE D APPRENTISSAGE-ELEVE
+//           section.list-courses-learning-tracking {
+//             display: grid;
+//             grid-template-columns: repeat(2, auto);
+//             gap: 50px 0px;
+//             // width: 100%;
+//             // margin-left: 0;
+//             // margin-right: 0;
+
+//             ul {
+//               display: grid;
+//               grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+//               gap: 25px;
+//               margin: 0;
+//               padding: 0;
+//               list-style: none;
+//               li {
+//                 align-self: center;
+//                 justify-self: center;
+
+//                 .card {
+//                   height: 100%;
+//                   width: 245px;
+//                   border: 1px solid #ccc;
+//                   border-radius: 10px;
+//                   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+//                   overflow: hidden;
+//                   align-self: center;
+//                   transition: transform 0.2s ease-in-out;
+//                 }
+//               }
+//             }
+//           }
+
+//           // ESPACE DE SUIVIE ELÈVES
+//           section.list-courses-for-professors {
+//             display: grid;
+//             grid-template-columns: repeat(2, auto);
+//             gap: 50px 0px;
+//             width: 100%;
+//             margin-left: 0;
+//             margin-right: 0;
+//             margin-top: 160px;
+
+
+
+//             ul {
+//               display: grid;
+//               grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+//               gap: 25px;
+//               margin: 0;
+//               padding: 0;
+//               background-color: rgb(195, 145, 242);
+//               list-style: none;
+//               li {
+//                 align-self: center;
+//                 justify-self: center;
+//                 .card {
+//                   height: 100%;
+//                   width: 245px;
+//                   border: 1px solid #ccc;
+//                   border-radius: 10px;
+//                   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+//                   overflow: hidden;
+//                   align-self: center;
+//                   transition: transform 0.2s ease-in-out;
+//                 }
+//               }
+//             }
+//           }
+//         }
+//       }
+//     }
+//   }
+// }

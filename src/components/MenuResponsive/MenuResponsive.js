@@ -1,5 +1,4 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import './MenuResponsive.scss';
 
 const MenuResponsive = () => (
@@ -12,9 +11,5 @@ const MenuResponsive = () => (
       </label>
   </>
 );
-
-MenuResponsive.propTypes = {};
-
-MenuResponsive.defaultProps = {};
 
 export default MenuResponsive;

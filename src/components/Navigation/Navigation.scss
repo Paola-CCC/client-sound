@@ -1,8 +1,9 @@
-nav {
+nav.desktop {
   
   display: flex;
   flex-direction: row;
   justify-content: center;
+  visibility: visible;
 
   .container-nav {
     width: 70%;
@@ -288,5 +289,13 @@ nav {
     a span#needAuth {
       display: none; 
     }
+  }
+}
+
+
+@media only screen and (max-width: 1024px){
+  header nav.desktop {
+      display: none;
+      visibility: hidden;
   }
 }

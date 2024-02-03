@@ -7,8 +7,9 @@ import './Navigation.scss';
 import { faRightFromBracket ,faMessage ,faUser } from "@fortawesome/free-solid-svg-icons";
 
 const Navigation = () => {
-const {isAuthenticated,handleLogout,userRole ,username} = useContext(AuthContext);
-const [ subnavbarIsOpen, setSubnavbarIsOpen ] = useState(false);
+
+  const {isAuthenticated,handleLogout,userRole ,username ,navbarMobileIsOpen} = useContext(AuthContext);
+  const [ subnavbarIsOpen, setSubnavbarIsOpen ] = useState(false);
 
 const location = useLocation();
 
@@ -30,10 +31,10 @@ const getFirstLetters = (value) => {
 
 return (
   
-    <nav>
+  
+    <nav className={`${ navbarMobileIsOpen === false ? 'desktop ' : ''}`} >
 
       <div className='container-nav'>
-      {/* <MenuResponsive /> */}
       <Link to="/">
           <IconHome />
       </Link>
