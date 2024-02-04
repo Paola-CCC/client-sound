@@ -53,7 +53,6 @@ const Homepage = () => {
 
   return (
     <div className="global-homepage">
-      <HomeHero />
       <div className="homepage-grid-area">
 
         {/* NOUVEAUTE */}

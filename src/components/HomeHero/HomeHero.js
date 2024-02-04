@@ -1,14 +1,11 @@
 import React from "react";
 // import PropTypes from "prop-types";
 import "./HomeHero.scss";
-import Navigation from "../Navigation/Navigation";
-
 
 const HomeHero = () => {
 
   return (
-    <div id="form-search" className="container-home-hero" tabIndex={0}>
-      <Navigation />
+    <div className="container-home-hero" tabIndex={0}>
       <div className="title">
         <h1> Saline royale academy </h1>
         <h4>Apprenez au côté des meilleurs musiciens au monde</h4>

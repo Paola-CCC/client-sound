@@ -5,6 +5,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { AuthContext } from '../../contexts/AuthContextProvider';
 import './NavigationResponsive.scss';
 import { faRightFromBracket ,faMessage ,faUser, faUsers, faChalkboardUser, faPersonChalkboard,faXmark } from "@fortawesome/free-solid-svg-icons";
+import logoImage from "../../assets/sound-symfo.png";
 
 const NavigationResponsive = () => {
 
@@ -33,7 +34,9 @@ const NavigationResponsive = () => {
              </button>
           </div>
           <Link to="/">
-              <IconHome />
+            <div className='logo-zone'>
+                <img src={logoImage}  alt="img-logo" style={{width: "80px" , height:'80px'}}  />
+            </div>
           </Link>
                 
           <ul className={`navigation ${location.pathname !== '/' &&  location.pathname !== '/courses'  ? 'not-home' : '' }` }>

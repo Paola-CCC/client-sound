@@ -8,6 +8,18 @@ nav.desktop {
   .container-nav {
     width: 70%;
     display: inline-flex;
+    > a {
+      text-align: start;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      > div{
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        align-items: center;
+      }
+    }
 
     span#logo-saline {
       display: block;

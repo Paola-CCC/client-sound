@@ -5,6 +5,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { AuthContext } from '../../contexts/AuthContextProvider';
 import './Navigation.scss';
 import { faRightFromBracket ,faMessage ,faUser } from "@fortawesome/free-solid-svg-icons";
+import logoImage from "../../assets/sound-symfo.png";
 
 const Navigation = () => {
 
@@ -36,7 +37,9 @@ return (
 
       <div className='container-nav'>
       <Link to="/">
-          <IconHome />
+            <div className='logo-zone'>
+                <img src={logoImage}  alt="img-logo" style={{width: "65px" , height:'65px'}}  />
+            </div>
       </Link>
 
       <ul className={`navigation ${location.pathname !== '/' &&  location.pathname !== '/courses'  ? 'not-home' : '' }` }>
