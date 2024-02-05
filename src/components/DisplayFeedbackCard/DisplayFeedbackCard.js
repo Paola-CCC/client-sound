@@ -24,20 +24,22 @@ const DisplayFeedbackCard = () => {
     infinite: false,
     speed: 500,
     slidesToShow: 3,
+    initialSlide: 1,
     responsive: [
       {
         breakpoint: 1388,
         settings: {
           slidesToShow: 2,
           slidesToScroll: 2,
-          initialSlide: 2
+          initialSlide: 1
         }
       },
       {
         breakpoint: 750,
         settings: {
           slidesToShow: 1,
-          slidesToScroll: 1
+          slidesToScroll: 1,
+          initialSlide: 1
         }
       }
     ]

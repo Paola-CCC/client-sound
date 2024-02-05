@@ -75,25 +75,19 @@
     margin-right: auto;
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-    gap: 30px 12px;
+    gap: 20px;
     margin-bottom: 75px;
     padding: 0;
     list-style: none;
   
     li {
-      margin-left: 0;
-      margin-right: 0;
-      align-self: center;
-      justify-self: center;
 
       .card {
         height: 100%;
-        width: 245px;
         border: 1px solid #ccc;
         border-radius: 10px;
         box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
         overflow: hidden;
-        align-self: center;
         transition: transform 0.2s ease-in-out;
       }
     }
@@ -111,6 +105,83 @@
       text-align: center;
       vertical-align: sub;
       vertical-align: -webkit-baseline-middle;
+    }
+  }
+}
+
+
+// Tablette
+@media (min-width: 768px) and (max-width: 1024px) {
+
+  .all-cours-show   {
+    div.global-forms-container .container-forms {
+      width: 85%;
+    }
+
+    ul.all-courses {
+      width: 85%;
+      max-width: 1000px;
+      margin-left: auto;
+      margin-right: auto;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 20px;
+      li {
+        background-color: aquamarine;
+        display: flex;
+        flex-direction: column; /* Si vous voulez que les enfants soient empilés verticalement */
+        // width: 100%;
+        // height: 100%; 
+          > * {
+            width: 100%;
+            height: 100%; 
+          }
+      }
+    }
+  }
+}
+
+
+// Tablette Mini + Portable
+@media (max-width: 767px) {
+
+  .all-cours-show {
+    div.global-forms-container .container-forms {
+      width: 90%;
+      padding: 10px;
+
+      div.list-intruments .carrousel-container {
+        button.slider__button {
+          display: none;
+        }
+      }
+
+      div.introduction-forms {
+        grid-template-columns: 1fr 1fr;
+        gap: 10px;
+
+        > * {
+          height: fit-content;
+        }
+
+        div.input-select-container {
+          margin: 0;
+        }
+
+        div.input-search-container {
+          grid-column: 1 / 3;
+          margin-right: 10px;
+        }
+        .clear-all-sort button {
+          width: 100%;
+          justify-content: space-evenly;
+        }
+      }
+    }
+
+
+    ul.all-courses {
+      width: 90%;
     }
   }
 }
