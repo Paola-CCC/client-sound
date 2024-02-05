@@ -21,14 +21,30 @@ const DisplayFeedbackCard = () => {
    
   const settings = {
     dots: true,
-    infinite: true,
+    infinite: false,
     speed: 500,
     slidesToShow: 3,
-    slidesToScroll: 1
+    responsive: [
+      {
+        breakpoint: 1388,
+        settings: {
+          slidesToShow: 2,
+          slidesToScroll: 2,
+          initialSlide: 2
+        }
+      },
+      {
+        breakpoint: 750,
+        settings: {
+          slidesToShow: 1,
+          slidesToScroll: 1
+        }
+      }
+    ]
   };
 
   return (
-    <di className="container-carrousel">
+    <div className="container-carrousel">
       <Slider {...settings}>
          { data?.map((e,i)=> (
             <div key={i}>
@@ -42,7 +58,7 @@ const DisplayFeedbackCard = () => {
           ))
         }
       </Slider>
-    </di>
+    </div>
   );
 };
 

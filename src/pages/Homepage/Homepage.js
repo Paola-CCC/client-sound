@@ -1,7 +1,6 @@
 import React, {  useEffect, useRef, useState } from "react";
 import "./Homepage.scss";
 import DisplayFeedbackCard from "../../components/DisplayFeedbackCard/DisplayFeedbackCard";
-import HomeHero from "../../components/HomeHero/HomeHero";
 import { Button, Card } from '../../common/Index';
 import { useAPIContext } from "../../contexts/APIContextProvider";
 import { DisplayNewCourses } from "../../components";
