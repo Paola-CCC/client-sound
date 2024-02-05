@@ -24,7 +24,11 @@ const TableArrayDatas = ({arrayOfDatas}) => {
           <tbody>
             {arrayOfDatas.map((ligne, index) => (
               <tr key={index}>
-                <td>{ligne.courses.title}</td>
+                <td>
+                  <div className='text-shorted' >
+                    {ligne.courses.title}
+                  </div>
+                </td>
                 <td>{ligne.courses.professor.firstName + ' ' + ligne.courses.professor.lastName}</td>
                 <td>{ligne.courses.instrument.name}</td>
     
@@ -52,8 +56,5 @@ const TableArrayDatas = ({arrayOfDatas}) => {
     </div>
   );
 };
-TableArrayDatas.propTypes = {};
-
-TableArrayDatas.defaultProps = {};
 
 export default TableArrayDatas;

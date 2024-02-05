@@ -129,6 +129,23 @@ const UpdateUsers = ({firstName,lastName,email,userId, instrumentPlayed,handleCa
     <div className="form-update-user">
       <form className="form-update-user" onSubmit={handleSubmit} >
         <h4 className="form-h4"> Modifier mes informations </h4>
+
+        <div className="update-pic d-flex">
+          <div className="img-profile">
+            <img
+              src={process.env.REACT_APP_API_URL + srcImg} alt={altImg}
+            />
+          </div>
+          <div className="btn-pic">
+                <InputFile onFileChange={ (e) => onFileChange(e)} />
+            <Button kind="primary" onClick={updatePicture} >
+                Modifier la photo
+            </Button>
+
+          </div>
+        </div>
+
+
         <div className="mb-3">
           <label htmlFor="firstName" className="form-label">
             Prénom :
@@ -172,6 +189,7 @@ const UpdateUsers = ({firstName,lastName,email,userId, instrumentPlayed,handleCa
           />
         </div>
         <div className="mb-3">
+
         <InputGroupCheckbox
             labelCheckboxGroup="Instruments"
             options={instrumentList}
@@ -180,22 +198,6 @@ const UpdateUsers = ({firstName,lastName,email,userId, instrumentPlayed,handleCa
           />
         </div>
 
-        <div className="update-pic d-flex">
-          <div className="img-profile">
-            <img
-              src={process.env.REACT_APP_API_URL + srcImg} alt={altImg}
-            />
-          </div>
-          <div className="btn-pic">
-            <div className="mb-3" >
-                <InputFile onFileChange={ (e) => onFileChange(e)} />
-            </div>
-            <Button kind="primary" onClick={updatePicture} >
-                Modifier la photo
-            </Button>
-
-          </div>
-        </div>
 
         <div className="btn-group">
           <Button kind="secondary" onClick={handleCancel}>

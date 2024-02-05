@@ -19,10 +19,10 @@ const PersonalCard = ({ srcImg,altImg,username,email,registrationDate,instrument
           </div>
           <div className="informations-grp">
             <div className="perso-infos infos-label">
-              <p>Email : </p>
-              <p>Date d'inscription : </p>
-              <p>Instrument(s) : </p>
-              <p>Abonnement : </p>
+              <p>Email: </p>
+              <p>Date d'inscription: </p>
+              <p>Instrument(s): </p>
+              <p>Abonnement: </p>
             </div>
             <div className="perso-infos infos-values">
               <p>{email}</p>

@@ -18,16 +18,17 @@
     font-weight: 300;
     margin-left: auto;
     margin-right: auto;
+    font-weight: 500;
+    font-size: 18px;
   }
 
   .container-personalspace {
     margin-left: auto;
     margin-right: auto;
-    width: 80%;
+    width: 70%;
     background-color: white;
 
     .personal-card-users {
-      //   background-color: rgb(32, 130, 228);
       display: flex;
       padding: 20px;
       border-radius: 10px;
@@ -47,7 +48,6 @@
       .users-perso-datas {
         display: flex;
         flex-direction: column;
-        width: calc(100% - 200px);
         padding-left: 30px;
 
         .name h3 {
@@ -73,8 +73,8 @@
     }
 
     .recap-courses {
+      width: 70%;
       padding: 50px 0;
-      background-color: cyan;
       table {
         width: 100%;
         margin-left: auto;
@@ -107,7 +107,7 @@
         tbody {
           th,
           td {
-            padding: 8px 15px;
+            padding: 10px;
           }
         }
       }
@@ -115,11 +115,11 @@
   }
 
   .recap-courses {
-    padding: 50px 0;
+    padding: 25px 0;
     margin-left: auto;
     margin-right: auto;
-    width: 80%;
-    // background-color: cyan;
+    width: 70%;
+    overflow-y: auto;
     table {
       width: 100%;
       margin-left: auto;
@@ -151,10 +151,128 @@
       }
 
       tbody {
-        th,
-        td {
+        th {
           padding: 8px 15px;
         }
+      }
+
+      td {
+        padding: 7px 10px;
+      }
+      tbody td div.text-shorted {
+        white-space: nowrap;
+        width: 400px;
+        overflow: hidden;
+        text-overflow: ellipsis;
+      }
+    }
+  }
+}
+
+@media (min-width: 768px) and (max-width: 1024px) {
+  .global-container-personal-space {
+    .container-personalspace {
+      width: 85%;
+    }
+
+    .recap-courses {
+      width: 85%;
+    }
+  }
+}
+
+// Tablette Mini + Portable
+@media (max-width: 767px) {
+  .global-container-personal-space {
+    .container-personalspace {
+      width: 90%;
+    }
+
+    .recap-courses {
+      width: 90%;
+    }
+  }
+}
+
+@media (max-width: 615px) {
+  .global-container-personal-space {
+    .container-personalspace {
+      width: 90%;
+
+      h5 {
+        padding: 0;
+        margin: 0;
+      }
+      .personal-card-users {
+        justify-content: space-between;
+        align-self: center;
+        align-items: center;
+        .img-profile {
+          width: 150px;
+          height: 150px;
+        }
+        .users-perso-datas {
+          padding: 0;
+          .btn-zone button {
+            width: 100%;
+          }
+        }
+        .users-perso-datas .informations-grp {
+          padding: 10px 0;
+          margin: 15px 0;
+        }
+      }
+    }
+
+    .recap-courses {
+      width: 90%;
+    }
+  }
+}
+
+@media (max-width: 616px) {
+  .global-container-personal-space {
+    .container-personalspace {
+      width: 90%;
+
+      h5 {
+        padding: 0;
+        margin: 0;
+        font-weight: 600;
+        font-size: larger;
+        text-align: center;
+      }
+      .personal-card-users {
+        padding: 15px;
+        flex-direction: column;
+        align-self: center;
+        align-items: center;
+        .img-profile {
+          width: 150px;
+          height: 150px;
+          margin-bottom: 15px;
+        }
+        .users-perso-datas {
+          width: 100%;
+          padding: 0;
+          .btn-zone button {
+            width: 100%;
+          }
+        }
+        .users-perso-datas .informations-grp {
+          padding: 20px 0;
+          margin: 0;
+          display: flex;
+          flex-direction: row;
+          justify-content: space-between;
+        }
+      }
+    }
+
+    .recap-courses {
+      width: 90%;
+      tbody td div.text-shorted {
+        width: 10em;
       }
     }
   }
