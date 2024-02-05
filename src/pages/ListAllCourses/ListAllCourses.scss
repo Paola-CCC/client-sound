@@ -127,7 +127,6 @@
       grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
       gap: 20px;
       li {
-        background-color: aquamarine;
         display: flex;
         flex-direction: column; /* Si vous voulez que les enfants soient empilés verticalement */
         // width: 100%;
