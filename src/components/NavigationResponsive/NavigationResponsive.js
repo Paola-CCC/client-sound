@@ -6,6 +6,7 @@ import { AuthContext } from '../../contexts/AuthContextProvider';
 import './NavigationResponsive.scss';
 import { faRightFromBracket ,faMessage ,faUser, faUsers, faChalkboardUser, faPersonChalkboard,faXmark } from "@fortawesome/free-solid-svg-icons";
 import logoImage from "../../assets/sound-symfo.png";
+import { faBuffer } from '@fortawesome/free-brands-svg-icons';
 
 const NavigationResponsive = () => {
 
@@ -40,16 +41,29 @@ const NavigationResponsive = () => {
           </Link>
                 
           <ul className={`navigation ${location.pathname !== '/' &&  location.pathname !== '/courses'  ? 'not-home' : '' }` }>
+
+            { username && username !== undefined && (
             <li>
-              <button onClick={() => setSubnavbarIsOpen(!subnavbarIsOpen)} tabIndex={0}>
-                  <Link to="#" className='gestion' >
-                  <FontAwesomeIcon icon={faUser} /> 
-                  <span id="username" className='desktop'> {username && username !== undefined ? username : ''  }    </span>   
-                  <span id="username" className='smartphone'> {username && username !== undefined ? getFirstLetters(username) : ''  }    </span>
-                  <span className={`chevron ${ subnavbarIsOpen ? 'open' : ''}`} ></span>
-                  </Link>
-              </button>
+                <button onClick={() => setSubnavbarIsOpen(!subnavbarIsOpen)} tabIndex={0}>
+                    <Link to="#" className='gestion' >
+                    <FontAwesomeIcon icon={faUser} /> 
+                    <span id="username" className='desktop'> { username && username !== undefined ? username : '' } </span>   
+                    <span id="username" className='smartphone'> { username && username !== undefined ? getFirstLetters(username) : '' } </span>
+                    <span className={`chevron ${ subnavbarIsOpen ? 'open' : ''}`} ></span>
+                    </Link>
+                </button>
             </li>
+            )}
+
+            { isAuthenticated !== true  ? (
+              <li>
+                <Link to="/offers">
+                  <FontAwesomeIcon icon={faBuffer} />
+                  Offres
+                </Link>
+              </li>
+            ) : null }
+
             <li>
               <Link to="/courses-all">
                 <FontAwesomeIcon icon={faPersonChalkboard} />
@@ -76,11 +90,7 @@ const NavigationResponsive = () => {
             </li>
             )}
            
-            { isAuthenticated !== true  ? (
-              <li>
-                <Link to="/offers">Offres</Link>
-              </li>
-            ) : null }
+
         
     
             { !isAuthenticated  && (
