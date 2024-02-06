@@ -66,7 +66,6 @@
 }
 
 .courseId-component {
-  // background-color: rgb(255, 255, 255);
   padding: 50px 0;
   display: flex;
   flex-direction: column;
@@ -85,6 +84,7 @@
     display: flex;
     padding: 20px;
     justify-content: space-around;
+    align-items: center;
     margin-bottom: 50px;
     .photos-area {
       width: 150px;
@@ -178,25 +178,19 @@
       border-bottom-left-radius: 10px;
       border-bottom-right-radius: 10px;
       .block-child {
-        // background-color: chocolate;
-        // overflow-y: auto;
-        // max-height: 450px;
         div.show-comments {
           overflow-y: auto;
           max-height: 450px;
           margin-bottom: 20px;
           .topic-card-body {
-            // width: 95%;
             background-color: #f9f9f9;
             box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
             border: 1px solid #f4f4f4;
-            margin-bottom: 7px;
+            margin-bottom: 15px;
             border-radius: 7px;
-            // padding: 25px 20px;
             width: 100%;
             .media-body {
               display: flex;
-              // margin-bottom: 15px;
               .topic-image {
                 //Modifié
                 width: 50px;
@@ -318,6 +312,93 @@
           }
         }
       }
+    }
+  }
+}
+
+
+// Tablette
+@media (min-width: 768px) and (max-width: 1024px) {
+
+  .courseId-component {
+    .common-style {
+      width: 85%;
+    }
+
+    .infos-professors-area {
+      justify-content: space-between;
+      .infos-course-area div.text-area p {
+        padding: 0;
+      } 
+    }
+  }
+}
+
+// Tablette Mini + Portable
+@media (max-width: 767px) {
+
+  .courseId-component {
+    .common-style {
+      width: 90%;
+    }
+  }
+}
+
+
+// Tablette Mini
+@media (max-width: 655px) {
+
+  div.zone-video {
+    height: 400px;
+  }
+
+  .courseId-component {
+    .infos-professors-area {
+      justify-content: space-between;
+      align-items: center;
+      .infos-course-area div.text-area p {
+        &.hidden-more {
+          max-height: 80px;
+        }
+      }
+      .photos-area {
+        width: 120px;
+        height: 120px;
+      } 
+    }
+  }
+}
+
+// Portable
+@media (max-width: 535px) {
+
+  .courseId-component {
+    .infos-professors-area {
+      flex-direction: column;
+      padding: 10px;
+      .infos-course-area {
+        width: 100%;
+
+        h3 {
+          text-align: center;
+          padding: 10px;
+        }
+        div.btn-area {
+          button {
+            width: 50%;
+          }
+        }
+      }
+
+      .infos-course-area div.text-area p {
+        padding: 0;
+        &.hidden-more {
+          max-height: 80px;
+        }
+      }
+      .photos-area {
+        margin-bottom: 10px;
+      } 
     }
   }
 }

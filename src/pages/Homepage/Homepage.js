@@ -74,7 +74,7 @@ const Homepage = () => {
 
         <section className="container-courses">
           <div className="container-line">
-            <span className="overlay">Actuellement sur Saline Academy </span>
+            <span className="overlay">Actuellement sur Symfo Sound </span>
           </div>
 
           <div className="list-courses">
@@ -127,7 +127,7 @@ const Homepage = () => {
             <div className="text-area-masterclass">
             </div>
             <p>
-            Saline royale academy dispose du plus complet et le plus prestigieux catalogue international de master class filmées de musique classique et baroque.
+            Symfo Sound dispose du plus complet et le plus prestigieux catalogue international de master class filmées de musique classique et baroque.
             </p>
             <p>
             Notre catalogue en ligne sur salineacademy.com présente aujourd’hui plus de 200 masterclass des plus prestigieux professeurs (Miriam Fried, Martin Beaver, Jacques Rouvier, Stephen Kovacevich, Augustin Dumay…) captées lors des académies au sein de la Saline royale d’Arc-et-Senans.

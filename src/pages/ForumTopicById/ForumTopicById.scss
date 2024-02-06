@@ -42,3 +42,43 @@
         }
     }
 }
+
+
+
+
+
+// Tablette
+@media (min-width: 768px) and (max-width: 1024px) {
+
+    .forum-topic-byId .topic-card-body,
+    .forum-topic-byId .topic-text,
+    .forum-topic-byId .group-answer
+    {
+        width: 80%;
+    }
+  }
+  
+  // Tablette Mini + Portable
+  @media (max-width: 767px) {
+  
+    .forum-topic-byId .topic-card-body,
+    .forum-topic-byId .topic-text,
+    .forum-topic-byId .group-answer
+    {
+        width: 90%;
+        .topic-icons button.primary {
+            padding: 8px 15px ;
+        }
+        .topic-icons button:not(.primary) {
+            margin-left: 10px;
+        }
+    }
+
+    .forum-topic-byId .group-answer {
+        padding: 10px;
+        .answer-card-body {
+            padding: 10px;
+        }
+    }
+  }
+  

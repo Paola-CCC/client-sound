@@ -7,7 +7,7 @@ const HomeHero = () => {
   return (
     <div className="container-home-hero" tabIndex={0}>
       <div className="title">
-        <h1> Saline royale academy </h1>
+        <h1> Symfo Sound </h1>
         <h4>Apprenez au côté des meilleurs musiciens au monde</h4>
         <p>
           Découvrez le plus grand catalogue de cours de musique classique en ligne

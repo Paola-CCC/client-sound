@@ -102,9 +102,9 @@ const TopicCard = ({
           <Button>
             <FontAwesomeIcon icon={faMessage} />
             {nmbComments === 1 || nmbComments === 0 ? (
-              <span>{nmbComments} commentaire</span>
+              <span>{nmbComments} </span>
             ) : (
-              <span>{nmbComments} commentaires</span>
+              <span>{nmbComments} </span>
             )}
           </Button>
 
