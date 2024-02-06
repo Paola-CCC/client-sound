@@ -45,7 +45,7 @@ const Offers = () => {
     setSelectedSubscription(selectedSubscription);
 
     try {
-      const response = await userAPI.updateUser(`/users/${userId}/edit`, {
+      await userAPI.updateUser(`/users/${userId}/edit`, {
         subscription: selectedSubscription,
       });
     } catch (error) {
@@ -56,7 +56,7 @@ const Offers = () => {
   return(
     <div className='offers-list'>
 
-      <h3>Nos offres</h3>
+      <h1>Nos offres</h1>
       
       <div className="subscription-card-container">
           {subscriptions.map((subscription, index) => (
