@@ -3,10 +3,11 @@ import './MessagingCourses.scss';
 import { ConversationBox } from '../../components/ConversationBox/ConversationBox';
 import { AuthContext } from "../../contexts/AuthContextProvider";
 import { useAPIContext } from '../../contexts/APIContextProvider';
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 
 const MessagingCourses = () =>  {
 
+  const { courseId } = useParams() ;
   const { professorId } = useParams() ;
   const { userId } = useContext(AuthContext);
   const { conversationAPI } = useAPIContext();
@@ -15,6 +16,8 @@ const MessagingCourses = () =>  {
   const [ tabListsOfConversation , setTabListsOfConversation] = useState([]);
   const [ currentConversation, setCurrentConversation] = useState(0);
   const [ count, setCount] = useState(0);
+  const navigate = useNavigate();
+
 
 
   const displayConversation = useCallback(async () => {
@@ -65,21 +68,14 @@ useEffect(() => {
 },[displayConversation, userId ,callAPIAppend ,destinataireDatas ,count])
 
   return (
-    <div className='grid-box-msg'>
-        <aside className='message'>
-            <div className='infos-professor'>
-              <div className="img-profile-msg">
-                <img src={destinataireDatas.photoUser} alt={""} />
-              </div>
-            </div>
-            <h5 id='prof-name'>{destinataireDatas.username}</h5>
-        </aside>
+    <div className='grid-box-msg messages-course'>
 
         <ConversationBox 
           getTabListsOfConversation={tabListsOfConversation}
           handleDisplayConversation={() => displayConversation()}
           currentConversation={currentConversation}
           destinataireName={destinataireDatas.username}
+          handleReturnConversation={() => navigate(`/courses/${courseId}`)}
         />
     </div>
 )};

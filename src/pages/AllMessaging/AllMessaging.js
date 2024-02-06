@@ -218,7 +218,7 @@ const AllMessaging = () => {
 
                   {(canShowListUser === false || viewportDimensions.width >= 900 ) && (
                         <ConversationBox 
-                        handleDisplayUserList={() => setCanShowListUser(!canShowListUser)}
+                        handleReturnConversation={() => setCanShowListUser(!canShowListUser)}
                         getTabListsOfConversation={tabListsOfConversation}
                         handleDisplayConversation={() => upDateMessagesConversation()}
                         currentConversation={conversationID}

@@ -5,7 +5,7 @@ import { AuthContext } from "../../contexts/AuthContextProvider";
 import { useAPIContext } from '../../contexts/APIContextProvider';
 
 
-export const ConversationBox = ({getTabListsOfConversation,handleDisplayConversation,currentConversation,destinataireName, handleDisplayUserList
+export const ConversationBox = ({getTabListsOfConversation,handleDisplayConversation,currentConversation,destinataireName, handleReturnConversation
 }) => {
 
   const {  userId } = useContext(AuthContext);
@@ -97,7 +97,7 @@ export const ConversationBox = ({getTabListsOfConversation,handleDisplayConversa
               </textarea>
             </div>
             <div className="btn-send" >
-              <Button kind="secondary" id="chat-return" onClick={handleDisplayUserList} >
+              <Button kind="secondary" id="chat-return" onClick={handleReturnConversation} >
                 Retour
               </Button>
               <Button kind="primary" id="send-chat" onClick={handleSubmit}>

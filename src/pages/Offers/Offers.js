@@ -56,7 +56,7 @@ const Offers = () => {
   return(
     <div className='offers-list'>
 
-      <h3>Choisissez votre offre</h3>
+      <h3>Nos offres</h3>
       
       <div className="subscription-card-container">
           {subscriptions.map((subscription, index) => (
