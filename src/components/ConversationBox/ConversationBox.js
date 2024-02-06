@@ -5,7 +5,8 @@ import { AuthContext } from "../../contexts/AuthContextProvider";
 import { useAPIContext } from '../../contexts/APIContextProvider';
 
 
-export const ConversationBox = ({getTabListsOfConversation,handleDisplayConversation,currentConversation,destinataireName}) => {
+export const ConversationBox = ({getTabListsOfConversation,handleDisplayConversation,currentConversation,destinataireName, handleDisplayUserList
+}) => {
 
   const {  userId } = useContext(AuthContext);
   const [conversationText, setConversationText] = useState('');
@@ -86,7 +87,7 @@ export const ConversationBox = ({getTabListsOfConversation,handleDisplayConversa
             { addMessage()}
           </div>
         </div>
-        <form onSubmit={handleSubmit} className='send-text-area' >
+        <form className='send-text-area' >
             <div className='chat-input-zone'>
               <textarea 
                 id="chat-input" 
@@ -96,7 +97,10 @@ export const ConversationBox = ({getTabListsOfConversation,handleDisplayConversa
               </textarea>
             </div>
             <div className="btn-send" >
-              <Button kind="primary" id="send-chat" >
+              <Button kind="secondary" id="chat-return" onClick={handleDisplayUserList} >
+                Retour
+              </Button>
+              <Button kind="primary" id="send-chat" onClick={handleSubmit}>
                 Envoyer
               </Button>
             </div>

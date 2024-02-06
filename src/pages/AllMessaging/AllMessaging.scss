@@ -64,3 +64,42 @@
     }
   }
 }
+
+
+
+// Tablette
+@media only screen and (max-width: 900px) {
+
+  .container-messenger div.grid-box-msg {
+    width: 80%;
+    border-radius: 15px;
+
+    aside.list-recipient.open-list-user {
+      width: 100% ;
+      ul,li {
+        width: 100%;
+      }
+    }
+
+    aside.list-recipient:not(.open-list-user)  {
+      display: none;
+      ul,li {
+        width: 100%;
+      }
+    }
+
+    div.conversation-zone-container {
+      width: 100%;
+      form.send-text-area .btn-send button.secondary#chat-return {
+        display: block;
+      }
+    }
+  }
+
+}
+
+// Tablette Mini + Portable
+@media (max-width: 767px) {
+
+
+}

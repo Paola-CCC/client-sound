@@ -1,6 +1,5 @@
 import React, { useCallback, useContext, useEffect, useState } from "react";
 import "./AllMessaging.scss";
-import { ContainerSidebarAndContent } from "../../components";
 import { ConversationBox } from "../../components/ConversationBox/ConversationBox";
 import { AuthContext } from "../../contexts/AuthContextProvider";
 import { useAPIContext } from "../../contexts/APIContextProvider";
@@ -18,8 +17,14 @@ const AllMessaging = () => {
   const [ count, setCount] = useState(0);
   const [ userSearchProf, setUserSearchProf] = useState([]);
   const [ userSearchClassic, setUserSearchClassic] = useState([]);
-  const [ isLoading, setIsLoading] = useState(null);
+  const [ isLoading, setIsLoading] = useState(true);
+  const [ canShowListUser, setCanShowListUser ] = useState(true);
 
+
+  const [viewportDimensions, setViewportDimensions] = useState({
+    width: window.innerWidth,
+    height: window.innerHeight,
+  });
 
   const strLcFirst = (value) => {
     return (value + "").charAt(0).toUpperCase() + value.substr(1);
@@ -63,6 +68,10 @@ const AllMessaging = () => {
         userOneId: userId,
         userProfessorId: elementFiltrer[0].destinataireId,
     });
+
+    if( elementFiltrer.length > 0 ){
+      setCanShowListUser(false);
+    }
 
   },[recipientList,userId]);
 
@@ -119,10 +128,31 @@ const AllMessaging = () => {
         }
 
     } catch (error) {
+      setIsLoading(false);
       console.error("text-error ", error);
 
     }
   }, [conversationAPI,userId]);
+
+  useEffect(() => {
+    // Fonction de gestionnaire de redimensionnement
+    const handleResize = () => {
+      setViewportDimensions({
+        width: window.innerWidth,
+        height: window.innerHeight,
+      });
+    };
+
+    // Ajouter un écouteur d'événement de redimensionnement lors du montage du composant
+    window.addEventListener('resize', handleResize);
+
+    // Nettoyer l'écouteur d'événement lors du démontage du composant
+    return () => {
+      window.removeEventListener('resize', handleResize);
+    };
+  }, []); // Assurez-vous de mettre une dépendance vide si vous souhaitez exécuter cela une seule fois après le rendu initial
+
+
 
   useEffect(() => {
 
@@ -135,12 +165,22 @@ const AllMessaging = () => {
     }
 
     setTimeout(() => {
+
       if( count === 0 && recipientList.length !== 0 ) {
         setCount((count) => count + 1);
-        checkMessages(recipientList[0].id,recipientList[0].username);
+        if( viewportDimensions.width >= 900  ) {
+          checkMessages(recipientList[0].id,recipientList[0].username);
+        }
+
       }
     }, 1000);
-  },[displayListRecipientClassic,displayListRecipientProfessor,checkMessages,userId,callAPIAppend,userRole,count,recipientList]);
+
+  },[displayListRecipientClassic,displayListRecipientProfessor,checkMessages,userId,callAPIAppend,userRole,count,recipientList, canShowListUser ,viewportDimensions.width]);
+
+
+
+
+
 
   return (
 
@@ -151,15 +191,15 @@ const AllMessaging = () => {
               <LoadingElements />
             )}
 
-            { (isLoading === false &&  recipientList.length === 0) && (
+            {/* { (isLoading === false &&  recipientList.length === 0) && (
               <div className="recipient-empty" >
                 <p> Il n'existe aucun message à afficher  </p>
               </div> 
-            )}
+            )} */}
 
-          { recipientList.length > 0  && (
+          { (recipientList.length > 0 && isLoading === false) && (
               <div className="grid-box-msg">
-                <aside className="list-recipient">
+                <aside className={`list-recipient ${ canShowListUser ? 'open-list-user' : null }`}>
                   <div>
                     <span> Mes contacts
                       { recipientList.length > 0 && ( 
@@ -176,26 +216,20 @@ const AllMessaging = () => {
                   </ul>
                 </aside>
 
-                <ConversationBox 
-                  getTabListsOfConversation={tabListsOfConversation}
-                  handleDisplayConversation={() => upDateMessagesConversation()}
-                  currentConversation={conversationID}
-                  destinataireName={destinataireName}
-                />
+                  {(canShowListUser === false || viewportDimensions.width >= 900 ) && (
+                        <ConversationBox 
+                        handleDisplayUserList={() => setCanShowListUser(!canShowListUser)}
+                        getTabListsOfConversation={tabListsOfConversation}
+                        handleDisplayConversation={() => upDateMessagesConversation()}
+                        currentConversation={conversationID}
+                        destinataireName={destinataireName}
+                      />
+                  )
+                }
               </div>
           )}
           </div>
-          
-
-
       </>
-
-
-
-
-
-
-    
   );
 };
 

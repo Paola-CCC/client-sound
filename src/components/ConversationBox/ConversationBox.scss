@@ -142,10 +142,13 @@
 
         > button {
           border-radius: 4px;
+          margin-left: 15px;
 
         }
-
+        
+        button.secondary#chat-return {
+          display: none;
+        }
       }
-
     }
   }
