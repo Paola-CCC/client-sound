@@ -335,15 +335,13 @@ const ForumTopicsList = () => {
                       Filter
                   </Button>
                 </div>
+                <div className='clear-all-sort'>
+                  <Button kind={"secondary"} disabled={ isAuthenticated ? false : true} onClick={() => setCanWeShowForm(true)}> 
+                    <FontAwesomeIcon icon={faPen} />
+                    Commenter
+                  </Button>
+                </div>
                 
-                { isAuthenticated && (
-                  <div className='clear-all-sort'>
-                    <Button kind={"secondary"} onClick={() => setCanWeShowForm(true)}> 
-                      <FontAwesomeIcon icon={faPen} />
-                      Commenter
-                    </Button>
-                  </div>
-                )}
           </div>
       )} 
 
