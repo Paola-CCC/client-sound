@@ -8,7 +8,7 @@ import {
   InputText,
 } from "../../common/Index";
 import TopicCard from "../../components/TopicCard/TopicCard";
-import { AuthContext } from "../../contexts/AuthContextProvider";
+import { useAuthContext } from "../../contexts/AuthContextProvider";
 import { Link } from "react-router-dom";
 import { useAPIContext } from "../../contexts/APIContextProvider";
 import { getformatDate } from "../../utils/Date";
@@ -26,7 +26,7 @@ const ForumTopicsList = () => {
   const [topicTitle, setTopicTitle] = useState("");
   const [topicDescription, setTopicDescription] = useState("");
   const [successCreatTopic, setSuccessCreatTopic] = useState(null);
-  const { userId } = useContext(AuthContext);
+  const { userId, isAuthenticated } = useAuthContext();
   const { forumAPI } = useAPIContext();
   const [isLoading, setIsLoading] = useState(true);
   const [optionsCategory, setOptionsCategory] = useState([{ value: "", label: "catégorie" }]);
@@ -335,12 +335,15 @@ const ForumTopicsList = () => {
                       Filter
                   </Button>
                 </div>
-                <div className='clear-all-sort'>
-                  <Button kind={"secondary"} onClick={() => setCanWeShowForm(true)}> 
-                    <FontAwesomeIcon icon={faPen} />
-                    Commenter
-                  </Button>
-                </div>
+                
+                { isAuthenticated && (
+                  <div className='clear-all-sort'>
+                    <Button kind={"secondary"} onClick={() => setCanWeShowForm(true)}> 
+                      <FontAwesomeIcon icon={faPen} />
+                      Commenter
+                    </Button>
+                  </div>
+                )}
           </div>
       )} 
 
