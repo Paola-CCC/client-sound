@@ -262,9 +262,9 @@ const ForumTopicsList = () => {
     return (
       <>
         <div className="topic-list">
-          {currentData ? currentData.map((e, index) => (
-
-              <Link to={`${e?.id}`} className="topic-list-link" key={index}>
+          {currentData.length > 0 ? currentData.map((e, index) => (
+            <>
+                 <Link to={`${e?.id}`} className="topic-list-link" key={index}>
                 <TopicCard
                   zone="forum"
                   username={
@@ -285,10 +285,12 @@ const ForumTopicsList = () => {
                   dislikes={e?.dislikesCount ? e?.dislikesCount : 0}
                 />
               </Link>
+            {currentData && <Pagination totalPages={totalPages} currentPage={currentPage} onPageChange={handlePageChange} />}
+
+            </>
           )) :
-            <h3>No forums were found !</h3>
+            <p> Il n'existe pas encore de sujets de Forum.</p>
           }
-          {currentData && <Pagination totalPages={totalPages} currentPage={currentPage} onPageChange={handlePageChange} />}
         </div>
 
       </>

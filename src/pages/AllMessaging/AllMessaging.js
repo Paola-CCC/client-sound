@@ -105,7 +105,7 @@ const AllMessaging = () => {
   const displayListRecipientClassic = useCallback(async () => {
     setIsLoading(true);
 
-    let datas = { userOneId: userId };
+    const datas = { userOneId: userId };
 
     try {
         setIsLoading(false);
@@ -135,7 +135,6 @@ const AllMessaging = () => {
   }, [conversationAPI,userId]);
 
   useEffect(() => {
-    // Fonction de gestionnaire de redimensionnement
     const handleResize = () => {
       setViewportDimensions({
         width: window.innerWidth,
@@ -143,14 +142,12 @@ const AllMessaging = () => {
       });
     };
 
-    // Ajouter un écouteur d'événement de redimensionnement lors du montage du composant
     window.addEventListener('resize', handleResize);
 
-    // Nettoyer l'écouteur d'événement lors du démontage du composant
     return () => {
       window.removeEventListener('resize', handleResize);
     };
-  }, []); // Assurez-vous de mettre une dépendance vide si vous souhaitez exécuter cela une seule fois après le rendu initial
+  }, []); 
 
 
 
@@ -178,24 +175,20 @@ const AllMessaging = () => {
   },[displayListRecipientClassic,displayListRecipientProfessor,checkMessages,userId,callAPIAppend,userRole,count,recipientList, canShowListUser ,viewportDimensions.width]);
 
 
-
-
-
-
   return (
 
       <>
           <div className="container-messenger">
 
-            { isLoading  && (
-              <LoadingElements />
-            )}
+          { isLoading  && (
+            <LoadingElements />
+          )}
 
-            {/* { (isLoading === false &&  recipientList.length === 0) && (
-              <div className="recipient-empty" >
-                <p> Il n'existe aucun message à afficher  </p>
-              </div> 
-            )} */}
+          { (isLoading === false &&  recipientList.length === 0) && (
+            <div className="recipient-empty" >
+              <p> Il n'existe aucun message à afficher.</p>
+            </div> 
+          )}
 
           { (recipientList.length > 0 && isLoading === false) && (
               <div className="grid-box-msg">
@@ -216,16 +209,15 @@ const AllMessaging = () => {
                   </ul>
                 </aside>
 
-                  {(canShowListUser === false || viewportDimensions.width >= 900 ) && (
-                        <ConversationBox 
-                        handleReturnConversation={() => setCanShowListUser(!canShowListUser)}
-                        getTabListsOfConversation={tabListsOfConversation}
-                        handleDisplayConversation={() => upDateMessagesConversation()}
-                        currentConversation={conversationID}
-                        destinataireName={destinataireName}
-                      />
-                  )
-                }
+                {(canShowListUser === false || viewportDimensions.width >= 900 ) && (
+                    <ConversationBox 
+                      handleReturnConversation={() => setCanShowListUser(!canShowListUser)}
+                      getTabListsOfConversation={tabListsOfConversation}
+                      handleDisplayConversation={() => upDateMessagesConversation()}
+                      currentConversation={conversationID}
+                      destinataireName={destinataireName}
+                    />
+                )}
               </div>
           )}
           </div>

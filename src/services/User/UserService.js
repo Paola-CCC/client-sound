@@ -66,7 +66,7 @@ class UserService
     async show(userId)
    {
        try {
-           const response = await this.httpClient.get(`${this.URL}/users/${userId}`);
+           const response = await this.httpClient.get(`${this.URL}/user/${userId}`);
            if (response.status >= 200 && response.status <= 299) {
                return response ;
            } else {
