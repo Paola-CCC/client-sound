@@ -48,6 +48,10 @@ const ForumTopicsList = () => {
     setCanWeShowForm(false);
     setTopicDescription("");
     setSuccessCreatTopic("");
+    setSelectedCategoryAsk("");
+    setSelectedCategory('');
+    setTopicTitle("");
+    setSearchValue('');
     window.location.reload(true);
   };
 
@@ -79,6 +83,8 @@ const ForumTopicsList = () => {
       setTopicDescription("");
       setSuccessCreatTopic("");
       displayData();
+      setSelectedCategoryAsk("");
+      setTopicTitle("");
       setTimeout(() => {
         setSuccessCreatTopic(null);
       }, 3000);
@@ -138,7 +144,7 @@ const ForumTopicsList = () => {
   const getForumAfterSearch = async () => {
     const objValue = {
         categoryId: selectedCategory !== "" ? parseInt(selectedCategory) : "" ,
-        subjectName: topicTitle
+        subjectName: searchValue
     }
 
     try {
@@ -204,7 +210,7 @@ const ForumTopicsList = () => {
   const creatForumQuestion = () => {
     return (
       <div className="topic-container-form">
-        <form className="form-topic" onSubmit={handleSubmitNewTopic}>
+        <form className="form-topic" >
           <h4> Poser une question </h4>
           <div className="mb-3">
             <InputText
@@ -244,7 +250,9 @@ const ForumTopicsList = () => {
             <Button kind="secondary" onClick={handleCancel}>
               Retour
             </Button>
-            <Button kind="primary">Envoyer</Button>
+            <Button kind="primary" onClick={handleSubmitNewTopic}>
+              Envoyer
+            </Button>
           </div>
         </form>
         {successCreatTopic !== null && successCreatTopic === false && (
@@ -263,8 +271,8 @@ const ForumTopicsList = () => {
       <>
         <div className="topic-list">
           {currentData.length > 0 ? currentData.map((e, index) => (
-            <>
-                 <Link to={`${e?.id}`} className="topic-list-link" key={index}>
+            
+                <Link to={`${e?.id}`} className="topic-list-link" key={index}>
                 <TopicCard
                   zone="forum"
                   username={
@@ -285,12 +293,12 @@ const ForumTopicsList = () => {
                   dislikes={e?.dislikesCount ? e?.dislikesCount : 0}
                 />
               </Link>
-            {currentData && <Pagination totalPages={totalPages} currentPage={currentPage} onPageChange={handlePageChange} />}
 
-            </>
+            
           )) :
             <p> Il n'existe pas encore de sujets de Forum.</p>
           }
+        { currentData.length > 0 && <Pagination totalPages={totalPages} currentPage={currentPage} onPageChange={handlePageChange} />}
         </div>
 
       </>
