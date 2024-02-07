@@ -1,4 +1,4 @@
-import React, { useCallback, useContext, useEffect, useRef, useState } from "react";
+import React, { useCallback, useEffect, useRef, useState } from "react";
 import "./ForumTopicsList.scss";
 import { ContainerSidebarAndContent } from "../../components";
 import {

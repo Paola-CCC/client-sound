@@ -20,7 +20,7 @@ div.global-homepage {
 
         div.zone-images {
           display: grid;
-          grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+          grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
           gap: 20px;
 
           figure.img-news {
@@ -78,7 +78,7 @@ div.global-homepage {
  
           ul {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
             gap: 20px;
             margin-bottom: 75px;
             padding: 0;
