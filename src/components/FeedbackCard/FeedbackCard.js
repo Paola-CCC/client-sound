@@ -1,5 +1,4 @@
 import './FeedbackCard.scss';
-// import RatingStars from '../RatingStars/RatingStars';
 
 const FeedbackCard = ({userName ,date, srcPictureUser , altPicture , textContent}) => {
 
