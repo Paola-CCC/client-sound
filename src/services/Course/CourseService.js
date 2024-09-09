@@ -1,124 +1,121 @@
-import AxiosClient from "../AxiosClient";
+import {httpClient} from "../httpClient";
 
-class CourseService {
-  
-  constructor() {
-    this.URL = process.env.REACT_APP_API_URL;
-    this.httpClient = AxiosClient;
-  }
-
-  async showAll() {
-    try {
-      const response = await this.httpClient.get(`${this.URL}/courses`);
-      if (response.status >= 200 && response.status <= 299) {
-        return response.data;
-      } else {
-        console.log("error message ", response);
-      }
-    } catch (error) {
-      console.error(error);
+export const showAll = async () => {
+  try {
+    const response = await httpClient.get(`/courses`);
+    if (response.status >= 200 && response.status <= 299) {
+      return response.data;
+    } else {
+      console.log('Erreur :', response);
     }
+  } catch (error) {
+    console.error('Erreur lors de la récupération des cours :', error);
   }
+};
 
-
-  async show(id) {
-    try {
-      const response = await this.httpClient.get(`${this.URL}/courses/${id}`);
-      if (response.status >= 200 && response.status <= 299) {
-        return response.data;
-      } else {
-        console.log("error message ", response);
-      }
-    } catch (error) {
-      console.error(error);
+export const show = async (id) => {
+  try {
+    const response = await httpClient.get(`/courses/${id}`);
+    if (response.status >= 200 && response.status <= 299) {
+      return response.data;
+    } else {
+      console.log('Erreur :', response);
     }
+  } catch (error) {
+    console.error('Erreur lors de la récupération du cours :', error);
   }
+};
 
-  async searching(data) {
-    try {
-      const response = await this.httpClient.post(`${this.URL}/courses/search`,data);
-      if (response.status >= 200 && response.status <= 299) {
-        return response.data;
-      } else {
-        console.log("error message ", response);
-      }
-    } catch (error) {
-      console.error(error);
+export const searching = async (data) => {
+  try {
+    const response = await httpClient.post(`/courses/search`, data);
+    if (response.status >= 200 && response.status <= 299) {
+      return response.data;
+    } else {
+      console.log('Erreur :', response);
     }
+  } catch (error) {
+    console.error('Erreur lors de la recherche de cours :', error);
   }
+};
 
-  // ESPACE D'APPRENTISSAGE
-  async showCourseByUser(userId) {
-    try {
-      const response = await this.httpClient.get(`${this.URL}/progression-student/${userId}`);
-      if (response.status >= 200 && response.status <= 299) {
-        return response.data;
-      } else {
-        console.log("error message ", response);
-      }
-    } catch (error) {
-      console.error(error);
+export const showCourseByUser = async (userId) => {
+  try {
+    const response = await httpClient.get(`/progression-student/${userId}`);
+    if (response.status >= 200 && response.status <= 299) {
+      return response.data;
+    } else {
+      console.log('Erreur :', response);
     }
+  } catch (error) {
+    console.error('Erreur lors de la récupération des cours par utilisateur :', error);
   }
+};
 
-  // ESPACE DE SUIVIE PROF
-  async showCourseListByProf(profId)
-  {
-    try {
-      const response = await this.httpClient.get(`${this.URL}/courses/professors/${profId}`);
-      if (response.status >= 200 && response.status <= 299) {
-        return response.data;
-      } else {
-        console.log("error message ", response);
-      }
-    } catch (error) {
-      console.error(error);
+export const showCourseListByProf = async (profId) => {
+  try {
+    const response = await httpClient.get(`/courses/professors/${profId}`);
+    if (response.status >= 200 && response.status <= 299) {
+      return response.data;
+    } else {
+      console.log('Erreur :', response);
     }
+  } catch (error) {
+    console.error('Erreur lors de la récupération des cours par professeur :', error);
   }
+};
 
-  // Trie des cours avec un instrument
-  async showListCourseByInstrument(instrumentName)
-  {
-    try {
-      const response = await this.httpClient.get(`${this.URL}/courses/instruments/${instrumentName}`);
-      if (response.status >= 200 && response.status <= 299) {
-        return response;
-      } else {
-        console.log("error message ", response);
-      }
-    } catch (error) {
-      console.error(error);
+export const showListCourseByInstrument = async (instrumentName) => {
+  try {
+    const response = await httpClient.get(`/courses/instruments/${instrumentName}`);
+    if (response.status >= 200 && response.status <= 299) {
+      return response.data;
+    } else {
+      console.log('Erreur :', response);
     }
+  } catch (error) {
+    console.error('Erreur lors de la récupération des cours par instrument :', error);
   }
+};
 
-  // récuperer les documents par cours
-  async showCourseFiles(courseId)
-  {
-    try {
-      const response = await this.httpClient.get(`${this.URL}/course/${courseId}/fileuploads`);
-
-      if (response.status >= 200 && response.status <= 299) {
-        return response;
-      } else {
-        console.log("error message ", response);
-      }
-    } catch (error) {
-      console.error(error);
+export const showCourseFiles = async (courseId) => {
+  try {
+    const response = await httpClient.get(`/course/${courseId}/fileuploads`);
+    if (response.status >= 200 && response.status <= 299) {
+      return response;
+    } else {
+      console.log('Erreur :', response);
     }
+  } catch (error) {
+    console.error('Erreur lors de la récupération des fichiers de cours :', error);
   }
+};
 
-  async delete(courseId) {
-    try {
-      const response = await this.httpClient.delete(`${this.URL}/courses/${courseId}`);
-      if (response.status >= 200 && response.status <= 299) {
-        return response;
-      } else {
-        console.log("error message ", response);
-      }
-    } catch (error) {
-      console.error(error);
+export const deleteCourse = async (courseId) => {
+  try {
+    const response = await httpClient.delete(`/courses/${courseId}`);
+    if (response.status >= 200 && response.status <= 299) {
+      return response.data;
+    } else {
+      console.log('Erreur :', response);
     }
+  } catch (error) {
+    console.error('Erreur lors de la suppression du cours :', error);
   }
+};
+
+
+
+const CourseService = {
+  showAll,
+  show,
+  searching,
+  showCourseByUser,
+  showCourseListByProf,
+  showListCourseByInstrument,
+  showCourseFiles,
+  delete: deleteCourse
+
 }
 
 export default CourseService;

@@ -11,16 +11,16 @@ const APIdatasProvider = ({children}) => {
 
     const contextValue = useMemo(
       () => ({
-        courseAPI : new services.CourseService(),
-        commentAPI: new services.CommentService(),
-        messageAPI: new services.MessageService(),
-        conversationAPI: new services.ConversationService(),
-        forumAPI: new services.ForumService(),
-        answerAPI: new services.AnswerService(),
-        likeAPI: new services.LikeService(),
-        subscriptionAPI: new services.SubscriptionService(),
-        userProgressionAPI : new services.ProgressionService(),
-        quizzAPI: new services.QuizzService()
+        courseAPI : services.CourseService,
+        commentAPI: services.CommentService,
+        messageAPI: services.MessageService,
+        conversationAPI: services.ConversationService,
+        forumAPI: services.ForumService,
+        answerAPI: services.AnswerService,
+        likeAPI: services.LikeService,
+        subscriptionAPI: services.SubscriptionService,
+        userProgressionAPI : services.ProgressionService,
+        quizzAPI: services.QuizzService
       }),
       []
     );

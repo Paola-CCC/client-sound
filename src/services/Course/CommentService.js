@@ -1,57 +1,50 @@
-import AxiosClient from "../AxiosClient";
+import {httpClient} from "../httpClient";
 
-class CommentService {
 
-    constructor() {
-        this.URL = process.env.REACT_APP_API_URL;
-        this.httpClient = AxiosClient;
+
+export const showAllComments = async (courseId) => {
+    try {
+      const response = await httpClient.get(`/courses/${courseId}/comments`);
+      if (response.status >= 200 && response.status <= 299) {
+        return response.data;
+      } else {
+        console.log('Erreur :', response);
+      }
+    } catch (error) {
+      console.error('Erreur lors de la récupération des commentaires :', error);
     }
-
-    async showAll(courseId)
-    {
-        try {
-            const response = await this.httpClient.get(`${this.URL}/courses/${courseId}/comments`);
-            if (response.status >= 200 && response.status <= 299) {
-                return response ;
-            } else {
-                console.log('error message ', response)
-            }
-        } catch (error) {
-            console.error(error)
-        }
+  };
+  
+  export const addComment = async (courseId, userId, data) => {
+    try {
+      const response = await httpClient.post(`/courses/${courseId}/user/${userId}/comment`, data);
+      if (response.status >= 200 && response.status <= 299) {
+        return response.data;
+      } else {
+        console.log('Erreur :', response);
+      }
+    } catch (error) {
+      console.error('Erreur lors de l\'ajout du commentaire :', error);
     }
-
-    //OK
-    async addComment(courseId, userId, data)
-    {
-        try {
-            const response = await this.httpClient.post(`${this.URL}/courses/${courseId}/user/${userId}/comment`, data );
-            if (response.status >= 200 && response.status <= 299) {
-                return response ;
-            } else {
-                console.log('error message ', response)
-            }
-        } catch (error) {
-            console.error(error)
-        }
+  };
+  
+  export const deleteComment = async (courseId, userId, commentId) => {
+    try {
+      const response = await httpClient.delete(`/courses/${courseId}/user/${userId}/comment/${commentId}`);
+      if (response.status >= 200 && response.status <= 299) {
+        return response.data;
+      } else {
+        console.log('Erreur :', response);
+      }
+    } catch (error) {
+      console.error('Erreur lors de la suppression du commentaire :', error);
     }
+  };
 
-    //OK
-    async deleteComment(courseId , userId , commentId)
-    {
-        try {
-            const response = await this.httpClient.delete(`${this.URL}/courses/${courseId}/user/${userId}/comment/${commentId}`);
-            if (response.status >= 200 && response.status <= 299) {
-                return response ;
-            } else {
-                console.log('error message ', response)
-            }
-        } catch (error) {
-            console.error(error)
-        }
-    }
-    
-
+const CommentService = {
+    showAllComments,
+    addComment,
+    deleteComment
 }
 
 export default CommentService;

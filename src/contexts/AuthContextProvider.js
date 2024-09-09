@@ -74,7 +74,7 @@ const AuthContextProvider = ({children}) => {
         handleLogout,
         navbarMobileIsOpen,
         setNavbarMobileIsOpen,
-        userAPI: new services.UserService()
+        userAPI: services.UserService
       }),
       [isAuthenticated, userId, userRole , username ,handleLogout ,navbarMobileIsOpen]
     );

@@ -22,7 +22,7 @@ const Login = () => {
     };
 
     try {
-      const response = await userAPI.loginUser( element ) ;
+      const response = await userAPI.login( element ) ;
         if (response && response.data.token !== '' && response.data.token !== undefined ) {
           let jwtDecoded = jwt_decode(response.data.token);
           localStorage.setItem("jwt", JSON.stringify(response.data.token));

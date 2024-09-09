@@ -1,24 +1,19 @@
-import AxiosClient from "../AxiosClient";
+import { httpClient } from "../httpClient";
 
-class SubscriptionService {
-
-    constructor() {
-        this.URL = process.env.REACT_APP_API_URL;
-        this.httpClient = AxiosClient;
+export const showAll = async () => {
+  try {
+    const response = await httpClient.get(`/subscriptions`);
+    if (response.status >= 200 && response.status <= 299) {
+      return response.data;
+    } else {
+      console.log("error message ", response);
     }
+  } catch (error) {
+    console.error(error);
+  }
+};
 
-    async showAll() {
-        try {
-          const response = await this.httpClient.get(`${this.URL}/subscriptions`);
-          if (response.status >= 200 && response.status <= 299) {
-            return response.data;
-          } else {
-            console.log("error message ", response);
-          }
-        } catch (error) {
-          console.error(error);
-        }
-    }
-}
-
+const SubscriptionService = {
+  showAll
+};
 export default SubscriptionService;

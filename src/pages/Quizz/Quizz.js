@@ -41,6 +41,7 @@ const Quizz = () => {
         setQuizzQuestion(response.data[0].question);
       } catch (error) {
         console.log('Error loading quizzes', error)
+        setErrorMessage('')
       }
     };
     getQuizz();

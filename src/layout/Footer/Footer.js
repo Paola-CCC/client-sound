@@ -20,16 +20,24 @@ const Footer = () => {
       </ul>
       <ul className="list">
         <li>
-          <a href="https://www.facebook.com/salineroyaleacademy/"> <FontAwesomeIcon icon={faFacebook} /></a>
+          <a href="https://www.facebook.com/salineroyaleacademy/"> 
+          <FontAwesomeIcon icon={faFacebook} />
+          </a>
         </li>
         <li>
-          <a href="https://www.instagram.com/salineroyaleacademy/?hl=fr">  <FontAwesomeIcon icon={faInstagram} /></a>
+          <a href="https://www.instagram.com/salineroyaleacademy/?hl=fr">  
+          <FontAwesomeIcon icon={faInstagram} />
+          </a>
         </li>
         <li>
-          <a href="https://www.linkedin.com/company/saline-royale-academy/?originalSubdomain=fr"> <FontAwesomeIcon icon={faLinkedin} /></a>
+          <a href="https://www.linkedin.com/company/saline-royale-academy/?originalSubdomain=fr"> 
+          <FontAwesomeIcon icon={faLinkedin} />
+          </a>
         </li>
         <li>
-          <a href="https://www.youtube.com/channel/UCFEULSLZCpnrODoKJdqYVEg"> <FontAwesomeIcon icon={faYoutube} /></a>
+          <a href="https://www.youtube.com/channel/UCFEULSLZCpnrODoKJdqYVEg"> 
+          <FontAwesomeIcon icon={faYoutube} />
+          </a>
         </li>
       </ul>
     </footer>

@@ -39,7 +39,7 @@ const Register = () => {
       instruments: selectedOptions,
     };
 
-    const response = await userAPI.registerUser(usersData);
+    const response = await userAPI.register(usersData);
 
     if (
       response.data.token &&

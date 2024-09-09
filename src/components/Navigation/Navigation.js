@@ -1,6 +1,5 @@
 import React, { useContext, useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import IconHome from '../../assets/svg/IconHome';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { AuthContext } from '../../contexts/AuthContextProvider';
 import './Navigation.scss';
@@ -120,9 +119,6 @@ return (
       </div> 
     </nav>
 );}
-
-Navigation.propTypes = {};
-
-Navigation.defaultProps = {};
+;
 
 export default Navigation;

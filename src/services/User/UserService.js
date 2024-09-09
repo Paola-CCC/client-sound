@@ -1,94 +1,93 @@
-import AxiosClient from "../AxiosClient";
+import { httpClient, httpClientFile } from "../httpClient";
 
-class UserService 
-{
 
-    constructor() {
-        this.URL = process.env.REACT_APP_API_URL;
-        this.httpClient = AxiosClient;
+export const login = async (dataUser) => {
+  try {
+    const response = await httpClient.post(`/api/login_check`, dataUser);
+    if (response.status >= 200 && response.status <= 299) {
+      return response;
+    } else {
+      console.log("error message ", response);
     }
-    //OK
-    async loginUser (dataUser) {
-        try {
-            const response = await this.httpClient.post(`${this.URL}/api/login_check`, dataUser);
-            if (response.status >= 200 && response.status <= 299) {
-                return response ;
-            } else {
-                console.log('error message ', response)
-            }
-        } catch (error) {
-            console.error(error)
-        }
-    };
-    //OK
-    async registerUser (dataUser) {
-        try {
-            const response = await this.httpClient.post(`${this.URL}/api/register`, dataUser);
-            if (response.status >= 200 && response.status <= 299) {
-                return response ;
-            } else {
-                console.log('error message ', response)
-            }
-        } catch (error) {
-            console.error(error)
-        }
-    };
+  } catch (error) {
+    console.error(error);
+  }
+};
 
-    //OK
-    async updateUser(endpoint, dataUser) {
-        try {
-            const response = await this.httpClient.put(`${this.URL}${endpoint}`, dataUser);
-            if (response.status >= 200 && response.status <= 299) {
-                return response ;
-            } else {
-                console.log('error message ', response)
-            }
-        } catch (error) {
-            console.error(error)
-        }
+export const register = async (dataUser) => {
+  try {
+    const response = await httpClient.post(`/api/register`, dataUser);
+    if (response.status >= 200 && response.status <= 299) {
+      return response;
+    } else {
+      console.log("error message ", response);
     }
+  } catch (error) {
+    console.error(error);
+  }
+};
 
-    async updateUserPicture(endpoint, userPicture){
-        try {
-            const response = await this.httpClient.postFile(`${this.URL}${endpoint}`, userPicture);
-            if (response.status >= 200 && response.status <= 299) {
-                return response ;
-            } else {
-                console.log('error message ', response)
-            }
-        } catch (error) {
-            console.error(error)
-        }
-    }
 
-    
-    //OK
-    async show(userId)
-   {
-       try {
-           const response = await this.httpClient.get(`${this.URL}/user/${userId}`);
-           if (response.status >= 200 && response.status <= 299) {
-               return response ;
-           } else {
-               console.log('error message ', response)
-           }
-       } catch (error) {
-           console.error(error)
-       }
-   }
-    async delete(userId)
-    {
-        try {
-            const response = await this.httpClient.delete(`${this.URL}/users/${userId}`);
-            if (response.status >= 200 && response.status <= 299) {
-                return response ;
-            } else {
-                console.log('error message ', response)
-            }
-        } catch (error) {
-            console.error(error)
-        }
+export const updateUser = async (userId, dataUser) => {
+  try {
+    const response = await httpClient.put(`/users/${userId}/edit`, dataUser);
+    if (response.status >= 200 && response.status <= 299) {
+      return response;
+    } else {
+      console.log("error message ", response);
     }
-}
+  } catch (error) {
+    console.error(error);
+  }
+};
+
+export const updateUserPicture = async (endpoint, userPicture) => {
+  try {
+    const response = await httpClientFile.post(`${endpoint}`, userPicture);
+    if (response.status >= 200 && response.status <= 299) {
+      return response;
+    } else {
+      console.log("error message ", response);
+    }
+  } catch (error) {
+    console.error(error);
+  }
+};
+
+
+export const show = async (userId) => {
+  try {
+    const response = await httpClient.get(`/user/${userId}`);
+    if (response.status >= 200 && response.status <= 299) {
+      return response;
+    } else {
+      console.log("error message ", response);
+    }
+  } catch (error) {
+    console.error(error);
+  }
+};
+
+export const deleteUser = async (userId) => {
+  try {
+    const response = await httpClient.delete(`/users/${userId}`);
+    if (response.status >= 200 && response.status <= 299) {
+      return response;
+    } else {
+      console.log("error message ", response);
+    }
+  } catch (error) {
+    console.error(error);
+  }
+};
+
+const UserService = {
+  login,
+  register,
+  updateUser,
+  updateUserPicture,
+  show,
+  delete: deleteUser
+};
 
 export default UserService;

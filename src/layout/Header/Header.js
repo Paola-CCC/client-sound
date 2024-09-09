@@ -34,8 +34,8 @@ const Header = () => {
               <Navigation />
             </>
             ):
-          <NavigationResponsive />
-        }
+            <NavigationResponsive />
+          }
         </header>
         {(location.pathname === "/" || location.pathname === "courses") && (
               <HomeHero />               

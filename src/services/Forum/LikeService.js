@@ -1,53 +1,54 @@
-import AxiosClient from "../AxiosClient";
+import { httpClient } from "../httpClient";
 
-class LikeService {
-
-    constructor() {
-        this.URL = process.env.REACT_APP_API_URL;
-        this.httpClient = AxiosClient;
+const getLikedByUser = async (data) => {
+  try {
+    const response = await httpClient.get(
+      `/forum/${data.forumId}/like/${data.userId}`
+    );
+    if (response.status >= 200 && response.status <= 299) {
+      return response.data;
+    } else {
+      console.log("Erreur :", response);
     }
+  } catch (error) {
+    console.error("Erreur lors de la récupération des likes :", error);
+  }
+};
 
-    async getLikedByUser(data) {
-        try {
-            const response = await this.httpClient.get(`${this.URL}/forum/${data.forumId}/like/${data.userId}`);
-            if (response.status >= 200 && response.status <= 299) {
-                return response.data;
-            } else {
-                console.log('error message ', response)
-            }
-        } catch (error) {
-            console.error(error)
-        }
+const addLike = async (data) => {
+  try {
+    const response = await httpClient.get(
+      `/like/${data.userInt}/forum/${data.forumId}`
+    );
+    if (response.status >= 200 && response.status <= 299) {
+      return response.data;
+    } else {
+      console.log("Erreur :", response);
     }
+  } catch (error) {
+    console.error("Erreur lors de l'ajout du like :", error);
+  }
+};
 
-
-    async addLike(data) {
-        try {
-            const response = await this.httpClient.get(`${this.URL}/like/${data.userInt}/forum/${data.forumId}`);
-            if (response.status >= 200 && response.status <= 299) {
-                return response.data;
-            } else {
-                console.log('error message ', response)
-            }
-        } catch (error) {
-            console.error(error)
-        }
+const addDislike = async (data) => {
+  try {
+    const response = await httpClient.get(
+      `/dislike/${data.userInt}/forum/${data.forumId}`
+    );
+    if (response.status >= 200 && response.status <= 299) {
+      return response.data;
+    } else {
+      console.log("Erreur :", response);
     }
+  } catch (error) {
+    console.error("Erreur lors de l'ajout du dislike :", error);
+  }
+};
 
-    async addDislike(data) {
-        try {
-            // /like/{userId}/forum/{id}
-            const response = await this.httpClient.get(`${this.URL}/dislike/${data.userInt}/forum/${data.forumId}`);
-            if (response.status >= 200 && response.status <= 299) {
-                // console.log({response})
-                return response.data;
-            } else {
-                console.log('error message ', response)
-            }
-        } catch (error) {
-            console.error(error)
-        }
-    }
-}
+const LikeService = {
+  getLikedByUser,
+  addLike,
+  addDislike,
+};
 
 export default LikeService;

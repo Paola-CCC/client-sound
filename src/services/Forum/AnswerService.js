@@ -1,53 +1,49 @@
-import AxiosClient from "../AxiosClient";
+import { httpClient } from "../httpClient";
 
-class AnswerService {
-    
-    constructor() {
-        this.URL = process.env.REACT_APP_API_URL;
-        this.httpClient = AxiosClient;
+export const addAnswerForum = async (forumId, data) => {
+  try {
+    const response = await httpClient.post(`/forums/${forumId}/new-response`, data);
+    if (response.status >= 200 && response.status <= 299) {
+      return response.data;
+    } else {
+      console.log('Erreur :', response);
     }
+  } catch (error) {
+    console.error('Erreur lors de l\'ajout de la réponse :', error);
+  }
+};
 
-    async addAnswerForum(forumId ,data)
-    {
-        try {
-            const response = await this.httpClient.post(`${this.URL}/forums/${forumId}/new-response`,data);
-            if (response.status >= 200 && response.status <= 299) {
-                return response.data ;
-            } else {
-                console.log('error message ', response)
-            }
-        } catch (error) {
-            console.error(error)
-        }
+export const showCommentsOfCourse = async (forumId) => {
+  try {
+    const response = await httpClient.get(`/forums/${forumId}/responses`);
+    if (response.status >= 200 && response.status <= 299) {
+      return response.data;
+    } else {
+      console.log('Erreur :', response);
     }
+  } catch (error) {
+    console.error('Erreur lors de la récupération des commentaires du cours :', error);
+  }
+};
 
-
-    async showCommentsOfCourse(forumId)
-    {
-        try {
-            const response = await this.httpClient.get(`${this.URL}/forums/${forumId}/responses`);
-            if (response.status >= 200 && response.status <= 299) {
-                return response.data ;
-            } else {
-                console.log('error message ', response)
-            }
-        } catch (error) {
-            console.error(error)
-        }
+export const deleteResponse = async (responseId) => {
+  try {
+    const response = await httpClient.delete(`/response/${responseId}`);
+    if (response.status >= 200 && response.status <= 299) {
+      return response.data;
+    } else {
+      console.log('Erreur :', response);
     }
+  } catch (error) {
+    console.error('Erreur lors de la suppression de la réponse :', error);
+  }
+};
 
-    async deleteResponse(responseId)
-    {
-        try {
-            const response = await this.httpClient.delete(`${this.URL}/response/${responseId}`);
-            if (response.status >= 200 && response.status <= 299) {
-                return response.data ;
-            } else {
-                console.log('error message ', response)
-            }
-        } catch (error) {
-            console.error(error)
-        }
-    }
-}
-export default AnswerService ;
+
+const AnswerService = {
+    addAnswerForum,
+    showCommentsOfCourse,
+    deleteResponse
+};
+
+export default AnswerService;
