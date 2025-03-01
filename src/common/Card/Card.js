@@ -5,7 +5,7 @@ import { faPlay } from "@fortawesome/free-solid-svg-icons";
 import { Link } from "react-router-dom";
 import RatingStars from "../../components/RatingStars/RatingStars";
 
-const Card = ({ imgSrc, imgAlt, professorName, title, rating, shortDescription ,linkTo }) => {
+const Card = ({ imgSrc, imgAlt, professorName, title, rating,linkTo }) => {
 
 
   return (
@@ -29,9 +29,6 @@ const Card = ({ imgSrc, imgAlt, professorName, title, rating, shortDescription ,
           <span >{title}</span>
         </div>
 
-        <div className="card-description">
-          <p>{shortDescription}</p>
-        </div>
         <hr />
         <div className="cours-infos-little">
           <small>de {professorName}</small>

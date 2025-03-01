@@ -179,13 +179,13 @@ const CourseById = () => {
 
   const ShowPersoCourses = () => {
     let globalData = Object.values(courseDatas).map((value, index) => {
-      let professor = `${value.professor.firstName} ${value.professor.lastName}`;
+      let professorName = `${value.professor.firstName} ${value.professor.lastName}`;
       return (
         <CardPersoCourseById
           key={index}
           handleShowMore={handleShowMore}
-          professorName={professor}
-          photo={value.photo}
+          professorName={professorName}
+          photo={value.professor.photo}
           canShowMore={canShowMore}
           biographyUserProf={value.professor.biography}
           handleOpenConversation={() => handleClickMessage(value.professor.id)}

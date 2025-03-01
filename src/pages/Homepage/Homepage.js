@@ -92,11 +92,10 @@ const Homepage = () => {
                       <li key={index} >
                         <Card
                           id={value.id}
-                          imgSrc={value.photo !== '' ? value.photo :"https://i1.sndcdn.com/artworks-000236202373-bjmc48-t500x500.jpg"}
+                          imgSrc={value.photo}
                           imgAlt="Cours de Violon"
                           title={value.title}
                           rating={value.ratingScore}
-                          shortDescription={value.preview}
                           longDescription={value.description}
                           professorName={`${value.professor.firstName} ${value.professor.lastName}`}
                           linkTo={`/courses/${value.id}`}

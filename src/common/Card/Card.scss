@@ -36,7 +36,10 @@ ul li .card {
       }
     }
 
-    div.card-title span {
+    div.card-title {
+      padding: 12px 0;
+
+      span {
         text-decoration: none;
         font-weight: 600;
         color: black;
@@ -47,17 +50,12 @@ ul li .card {
         overflow: hidden;
         text-overflow: ellipsis; 
     }
+    } 
 
     .card-description {
       font-size: 1rem;
       color: #545454;
       margin: 0;
-      p {
-        white-space: nowrap; 
-        width: 100%; 
-        overflow: hidden;
-        text-overflow: ellipsis; 
-      }
     }
     hr {
       margin: 5px 0;

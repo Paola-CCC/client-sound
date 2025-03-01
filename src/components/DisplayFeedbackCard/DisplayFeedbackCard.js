@@ -10,7 +10,7 @@ const DisplayFeedbackCard = () => {
 
   const [data, setData] = React.useState([]);
 
-  const baseURL = "https://api-sound-project.com";
+  const baseURL = process.env.REACT_APP_API_URL;
 
   useEffect(() => {
     axios.get(baseURL + '/review' ).then((response) => {
