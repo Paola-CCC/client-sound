@@ -16,7 +16,7 @@ const DisplayFeedbackCard = () => {
     axios.get(baseURL + '/review' ).then((response) => {
       setData(response.data);
     });
-  }, []);
+  }, [baseURL]);
 
    
   const settings = {
@@ -50,7 +50,7 @@ const DisplayFeedbackCard = () => {
          { data?.map((e,i)=> (
             <div key={i}>
               <FeedbackCard 
-                userName={e.author.firstName + ' ' + e.author.lastName }
+                userName={e.author.firstName + ' ' + e.author.lastName.charAt(0).toUpperCase()+ '. '  }
                 srcPictureUser={e.author.photo}
                 textContent={e.contentText}
                 date={e.createdAt}

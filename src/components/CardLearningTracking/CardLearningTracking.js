@@ -25,7 +25,7 @@ const CardLearningTracking = ({ valueProgress, imgSrc, imgAlt, professorName,rat
         </ Link> 
         <div className="card-title-description">
           <span>{title}</span>
-          <span>{shortDescription}</span>
+          {/* <span>{shortDescription}</span> */}
         </div>
         <div className='progressbar'>
           <progress value={valueProgress} max="100" style={{width: '85%', height: '12px'}}></progress>

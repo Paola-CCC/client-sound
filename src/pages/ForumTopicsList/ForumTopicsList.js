@@ -135,6 +135,8 @@ const ForumTopicsList = () => {
       ...transformedData
     ];
     setOptionsCategoryAsk(finalData);
+    setOptionsCategory(finalData);
+
 
   } catch (error) {
     console.error("Error fetching category data:", error);

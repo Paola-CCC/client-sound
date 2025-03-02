@@ -169,7 +169,6 @@ const ListLearningTracking = () =>  {
                 title={value?.title}
                 valueProgress={value?.percentageWatched ? value?.percentageWatched  : '0'}
                 rating={value?.ratingScore}
-                shortDescription={value?.preview}
                 longDescription={value?.description}
                 professorName={`${value?.professor?.firstName} ${value?.professor?.lastName}`}
                 linkTo={`/courses/${value?.id}`}

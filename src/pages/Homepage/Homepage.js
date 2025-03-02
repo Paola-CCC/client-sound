@@ -19,7 +19,7 @@ const Homepage = () => {
   const { courseAPI } = useAPIContext();
   const [isLoading , setIsLoading ] = useState(false);
   const [data, setData] = useState([]);
-  const dataToShow = data ? data.slice(0, 12) : [];
+  const dataToShow = data ? data.slice(0, 8) : [];
 
   const dataFetchedRef = useRef(false);
 

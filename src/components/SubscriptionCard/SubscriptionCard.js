@@ -40,7 +40,7 @@ const SubscriptionCard = ({ subscription, onSelectSubscription, isUserSub }) => 
 
             <div >
               <FontAwesomeIcon icon={faCircleCheck}  size="lg" />
-              <span> Des interviews exclusives avec les plus grands professeurs du monde. </span>
+              <span> Des réductions sur les Bootcamp d'été avec nos professionnels. </span>
             </div>
       </div>
       ) : (

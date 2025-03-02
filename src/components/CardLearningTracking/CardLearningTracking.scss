@@ -59,17 +59,14 @@
 
     .card-title-description {
       color: #545454;
-      margin-bottom: 13px;
+      margin: 13px 0;
       span {
         display: block;
         white-space: nowrap;
         overflow: hidden;
         text-overflow: ellipsis;
-        &:first-of-type {
-          font-weight: 600;
-          color: black;
-          margin-bottom: 7px;
-        }
+        font-weight: 600;
+        color: black;      
       }
     }
 

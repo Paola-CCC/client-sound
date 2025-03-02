@@ -50,13 +50,21 @@ div.global-homepage {
               bottom: 0;
               left: 0;
               width: 100%;
-              padding: 20px;
+              padding: 10px;
               color: white;
               background-image: linear-gradient(
                 to top,
                 rgba(0, 0, 0, 0.8),
                 rgba(65, 65, 65, 0)
               );
+
+              h6 {
+             
+                  white-space: nowrap; /* Prevent line breaks */
+                  overflow: hidden; /* Hide elements that may overflow */
+                  text-overflow: ellipsis; /* Request an ellipsis */
+              
+              }
             }
 
               &:hover {
@@ -306,7 +314,6 @@ div.global-homepage {
 // Tablette
 @media (min-width: 768px) and (max-width: 1024px) {
   div.global-homepage {
-    // background-color: burlywood;
 
     .homepage-grid-area {
       // background-color: aqua;
